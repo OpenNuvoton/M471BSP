@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     clk.c
  * @version  V3.00
- * $Revision: 7 $
- * $Date: 20/08/10 2:24p $
+ * $Revision: 9 $
+ * $Date: 20/08/17 5:59p $
  * @brief    M471 Series Clock Controller (CLK) Driver Source File
  *
  * @note
@@ -194,28 +194,23 @@ uint32_t CLK_GetCPUFreq(void)
 
 /**
   * @brief      Set HCLK frequency
-  * @param[in]  u32Hclk is HCLK frequency. The range of u32Hclk is 25.5MHz ~ 120MHz.
+  * @param[in]  u32Hclk is HCLK frequency. The range of u32Hclk is 51MHz ~ 120MHz.
   * @return     HCLK frequency
   * @details    This function is used to set HCLK frequency. The frequency unit is Hz. \n
-  *             It would configure PLL frequency to 51MHz ~ 240MHz,
-  *             set HCLK clock divider as 2 and switch HCLK clock source to PLL. \n
   *             The register write-protection function should be disabled before using this function.
   */
 uint32_t CLK_SetCoreClock(uint32_t u32Hclk)
 {
     uint32_t u32HIRCSTB;
-    uint32_t u32HCLK_UpperLimit;
 
     /* Read HIRC clock source stable flag */
     u32HIRCSTB = CLK->STATUS & CLK_STATUS_HIRCSTB_Msk;
 
-    /* The range of u32Hclk is 25.5 MHz ~ 120 MHz */
-    u32HCLK_UpperLimit = FREQ_120MHZ;
-
-    if(u32Hclk > u32HCLK_UpperLimit)
-        u32Hclk = u32HCLK_UpperLimit;
-    if(u32Hclk < (FREQ_51MHZ >> 1))
-        u32Hclk = (FREQ_51MHZ >> 1);
+    /* The range of u32Hclk is 51 MHz ~ 120 MHz */
+    if(u32Hclk > FREQ_120MHZ)
+        u32Hclk = FREQ_120MHZ;
+    if(u32Hclk < (FREQ_51MHZ))
+        u32Hclk = (FREQ_51MHZ);
 
     /* Switch FMC access cycle to maximum value for safe */
     FMC->CYCCTL = 6;
@@ -228,29 +223,28 @@ uint32_t CLK_SetCoreClock(uint32_t u32Hclk)
 
     /* Configure PLL setting if HXT clock is stable */
     if(CLK->STATUS & CLK_STATUS_HXTSTB_Msk)
-        u32Hclk = CLK_EnablePLL(CLK_PLLCTL_PLLSRC_HXT, (u32Hclk << 1));
+        u32Hclk = CLK_EnablePLL(CLK_PLLCTL_PLLSRC_HXT, u32Hclk);
 
     /* Configure PLL setting if HXT clock is not stable */
     else
     {
-        u32Hclk = CLK_EnablePLL(CLK_PLLCTL_PLLSRC_HIRC_DIV4, (u32Hclk << 1));
+        u32Hclk = CLK_EnablePLL(CLK_PLLCTL_PLLSRC_HIRC_DIV4, u32Hclk);
 
         /* Read HIRC clock source stable flag */
         u32HIRCSTB = CLK->STATUS & CLK_STATUS_HIRCSTB_Msk;
     }
 
     /* Select HCLK clock source to PLL,
-       Select HCLK clock source divider as 2
        and update system core clock
     */
-    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_PLL, CLK_CLKDIV0_HCLK(2));
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_PLL, CLK_CLKDIV0_HCLK(1));
 
     /* Disable HIRC if HIRC is disabled before setting core clock */
     if(u32HIRCSTB == 0)
         CLK->PWRCTL &= ~CLK_PWRCTL_HIRCEN_Msk;
 
-    /* Return actually HCLK frequency is PLL frequency divide 2 */
-    return u32Hclk >> 1;
+    /* Return actually HCLK frequency is PLL frequency divide 1 */
+    return u32Hclk;
 }
 
 /**
@@ -287,9 +281,6 @@ void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv)
 
     /* Switch HCLK to new HCLK source */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | u32ClkSrc;
-
-    /* Wait HCLK switch completed */
-    while((CLK->CLKSEL0 & CLK_CLKSEL0_HCLKSEL_Msk) != u32ClkSrc);
 
     /* Update System Core Clock */
     SystemCoreClockUpdate();
@@ -698,6 +689,9 @@ uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq)
                   (u32Outdiv << CLK_PLLCTL_OUTDIV_Pos) |
                   ((u32MinNR - 2) << CLK_PLLCTL_INDIV_Pos) |
                   ((u32MinNF - 2) << CLK_PLLCTL_FBDIV_Pos);
+
+    /* Wait 500us for PLL unstable */
+    CLK_SysTickDelay(500);
 
     /* Wait for PLL clock stable */
     CLK_WaitClockReady(CLK_STATUS_PLLSTB_Msk);
