@@ -47,7 +47,8 @@
   */
 void ACMP_Open(ACMP_T *acmp, uint32_t u32ChNum, uint32_t u32NegSrc, uint32_t u32HysSel)
 {
-    acmp->CTL[u32ChNum] = (acmp->CTL[u32ChNum] & (~(ACMP_CTL_NEGSEL_Msk | ACMP_CTL_HYSSEL_Msk))) | (u32NegSrc | u32HysSel | ACMP_CTL_ACMPEN_Msk);
+    acmp->CTL[u32ChNum] = (acmp->CTL[u32ChNum] & (~ACMP_CTL_POSSEL_Msk)) | (ACMP_CTL_POSSEL_P1);
+    acmp->CTL[u32ChNum] = (acmp->CTL[u32ChNum] & (~(ACMP_CTL_NEGSEL_Msk | ACMP_CTL_HYSSEL_Msk | ACMP_CTL_POSSEL_Msk))) | (u32NegSrc | u32HysSel | ACMP_CTL_POSSEL_P0 | ACMP_CTL_ACMPEN_Msk);
 }
 
 /**
