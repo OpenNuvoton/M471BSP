@@ -23,31 +23,34 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Switch HCLK clock source to HIRC */
-    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
+    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
+    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
 
-    /* Enable LIRC */
-    CLK_EnableXtalRC(CLK_PWRCTL_LIRCEN_Msk);
+    /* Enable HIRC clock (Internal RC 48 MHz) */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for LIRC clock ready */
-    CLK_WaitClockReady(CLK_STATUS_LIRCSTB_Msk);
+    /* Wait for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Set both PCLK0 and PCLK1 as HCLK/2 */
+    /* Set core clock as 96MHz from PLL */
+    CLK_SetCoreClock(FREQ_96MHZ);
+
+    /* Set PCLK0/PCLK1 to HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
-    /* Enable UART peripheral clock */
+    /* Enable UART clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to HIRC */
+    /* Select UART clock source from HIRC */
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
+
+    /* Update System Core Clock */
+    /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock. */
+    SystemCoreClockUpdate();
 
     /* Select Timer clock source from LIRC */
     CLK_EnableModuleClock(TMR0_MODULE);
     CLK_SetModuleClock(TMR0_MODULE, CLK_CLKSEL1_TMR0SEL_LIRC, 0);
-
-    /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
-    SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
@@ -89,7 +92,7 @@ int main(void)
     /* Output selected clock to CKO, CKO Clock = HCLK / 1 */
     CLK_EnableCKO(CLK_CLKSEL1_CLKOSEL_HCLK, 0, 1);
 
-    /* Initial Timer0 to periodic mode with 1Hz, since system is fast (48MHz)
+    /* Initial Timer0 to periodic mode with 1Hz, since system is fast (96MHz)
        and timer is slow (32kHz), and following function calls all modified timer's
        CTL register, so add extra delay between each function call and make sure the
        setting take effect */

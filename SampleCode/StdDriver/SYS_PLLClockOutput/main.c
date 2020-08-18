@@ -10,7 +10,7 @@
 #include "NuMicro.h"
 
 #define SIGNATURE       0x125ab234
-#define FLAG_ADDR       0x200007FC
+#define FLAG_ADDR       (0x20010000-4)  // For 64KB (0x10000) SRAM
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Brown Out Detector IRQ Handler                                                                         */
@@ -92,12 +92,12 @@ void Delay(uint32_t x)
 
 uint32_t g_au32PllSetting[] =
 {
-    28000000,   /* PLL = 56MHz,  HCLK = PLL/2 */
-    36000000,   /* PLL = 72MHz,  HCLK = PLL/2 */
-    48000000,   /* PLL = 96MHz,  HCLK = PLL/2 */
-    72000000,   /* PLL = 144MHz, HCLK = PLL/2 */
-    96000000,   /* PLL = 192MHz, HCLK = PLL/2 */
-    120000000,  /* PLL = 240MHz, HCLK = PLL/2 */
+    48000000,   /* PLL =  51MHz, HCLK = PLL/1 */
+    51000000,   /* PLL =  51MHz, HCLK = PLL/1 */
+    72000000,   /* PLL =  72MHz, HCLK = PLL/1 */
+    96000000,   /* PLL =  96MHz, HCLK = PLL/1 */
+    120000000,  /* PLL = 120MHz, HCLK = PLL/1 */
+    144000000,  /* PLL = 120MHz, HCLK = PLL/1 */
 };
 
 void SYS_PLL_Test(void)
@@ -109,14 +109,12 @@ void SYS_PLL_Test(void)
     /*---------------------------------------------------------------------------------------------------------*/
 
     printf("\n-------------------------[ Test PLL ]-----------------------------\n");
-    printf("  Select HCLK clock source from PLL/2.\n");
+    printf("  Select HCLK clock source from PLL/1.\n");
     printf("  Please measure HCLK on CLKO pin (PB.14) by scope ...\n");
 
     for(i = 0; i < sizeof(g_au32PllSetting) / sizeof(g_au32PllSetting[0]) ; i++)
     {
-        /* Select HCLK clock source from PLL.
-           PLL will be configured to twice specified frequency.
-        */
+        /* Select HCLK clock source from PLL. */
         CLK_SetCoreClock(g_au32PllSetting[i]);
 
         printf("  Change system clock to %d Hz ...................... ", SystemCoreClock);
@@ -146,26 +144,29 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable HIRC */
+    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
+    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+
+    /* Enable HIRC clock (Internal RC 48 MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC */
-    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
+    /* Set core clock as 96MHz from PLL */
+    CLK_SetCoreClock(FREQ_96MHZ);
 
-    /* Set both PCLK0 and PCLK1 as HCLK/2 */
+    /* Set PCLK0/PCLK1 to HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
-    /* Switch UART0 clock source to HIRC */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
-
-    /* Enable UART peripheral clock */
+    /* Enable UART clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
+    /* Select UART clock source from HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
+
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/

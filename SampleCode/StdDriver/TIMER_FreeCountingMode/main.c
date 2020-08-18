@@ -34,8 +34,8 @@ void TMR0_IRQHandler(void)
         }
         else
         {
-            /* TIMER0 clock source = PCLK0 = HCLK / 2 = HIRC / 2 */
-            printf("Input frequency is %dHz\n", (__HIRC/2) / (t1 - t0));
+            /* TIMER0 clock source = PCLK0 = HCLK / 2 = PLL / 2 */
+            printf("Input frequency is %dHz\n", (FREQ_96MHZ/2) / (t1 - t0));
         }
     }
     else
@@ -50,33 +50,36 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable HIRC */
+    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
+    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+
+    /* Enable HIRC clock (Internal RC 48 MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC */
-    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
+    /* Set core clock as 96MHz from PLL */
+    CLK_SetCoreClock(FREQ_96MHZ);
 
-    /* Set both PCLK0 and PCLK1 as HCLK/2 */
+    /* Set PCLK0/PCLK1 to HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
-    /* Switch UART0 clock source to HIRC */
+    /* Enable UART clock */
+    CLK_EnableModuleClock(UART0_MODULE);
+
+    /* Select UART clock source from HIRC */
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
-    /* Enable UART peripheral clock */
-    CLK_EnableModuleClock(UART0_MODULE);
+    /* Update System Core Clock */
+    /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock. */
+    SystemCoreClockUpdate();
 
     /* Enable IP clock */
     CLK_EnableModuleClock(TMR0_MODULE);
 
     /* Select IP clock source */
     CLK_SetModuleClock(TMR0_MODULE, CLK_CLKSEL1_TMR0SEL_PCLK0, 0);
-
-    /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
-    SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */

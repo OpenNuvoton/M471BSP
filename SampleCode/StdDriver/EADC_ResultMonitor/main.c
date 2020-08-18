@@ -9,11 +9,9 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
-#define PLL_CLOCK       72000000
-
-/*---------------------------------------------------------------------------------------------------------*/
-/* Define global variables and constants                                                                   */
-/*---------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------*/
+/* Define global variables and constants                                */
+/*----------------------------------------------------------------------*/
 volatile uint32_t g_u32AdcCmp0IntFlag;
 volatile uint32_t g_u32AdcCmp1IntFlag;
 
@@ -23,23 +21,30 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable HIRC */
+    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
+    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+
+    /* Enable HIRC clock (Internal RC 48 MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Set core clock as PLL_CLOCK from PLL */
-    CLK_SetCoreClock(PLL_CLOCK);
+    /* Set core clock as 72MHz from PLL */
+    CLK_SetCoreClock(FREQ_72MHZ);
 
-    /* Set both PCLK0 and PCLK1 as HCLK/2 */
+    /* Set PCLK0/PCLK1 to HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
-    /* Switch UART0 clock source to HIRC */
+    /* Enable UART clock */
+    CLK_EnableModuleClock(UART0_MODULE);
+
+    /* Select UART clock source from HIRC */
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
-    /* Enable UART peripheral clock */
-    CLK_EnableModuleClock(UART0_MODULE);
+    /* Update System Core Clock */
+    /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock. */
+    SystemCoreClockUpdate();
 
     /* Enable EADC peripheral clock */
     CLK_SetModuleClock(EADC_MODULE, 0, CLK_CLKDIV0_EADC(2));
@@ -47,13 +52,6 @@ void SYS_Init(void)
     /* Enable EADC module clock */
     CLK_EnableModuleClock(EADC_MODULE);
 
-    /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock and CyclesPerUs automatically. */
-    SystemCoreClockUpdate();
-
-    /*----------------------------------------------------------------------*/
-    /* Init I/O Multi-function                                              */
-    /*----------------------------------------------------------------------*/
     /* Set GPB multi-function pins for UART0 RXD and TXD */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
@@ -70,9 +68,6 @@ void SYS_Init(void)
     SYS_LockReg();
 }
 
-/*----------------------------------------------------------------------*/
-/* Init UART0                                                           */
-/*----------------------------------------------------------------------*/
 void UART0_Init(void)
 {
     /* Reset UART0 */
@@ -85,9 +80,9 @@ void UART0_Init(void)
 void EADC_FunctionTest()
 {
     printf("\n");
-    printf("+----------------------------------------------------------------------+\n");
-    printf("|           EADC compare function (result monitor) sample code         |\n");
-    printf("+----------------------------------------------------------------------+\n");
+    printf("+-------------------------------------------------------+\n");
+    printf("|   EADC compare function (result monitor) sample code  |\n");
+    printf("+-------------------------------------------------------+\n");
     printf("\nIn this test, software will compare the conversion result of channel 2.\n");
 
     /* Set input mode as single-end and enable the A/D converter */
