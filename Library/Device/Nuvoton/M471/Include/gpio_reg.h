@@ -54,8 +54,7 @@ typedef struct
      * |        |          |If input is analog signal, users can disable Px.n digital input path to avoid input current leakage.
      * |        |          |0 = Px.n digital input path Enabled.
      * |        |          |1 = Px.n digital input path Disabled (digital input tied to low).
-     * |        |          |Note:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::DOUT
      * Offset: 0x08/0x48/0x88/0xC8/0x108/0x148/0x188/0x1C8/0x208  Port A-I Data Output Value
      * ---------------------------------------------------------------------------------------------------
@@ -65,8 +64,7 @@ typedef struct
      * |        |          |Each of these bits controls the status of a Px.n pin when the Px.n is configured as Push-pull output, Open-drain output or Quasi-bidirectional mode.
      * |        |          |0 = Px.n will drive Low if the Px.n pin is configured as Push-pull output, Open-drain output or Quasi-bidirectional mode.
      * |        |          |1 = Px.n will drive High if the Px.n pin is configured as Push-pull output or Quasi-bidirectional mode.
-     * |        |          |Note:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::DATMSK
      * Offset: 0x0C/0x4C/0x8C/0xCC/0x10C/0x14C/0x18C/0x1CC/0x20C  Port A-I Data Output Write Mask
      * ---------------------------------------------------------------------------------------------------
@@ -79,8 +77,7 @@ typedef struct
      * |        |          |0 = Corresponding DOUT (Px_DOUT[n]) bit can be updated.
      * |        |          |1 = Corresponding DOUT (Px_DOUT[n]) bit protected.
      * |        |          |Note 1: This function only protects the corresponding DOUT (Px_DOUT[n]) bit, and will not protect the corresponding PDIO (Pxn_PDIO[n]) bit.
-     * |        |          |Note 2:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note 2: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::PIN
      * Offset: 0x10/0x50/0x90/0xD0/0x110/0x150/0x190/0x1D0/0x210  Port A-I Pin Value
      * ---------------------------------------------------------------------------------------------------
@@ -89,14 +86,13 @@ typedef struct
      * |[n]     |PINn      |Port A-I Pin[n] Pin Value
      * |        |          |Each bit of the register reflects the actual status of the respective Px.n pin.
      * |        |          |If the bit is 1, it indicates the corresponding pin status is high; else the pin status is low.
-     * |        |          |Note:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::DBEN
      * Offset: 0x14/0x54/0x94/0xD4/0x114/0x154/0x194/0x1D4/0x214  Port A-I De-Bounce Enable Control Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[n]     |DBENn     |Port A-I Pin[n] Input Signal De-Bounce Enable Bit
+     * |[n]     |DBENn     |Port A-I Pin[n] Input Signal De-bounce Enable Bit
      * |        |          |The DBEN[n] bit is used to enable the de-bounce function for each corresponding bit.
      * |        |          |If the input signal pulse width cannot be sampled by continuous two de-bounce sample cycle, the input signal transition is seen as the signal bounce and will not trigger the interrupt.
      * |        |          |The de-bounce clock source is controlled by DBCLKSRC (GPIO_DBCTL [4]), one de-bounce sample cycle period is controlled by DBCLKSEL (GPIO_DBCTL [3:0]).
@@ -104,8 +100,7 @@ typedef struct
      * |        |          |1 = Px.n de-bounce function Enabled.
      * |        |          |The de-bounce function is valid only for edge triggered interrupt.
      * |        |          |If the interrupt mode is level triggered, the de-bounce enable bit is ignored.
-     * |        |          |Note:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::INTTYPE
      * Offset: 0x18/0x58/0x98/0xD8/0x118/0x158/0x198/0x1D8/0x218  Port A-I Interrupt Trigger Type Control
      * ---------------------------------------------------------------------------------------------------
@@ -121,8 +116,7 @@ typedef struct
      * |        |          |If both levels to trigger interrupt are set, the setting is ignored and no interrupt will occur.
      * |        |          |The de-bounce function is valid only for edge triggered interrupt.
      * |        |          |If the interrupt mode is level triggered, the de-bounce enable bit is ignored.
-     * |        |          |Note:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::INTEN
      * Offset: 0x1C/0x5C/0x9C/0xDC/0x11C/0x15C/0x19C/0x1DC/0x21C  Port A-I Interrupt Enable Control Register
      * ---------------------------------------------------------------------------------------------------
@@ -136,8 +130,7 @@ typedef struct
      * |        |          |If the interrupt is edge trigger(TYPE (Px_INTTYPE[n]) bit is set to 0), the input Px.n pin will generate the interrupt while this pin state changed from high to low.
      * |        |          |0 = Px.n level low or high to low interrupt Disabled.
      * |        |          |1 = Px.n level low or high to low interrupt Enabled.
-     * |        |          |Note:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * |[n+16]  |RHIENn    |Port A-I Pin[n] Rising Edge or High Level Interrupt Trigger Type Enable Bit
      * |        |          |The RHIEN (Px_INTEN[n+16]) bit is used to enable the interrupt for each of the corresponding input Px.n pin
      * |        |          |Set bit to 1 also enable the pin wake-up function.
@@ -146,8 +139,7 @@ typedef struct
      * |        |          |If the interrupt is edge trigger (TYPE (Px_INTTYPE[n]) bit is set to 0), the input Px.n pin will generate the interrupt while this pin state changed from low to high.
      * |        |          |0 = Px.n level high or low to high interrupt Disabled.
      * |        |          |1 = Px.n level high or low to high interrupt Enabled.
-     * |        |          |Note:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::INTSRC
      * Offset: 0x20/0x60/0xA0/0xE0/0x120/0x160/0x1A0/0x1E0/0x220  Port A-I Interrupt Source Flag
      * ---------------------------------------------------------------------------------------------------
@@ -160,8 +152,7 @@ typedef struct
      * |        |          |Read Operation :
      * |        |          |0 = No interrupt at Px.n.
      * |        |          |1 = Px.n generates an interrupt.
-     * |        |          |Note:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::SMTEN
      * Offset: 0x24/0x64/0xA4/0xE4/0x124/0x164/0x1A4/0x1E4/0x224  Port A-I Input Schmitt Trigger Enable Register
      * ---------------------------------------------------------------------------------------------------
@@ -170,20 +161,18 @@ typedef struct
      * |[n]     |SMTENn    |Port A-I Pin[n] Input Schmitt Trigger Enable Bit
      * |        |          |0 = Px.n input schmitt trigger function Disabled.
      * |        |          |1 = Px.n input schmitt trigger function Enabled.
-     * |        |          |Note:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::SLEWCTL
      * Offset: 0x28/0x68/0xA8/0xE8/0x128/0x168/0x1A8/0x1E8/0x228  Port A-I High Slew Rate Control Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[2n+1:2n]|HSRENn   |Port A-I Pin[n] High Slew Rate Control
-     * |        |          |00 = Px.n output with normal slew rate mode (maximum 40 MHz at 2.7V).
-     * |        |          |01 = Px.n output with high slew rate mode (maximum 80 MHz at 2.7V).
-     * |        |          |10 = Px.n output with fast slew rate mode (maximum 100 MHz at 2.7V).
+     * |        |          |00 = Px.n output with normal slew rate mode.
+     * |        |          |01 = Px.n output with high slew rate mode.
+     * |        |          |10 = Reserved.
      * |        |          |11 = Reserved.
-     * |        |          |Note:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::PUSEL
      * Offset: 0x30/0x70/0xB0/0xF0/0x130/0x170/0x1B0/0x1F0/0x230  Port A-I Pull-up Selection Register
      * ---------------------------------------------------------------------------------------------------
@@ -196,8 +185,7 @@ typedef struct
      * |        |          |Note 1:
      * |        |          |Basically, the pull-up control has following behavior limitation
      * |        |          |The independent pull-up control register only valid when MODEn set as tri-state and open-drain mode
-     * |        |          |Note 2:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note 2: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      */
 
     __IO uint32_t MODE;             /* Offset: 0x00/0x40/0x80/0xC0/0x100/0x140/0x180/0x1C0/0x200  Port A-I I/O Mode Control                       */
@@ -212,7 +200,7 @@ typedef struct
     __IO uint32_t SMTEN;            /* Offset: 0x24/0x64/0xA4/0xE4/0x124/0x164/0x1A4/0x1E4/0x224  Port A-I Input Schmitt Trigger Enable Register  */
     __IO uint32_t SLEWCTL;          /* Offset: 0x28/0x68/0xA8/0xE8/0x128/0x168/0x1A8/0x1E8/0x228  Port A-I High Slew Rate Control Register        */
     __I  uint32_t RESERVE0[1];
-    __IO uint32_t PUSEL;            /* Offset: 0x30/0x70/0xB0/0xF0/0x130/0x170/0x1B0/0x1F0/0x230  Port A-I Pull-up and Pull-down Enable Register  */
+    __IO uint32_t PUSEL;            /* Offset: 0x30/0x70/0xB0/0xF0/0x130/0x170/0x1B0/0x1F0/0x230  Port A-I Pull-up Selection Register  */
 
 } GPIO_T;
 
@@ -249,8 +237,7 @@ typedef struct
      * |        |          |0 = Edge detection circuit is active only if I/O pin corresponding RHIEN (Px_INTEN[n+16])/FLIEN (Px_INTEN[n]) bit is set to 1.
      * |        |          |1 = All I/O pins edge detection circuit is always active after reset.
      * |        |          |Note 1: It is recommended to disable this bit to save system power if no special application concern.
-     * |        |          |Note 2:
-     * |        |          |The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available
+     * |        |          |Note 2: The PC.15/PG.0/PG.1/PG.5~PG.8/PH.0~PH.3/PH.12~PH.15/PI.6~PI.15 pins are not available.
      * @var GPIO_T::INTx_INNF
      * Offset: 0x450/0x454/0x458/0x45C/0x460/0x464/0x468/0x46C  INT0~7 Input Noise Filter Register
      * ---------------------------------------------------------------------------------------------------

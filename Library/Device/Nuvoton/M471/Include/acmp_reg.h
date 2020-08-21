@@ -95,7 +95,7 @@ typedef struct
      * |        |          |011 = Hysteresis is 30mV.
      * |        |          |100 = Hysteresis is 40mV
      * |        |          |101 = Hysteresis is 50mV
-     * |        |          |Others = reserved
+     * |        |          |Others = Reserved
      * @var ACMP_T::STATUS
      * Offset: 0x08  Analog Comparator Status Register
      * ---------------------------------------------------------------------------------------------------
@@ -165,14 +165,14 @@ typedef struct
      * |        |          |0 = Calibration is stopped.
      * |        |          |1 = Calibration is triggered.
      * |        |          |Note 1: Before this bit is enabled,ACMPEN(ACMP_CTL0[0]) should be set and the internal high speed RC oscillator (HIRC) should be enabled in advance.
-     * |        |          |Note 2: Hardware will auto clear this bit when next calibration is triggered by software
-     * |        |          |Note 3: If user must trigger calibration twice or more times, the second trigger have to wait at least 300us after the previous calibration done
+     * |        |          |Note 2: Hardware will auto clear this bit when the next calibration is triggered by software.
+     * |        |          |Note 3: If user must trigger calibration twice or more times, the second trigger has to wait at least 300us after the previous calibration is done.
      * |[1]     |CALTRG1   |Comparator1 Calibration Trigger Bit
      * |        |          |0 = Calibration is stopped.
      * |        |          |1 = Calibration is triggered.
      * |        |          |Note 1: Before this bit is enabled, ACMPEN(ACMP_CTL1[0]) should be set and the internal high speed RC oscillator (HIRC) should be enabled in advance.
-     * |        |          |Note 2: Hardware will auto clear this bit when next calibration is triggered by software.
-     * |        |          |Note 3: If user must trigger calibration twice or more times, the second trigger have to wait at least 300us after the previous calibration done
+     * |        |          |Note 2: Hardware will auto clear this bit when the next calibration is triggered by software.
+     * |        |          |Note 3: If user must trigger calibration twice or more times, the second trigger has to wait at least 300us after the previous calibration is done.
      * @var ACMP_T::CALSR
      * Offset: 0x14  Analog Comparator Calibration Status Register
      * ---------------------------------------------------------------------------------------------------
@@ -202,6 +202,7 @@ typedef struct
     __IO uint32_t VREF;                 /*!< [0x000c] Analog Comparator Reference Voltage Control Register          */
     __IO uint32_t CALCTL;               /*!< [0x0010] Analog Comparator Calibration Control Register                */
     __I  uint32_t CALSR;                /*!< [0x0014] Analog Comparator Calibration Status Register                 */
+
 } ACMP_T;
 
 /**

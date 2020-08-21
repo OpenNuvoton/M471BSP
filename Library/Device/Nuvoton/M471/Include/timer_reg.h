@@ -285,8 +285,8 @@ typedef struct
      * |        |          |1 = PWM interrupt wake-up Enabled.
      * |[30]    |DBGHALT   |ICE Debug Mode Counter Halt (Write Protect)
      * |        |          |If debug mode counter halt is enabled, PWM counter will keep current value until exit ICE debug mode.
-     * |        |          |0 = ICE debug mode counter halt disable.
-     * |        |          |1 = ICE debug mode counter halt enable.
+     * |        |          |0 = ICE debug mode counter halt Disabled.
+     * |        |          |1 = ICE debug mode counter halt Enabled.
      * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL control register.
      * |[31]    |DBGTRIOFF |ICE Debug Mode Acknowledge Disable Bit (Write Protect)
      * |        |          |0 = ICE debug mode acknowledgement effects PWM output.

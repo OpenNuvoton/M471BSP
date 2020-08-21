@@ -785,7 +785,7 @@ typedef struct
      * |[31:24] |EXTSMPT   |EADC Sampling Time Extend
      * |        |          |When EADC is converting at high conversion rate, the sampling time of analog input voltage may not be enough if input channel loading is heavy, and software can extend EADC sampling time after trigger source is coming to get enough sampling time.
      * |        |          |The range of start delay time is from 0~255 EADC clock.
-     * @var EADC_T::SCTL19
+     * @var EADC_T::SCTL24
      * Offset: 0x234  EADC Sample Module 24 ~ 26 Control Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
@@ -819,7 +819,7 @@ typedef struct
     __I  uint32_t RESERVE4[3];
     __IO uint32_t MCTL1[24];            /*!< [0x0140 - 0x019c] EADC Sample Module 0~23 Control Register                 */
     __I  uint32_t RESERVE5[24];
-    __I  uint32_t DAT19[8];             /*!< [0x0200 - 0x021c] EADC Data Register 19~26 for Sample Module 0~18          */
+    __I  uint32_t DAT19[8];             /*!< [0x0200 - 0x021c] EADC Data Register 19~26 for Sample Module 19~26         */
     __IO uint32_t SCTL19[8];            /*!< [0x0220 - 0x023c] EADC Sample Module 19~26 Control Register                */
 } EADC_T;
 

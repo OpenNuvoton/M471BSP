@@ -88,18 +88,18 @@ typedef struct
      * |        |          |This is a protected register. Please refer to open lock sequence to program it.
      * |        |          |Gain control is used to enlarge the gain of crystal to make sure crystal work normally
      * |        |          |If gain control is enabled, crystal will consume more power than gain control off.
-     * |        |          |000 = HXT frequency is from 4 MHz to 8MHz.
-     * |        |          |001 = HXT frequency is from 8 MHz to 12MHz.
-     * |        |          |010 = HXT frequency is from 12 MHz to 16MHz.
-     * |        |          |011 = HXT frequency is from 16 MHz to 24MHz.
-     * |        |          |000 = HXT frequency is from 4 MHz to 8MHz. (Crystal)
-     * |        |          |001 = HXT frequency is from 8 MHz to 12MHz. (Crystal)
-     * |        |          |010 = HXT frequency is from 12 MHz to 16MHz. (Crystal)
-     * |        |          |011 = HXT frequency is from 16 MHz to 24MHz. (Crystal)
-     * |        |          |100 = HXT frequency is from 4 MHz to 8MHz. (Resonator)
-     * |        |          |101 = HXT frequency is from 8 MHz to 12MHz. (Resonator)
-     * |        |          |110 = HXT frequency is from 12 MHz to 16MHz. (Resonator)
-     * |        |          |111 = HXT frequency is from 16 MHz to 24MHz. (Resonator)
+     * |        |          |000 = HXT frequency is from 4 MHz to 8 MHz.
+     * |        |          |001 = HXT frequency is from 8 MHz to 12 MHz.
+     * |        |          |010 = HXT frequency is from 12 MHz to 16 MHz.
+     * |        |          |011 = HXT frequency is from 16 MHz to 24 MHz.
+     * |        |          |000 = HXT frequency is from 4 MHz to 8 MHz. (Crystal)
+     * |        |          |001 = HXT frequency is from 8 MHz to 12 MHz. (Crystal)
+     * |        |          |010 = HXT frequency is from 12 MHz to 16 MHz. (Crystal)
+     * |        |          |011 = HXT frequency is from 16 MHz to 24 MHz. (Crystal)
+     * |        |          |100 = HXT frequency is from 4 MHz to 8 MHz. (Resonator)
+     * |        |          |101 = HXT frequency is from 8 MHz to 12 MHz. (Resonator)
+     * |        |          |110 = HXT frequency is from 12 MHz to 16 MHz. (Resonator)
+     * |        |          |111 = HXT frequency is from 16 MHz to 24 MHz. (Resonator)
      * |        |          |Others: Reserved
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
      * |[31]    |HXTMD     |HXT Bypass Mode (Write Protect)
@@ -272,7 +272,7 @@ typedef struct
      * |        |          |010 = Clock source from HXT/2.
      * |        |          |011 = Clock source from HCLK/2.
      * |        |          |111 = Clock source from HIRC/2.
-     * |        |          |Note 1: if SysTick clock source is not from HCLK (i.e SYST_CTRL[2] = 0), SysTick clock source must less than or equal to HCLK/2.
+     * |        |          |Note 1: if SysTick clock source is not from HCLK (i.e. SYST_CTRL[2] = 0), SysTick clock source must less than or equal to HCLK/2.
      * |        |          |Note 2: This bit is write protected. Refer to the SYS_REGLCTL register.
      * @var CLK_T::CLKSEL1
      * Offset: 0x14  Clock Source Select Control Register 1
@@ -630,6 +630,7 @@ typedef struct
     __IO uint32_t CDLOWB;                /*!< [0x007c] Clock Frequency Range Detector Lower Boundary Register           */
     __I  uint32_t RESERVE5[4];
     __IO uint32_t PMUCTL;                /*!< [0x0090] Power Manager Control Register                                   */
+
 } CLK_T;
 
 /**

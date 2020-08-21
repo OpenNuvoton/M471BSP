@@ -95,7 +95,7 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[0]     |CHIPRST   |Chip One-shot Reset (Write Protect)
      * |        |          |Setting this bit will reset the whole chip, including Processor core and all peripherals, and this bit will automatically return to 0 after the 2 clock cycles.
-     * |        |          |The CHIPRST is same as the POR reset, all the chip controllers is reset and the chip setting from flash are also reload.
+     * |        |          |The CHIPRST is same as the POR reset, all the chip controllers is reset and the chip setting from Flash are also reload.
      * |        |          |About the difference between CHIPRST and SYSRESETREQ(AIRCR[2]), please refer to section 7.2.2
      * |        |          |0 = Chip normal operation.
      * |        |          |1 = Chip one-shot reset.
@@ -200,22 +200,22 @@ typedef struct
      * |        |          |0 = PRNG controller normal operation.
      * |        |          |1 = PRNG controller reset.
      * @var SYS_T::BODCTL
-     * Offset: 0x18  Brown-Out Detector Control Register
+     * Offset: 0x18  Brown-out Detector Control Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[0]     |BODEN     |Brown-out Detector Enable Bit (Write Protect)
-     * |        |          |The default value is set by flash controller user configuration register CBODEN(CONFIG0 [19]).
+     * |        |          |The default value is set by Flash controller user configuration register CBODEN(CONFIG0 [19]).
      * |        |          |0 = Brown-out Detector function Disabled.
      * |        |          |1 = Brown-out Detector function Enabled.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
      * |[3]     |BODRSTEN  |Brown-out Reset Enable Bit (Write Protect)
-     * |        |          |The default value is set by flash controller user configuration register CBORST(CONFIG0[20]) bit.
-     * |        |          |0 = Brown-out INTERRUPT function Enabled.
-     * |        |          |1 = Brown-out RESET function Enabled.
+     * |        |          |The default value is set by Flash controller user configuration register CBORST(CONFIG0[20]) bit.
+     * |        |          |0 = Brown-out "INTERRUPT" function Enabled.
+     * |        |          |1 = Brown-out "RESET" function Enabled.
      * |        |          |Note 1: While the Brown-out Detector function is enabled (BODEN high) and BOD reset function is enabled (BODRSTEN high), BOD will assert a signal to reset chip when the detected voltage is lower than the threshold (BODOUT high).
      * |        |          |While the BOD function is enabled (BODEN high) and BOD interrupt function is enabled (BODRSTEN low), BOD will assert an interrupt if BODOUT is high
-     * |        |          |BOD interrupt will keep till to the BODEN set to 0
+     * |        |          |BOD interrupt will be kept till to the BODEN is set to 0
      * |        |          |BOD interrupt can be blocked by disabling the NVIC BOD interrupt or disabling BOD function (set BODEN low).
      * |        |          |Note 2: This bit is write protected. Refer to the SYS_REGLCTL register.
      * |[4]     |BODIF     |Brown-out Detector Interrupt Flag
@@ -291,13 +291,13 @@ typedef struct
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
      * |[6]     |PRELOADEN |Pre-load Function Enable Bit (Write Protect)
      * |        |          |This bit should be enabled and keep during Tstable when VREFCTL(SYS_VREFCTL[4:0]) change setting(except set to 00000)
-     * |        |          |Tstable depends on different situations has different requirement, please refer to datasheet.
+     * |        |          |Tstable depends on different situations has different requirement, please refer to Datasheet.
      * |        |          |0 = VREF Pre-load function Disabled. (Default).
      * |        |          |1 = VREF Pre-load function Enabled.
      * |        |          |Note 1: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |[24]    |VBGFEN    |Chip Internal Voltage Bandgap Force Enable Bit(Write Only)
-     * |        |          |0 = Chip internal voltage bandgap controlled by ADC/ACMP if source selected.
-     * |        |          |1 = Chip internal voltage bandgap force enable.
+     * |[24]    |VBGFEN    |Chip Internal Voltage Band-gap Force Enable Bit(Write Only)
+     * |        |          |0 = Chip internal voltage band-gap controlled by ADC/ACMP if source selected.
+     * |        |          |1 = Chip internal voltage band-gap force enable.
      * @var SYS_T::GPA_MFPL
      * Offset: 0x30  GPIOA Low Byte Multiple Function Control Register
      * ---------------------------------------------------------------------------------------------------
@@ -647,25 +647,25 @@ typedef struct
      * |        |          |Note: For example, if LOOPSEL is set as 00, auto trim circuit will calculate trim value based on the average frequency difference in 4 clocks of reference clock.
      * |[7:6]   |RETRYCNT  |Trim Value Update Limitation Count
      * |        |          |This field defines that how many times the auto trim circuit will try to update the HIRC trim value before the frequency of HIRC locked.
-     * |        |          |Once the HIRC locked, the internal trim value update counter will be reset.
-     * |        |          |If the trim value update counter reached this limitation value and frequency of HIRC still doesn't lock, the auto trim operation will be disabled and FREQSEL will be cleared to 00.
+     * |        |          |Once the HIRC is locked, the internal trim value update counter will be reset.
+     * |        |          |If the trim value update counter reaches this limitation value and the frequency of HIRC is still not locked, the auto trim operation will be disabled and FREQSEL will be cleared to 00.
      * |        |          |00 = Trim retry count limitation is 64 loops.
      * |        |          |01 = Trim retry count limitation is 128 loops.
      * |        |          |10 = Trim retry count limitation is 256 loops.
      * |        |          |11 = Trim retry count limitation is 512 loops.
      * |[8]     |CESTOPEN  |Clock Error Stop Enable Bit
-     * |        |          |0 = The trim operation is keep going if clock is inaccuracy.
-     * |        |          |1 = The trim operation is stopped if clock is inaccuracy.
+     * |        |          |0 = The trim operation keeps going if clock is inaccurate.
+     * |        |          |1 = The trim operation is stopped if clock is inaccurate.
      * |[9]     |BOUNDEN   |Boundary Enable Bit
-     * |        |          |0 = Boundary function is disable.
-     * |        |          |1 = Boundary function is enable.
+     * |        |          |0 = Boundary function Disabled.
+     * |        |          |1 = Boundary function Enabled.
      * |[10]    |REFCKSEL  |Reference Clock Selection
      * |        |          |0 = HIRC trim reference clock is from LXT (32.768 kHz).
      * |        |          |1 = Reserved.
-     * |        |          |Note: HIRC trim reference clock is 20 kHz in test mode.
+     * |        |          |Note: The HIRC trim reference clock is 20 kHz in test mode.
      * |[20:16] |BOUNDARY  |Boundary Selection
      * |        |          |Fill the boundary range from 0x1 to 0x31, 0x0 is reserved.
-     * |        |          |Note 1: This field is effective only when the BOUNDEN(SYS_IRCTCTL[9]) is enabled.
+     * |        |          |Note: This field is effective only when the BOUNDEN(SYS_IRCTCTL[9]) is enabled.
      * @var SYS_T::IRCTIEN
      * Offset: 0xF4  HIRC Trim Interrupt Enable Register
      * ---------------------------------------------------------------------------------------------------
@@ -677,8 +677,8 @@ typedef struct
      * |        |          |0 = Disable TFAILIF(SYS_IRCTISTS[1]) status to trigger an interrupt to CPU.
      * |        |          |1 = Enable TFAILIF(SYS_IRCTISTS[1]) status to trigger an interrupt to CPU.
      * |[2]     |CLKEIEN   |Clock Error Interrupt Enable Bit
-     * |        |          |This bit controls if CPU would get an interrupt while clock is inaccuracy during auto trim operation.
-     * |        |          |If this bit is set to1, and CLKERRIF(SYS_IRCTISTS[2]) is set during auto trim operation, an interrupt will be triggered to notify the clock frequency is inaccuracy.
+     * |        |          |This bit controls if CPU would get an interrupt while clock is inaccurate during auto trim operation.
+     * |        |          |If this bit is set to1, and CLKERRIF(SYS_IRCTISTS[2]) is set during auto trim operation, an interrupt will be triggered to notify the clock frequency is inaccurate.
      * |        |          |0 = Disable CLKERRIF(SYS_IRCTISTS[2]) status to trigger an interrupt to CPU.
      * |        |          |1 = Enable CLKERRIF(SYS_IRCTISTS[2]) status to trigger an interrupt to CPU.
      * @var SYS_T::IRCTISTS
@@ -688,25 +688,25 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[0]     |FREQLOCK  |HIRC Frequency Lock Status
      * |        |          |This bit indicates the HIRC frequency is locked.
-     * |        |          |This is a status bit and doesn't trigger any interrupt
+     * |        |          |This is a status bit and does not trigger any interrupt
      * |        |          |Write 1 to clear this to 0
-     * |        |          |This bit will be set automatically, if the frequency is lock and the RC_TRIM is enabled.
-     * |        |          |0 = The internal high-speed oscillator frequency doesn't lock at 48 MHz yet.
-     * |        |          |1 = The internal high-speed oscillator frequency locked at 48 MHz.
+     * |        |          |This bit will be set automatically, if the frequency is locked and the RC_TRIM is enabled.
+     * |        |          |0 = The internal high-speed oscillator frequency is not locked at 48 MHz yet.
+     * |        |          |1 = The internal high-speed oscillator frequency is locked at 48 MHz.
      * |[1]     |TFAILIF   |Trim Failure Interrupt Status
-     * |        |          |This bit indicates that HIRC trim value update limitation count reached and the HIRC clock frequency still doesn't be locked
+     * |        |          |This bit indicates that HIRC trim value update limitation count is reached and the HIRC clock frequency is still not locked
      * |        |          |Once this bit is set, the auto trim operation stopped and FREQSEL(SYS_IRCTCTL[1:0]) will be cleared to 00 by hardware automatically.
      * |        |          |If this bit is set and TFAILIEN(SYS_IRCTIEN[1]) is high, an interrupt will be triggered to notify that HIRC trim value update limitation count was reached
      * |        |          |Write 1 to clear this to 0.
-     * |        |          |0 = Trim value update limitation count does not reach.
-     * |        |          |1 = Trim value update limitation count reached and HIRC frequency still not locked.
+     * |        |          |0 = Trim value update limitation count is not reached.
+     * |        |          |1 = Trim value update limitation count is reached and HIRC frequency is still not locked.
      * |[2]     |CLKERRIF  |Clock Error Interrupt Status
-     * |        |          |When the frequency of 32.768 kHz external low speed crystal oscillator (LXT) or 48 MHz internal high speed RC oscillator (HIRC) is shift larger to unreasonable value, this bit will be set and to be an indicate that clock frequency is inaccuracy.
+     * |        |          |When the frequency of 32.768 kHz external low speed crystal oscillator (LXT) or 48 MHz internal high speed RC oscillator (HIRC) is shift larger to unreasonable value, this bit will be set and to be an indicate that clock frequency is inaccurate.
      * |        |          |Once this bit is set to 1, the auto trim operation stopped and FREQSEL(SYS_IRCTCL[1:0]) will be cleared to 00 by hardware automatically if CESTOPEN(SYS_IRCTCTL[8]) is set to 1.
-     * |        |          |If this bit is set and CLKEIEN(SYS_IRCTIEN[2]) is high, an interrupt will be triggered to notify the clock frequency is inaccuracy.
+     * |        |          |If this bit is set and CLKEIEN(SYS_IRCTIEN[2]) is high, an interrupt will be triggered to notify the clock frequency is inaccurate
      * |        |          |Write 1 to clear this to 0.
-     * |        |          |0 = Clock frequency is accuracy.
-     * |        |          |1 = Clock frequency is inaccuracy.
+     * |        |          |0 = Clock frequency is accurate.
+     * |        |          |1 = Clock frequency is inaccurate.
      * |[3]     |OVBDIF    |Over Boundary Status
      * |        |          |When the over boundary function is set, if there occurs the over boundary condition, this flag will be set.
      * |        |          |0 = Over boundary coundition did not occur.
@@ -732,7 +732,7 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[15:0]  |POROFFAN  |Power-on Reset Enable Bit (Write Protect)
-     * |        |          |After powered on, User can turn off internal analog POR circuit to save power by writing 0x5AA5 to this field.
+     * |        |          |After powered on, user can turn off internal analog POR circuit to save power by writing 0x5AA5 to this field.
      * |        |          |The analog POR circuit will be active again when  this field is set to another value or chip is reset by other reset source, including:
      * |        |          |nRESET, Watchdog, LVR reset, BOD reset, ICE reset command and the software-chip reset function.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
@@ -746,7 +746,7 @@ typedef struct
      * |        |          |00 = Power level is PL0.
      * |        |          |01 = Power level is PL1.
      * |        |          |Others = Reserved.
-     * |        |          |Note: Refer to section 1.1.5 for Power Modes and Power Level Transition.
+     * |        |          |Note: Refer to section 6.2.5 for Power Modes and Power Level Transition.
      * |[20:16] |LVSSTEP   |LDO Voltage Scaling Step (Write Protect)
      * |        |          |The LVSSTEP value is LDO voltage rising step.
      * |        |          |LDO voltage scaling step = (LVSSTEP + 1) * 20mV.
@@ -1861,21 +1861,17 @@ typedef struct
      * |        |          |0 = Power-down mode wake-up NMI source Disabled.
      * |        |          |1 = Power-down mode wake-up NMI source Enabled.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |[3]     |SRAM_PERR |SRAM Parity Check NMI Source Enable (Write Protect)
+     * |[3]     |SRAM_PERR |SRAM Parity Check Error NMI Source Enable (Write Protect)
      * |        |          |0 = SRAM parity check error NMI source Disabled.
      * |        |          |1 = SRAM parity check error NMI source Enabled.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |[4]     |CLKFAIL   |Clock Fail Detected and IRC Auto Trim Interrupt NMI Source Enable (Write Protect)
-     * |        |          |0 = Clock fail detected and IRC Auto Trim interrupt NMI source Disabled.
-     * |        |          |1 = Clock fail detected and IRC Auto Trim interrupt NMI source Enabled.
+     * |[4]     |CLKFAIL   |Clock Fail Detected NMI Source Enable (Write Protect)
+     * |        |          |0 = Clock fail detected interrupt NMI source Disabled.
+     * |        |          |1 = Clock fail detected interrupt NMI source Enabled.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
      * |[6]     |RTC_INT   |RTC NMI Source Enable (Write Protect)
      * |        |          |0 = RTC NMI source Disabled.
      * |        |          |1 = RTC NMI source Enabled.
-     * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |[7]     |TAMPER_INT|TAMPER_INT NMI Source Enable (Write Protect)
-     * |        |          |0 = Backup register tamper detected NMI source Disabled.
-     * |        |          |1 = Backup register tamper detected NMI source Enabled.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
      * |[8]     |EINT0     |External Interrupt From PA.6 or PB.5 Pin NMI Source Enable (Write Protect)
      * |        |          |0 = External interrupt from PA.6 or PB.5 pin NMI source Disabled.
@@ -1897,9 +1893,9 @@ typedef struct
      * |        |          |0 = External interrupt from PA.8, PB.6 or PF.15 pin NMI source Disabled.
      * |        |          |1 = External interrupt from PA.8, PB.6 or PF.15 pin NMI source Enabled.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |[13]    |EINT5     |External Interrupt From PB.7, D12 or PF.14 Pin NMI Source Enable (Write Protect)
-     * |        |          |0 = External interrupt from PB.7, D12 or PF.14 pin NMI source Disabled.
-     * |        |          |1 = External interrupt from PB.7, D12 or PF.14 pin NMI source Enabled.
+     * |[13]    |EINT5     |External Interrupt From PB.7, PD.12 or PF.14 Pin NMI Source Enable (Write Protect)
+     * |        |          |0 = External interrupt from PB.7, PD.12 or PF.14 pin NMI source Disabled.
+     * |        |          |1 = External interrupt from PB.7, PD.12 or PF.14 pin NMI source Enabled.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
      * |[14]    |UART0_INT |UART0 NMI Source Enable (Write Protect)
      * |        |          |0 = UART0 NMI source Disabled.
@@ -1926,9 +1922,9 @@ typedef struct
      * |[3]     |SRAM_PERR |SRAM ParityCheck Error Interrupt Flag (Read Only)
      * |        |          |0 = SRAM parity check error interrupt is deasserted.
      * |        |          |1 = SRAM parity check error interrupt is asserted.
-     * |[4]     |CLKFAIL   |Clock Fail Detected or IRC Auto Trim Interrupt Flag (Read Only)
-     * |        |          |0 = Clock fail detected or IRC Auto Trim interrupt is deasserted.
-     * |        |          |1 = Clock fail detected or IRC Auto Trim interrupt is asserted.
+     * |[4]     |CLKFAIL   |Clock Fail Detected Interrupt Flag (Read Only)
+     * |        |          |0 = Clock fail detected interrupt is deasserted.
+     * |        |          |1 = Clock fail detected interrupt is asserted.
      * |[6]     |RTC_INT   |RTC Interrupt Flag (Read Only)
      * |        |          |0 = RTC interrupt is deasserted.
      * |        |          |1 = RTC interrupt is asserted.
@@ -1947,9 +1943,9 @@ typedef struct
      * |[12]    |EINT4     |External Interrupt From PA.8, PB.6 or PF.15 Pin Interrupt Flag (Read Only)
      * |        |          |0 = External Interrupt from PA.8, PB.6 or PF.15 interrupt is deasserted.
      * |        |          |1 = External Interrupt from PA.8, PB.6 or PF.15 interrupt is asserted.
-     * |[13]    |EINT5     |External Interrupt From PB.7, D12 or PF.14 Pin Interrupt Flag (Read Only)
-     * |        |          |0 = External Interrupt from PB.7, D12 or PF.14 interrupt is deasserted.
-     * |        |          |1 = External Interrupt from PB.7, D12 or PF.14 interrupt is asserted.
+     * |[13]    |EINT5     |External Interrupt From PB.7, PD.12 or PF.14 Pin Interrupt Flag (Read Only)
+     * |        |          |0 = External Interrupt from PB.7, PD.12 or PF.14 interrupt is deasserted.
+     * |        |          |1 = External Interrupt from PB.7, PD.12 or PF.14 interrupt is asserted.
      * |[14]    |UART0_INT |UART0 Interrupt Flag (Read Only)
      * |        |          |0 = UART0 interrupt is deasserted.
      * |        |          |1 = UART0 interrupt is asserted.
