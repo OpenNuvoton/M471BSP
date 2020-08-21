@@ -207,6 +207,18 @@ extern "C"
 #define BPWM_SET_PRESCALER(bpwm, u32ChannelNum, u32Prescaler) ((bpwm)->CLKPSC = (u32Prescaler))
 
 /**
+* @brief This macro get the prescaler of the selected channel
+* @param[in] bpwm The pointer of the specified BPWM module
+* @param[in] u32ChannelNum BPWM channel number. Valid values are between 0~5. This parameter is not used.
+* @return Return Clock prescaler of specified channel. Valid values are between 0 ~ 0xFFF
+* @details This macro is used to get the prescaler of specified channel.
+* @note All channels share channel 0's setting.
+*       The clock of BPWM counter is divided by (u32Prescaler + 1).
+* \hideinitializer
+*/
+#define BPWM_GET_PRESCALER(bpwm, u32ChannelNum) (bpwm)->CLKPSC
+
+/**
  * @brief This macro set the duty of the selected channel
  * @param[in] bpwm The pointer of the specified BPWM module
  * @param[in] u32ChannelNum BPWM channel number. Valid values are between 0~5
