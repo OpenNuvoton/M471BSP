@@ -54,8 +54,8 @@ uint32_t EPWM_ConfigCaptureChannel(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_
 
     if(u32Src == 0U)
     {
-        /* clock source is from PLL clock */
-        u32EPWMClockSrc = CLK_GetPLLClockFreq();
+        /* clock source is from HCLK clock */
+        u32EPWMClockSrc = CLK_GetHCLKFreq();
     }
     else
     {
@@ -152,8 +152,8 @@ uint32_t EPWM_ConfigOutputChannel(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t
 
     if(u32Src == 0U)
     {
-        /* clock source is from PLL clock */
-        u32EPWMClockSrc = CLK_GetPLLClockFreq();
+        /* clock source is from HCLK clock */
+        u32EPWMClockSrc = CLK_GetHCLKFreq();		
     }
     else
     {

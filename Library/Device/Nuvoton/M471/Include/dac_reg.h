@@ -138,6 +138,8 @@ typedef struct
     __I  uint32_t DATOUT;                /*!< [0x000c] DAC Data Output Register                                         */
     __IO uint32_t STATUS;                /*!< [0x0010] DAC Status Register                                              */
     __IO uint32_t TCTL;                  /*!< [0x0014] DAC Timing Control Register                                      */
+    __I  uint32_t RESERVE0[2];
+    __IO uint32_t VREF;                  /*!< [0x0020] DAC0 Reference Voltage Control Register                          */
 
 } DAC_T;
 
@@ -164,26 +166,14 @@ typedef struct
 #define DAC_CTL_TRGSEL_Pos               (5)                                               /*!< DAC_T::CTL: TRGSEL Position            */
 #define DAC_CTL_TRGSEL_Msk               (0x7ul << DAC_CTL_TRGSEL_Pos)                     /*!< DAC_T::CTL: TRGSEL Mask                */
 
-#define DAC_CTL_BYPASS_Pos               (8)                                               /*!< DAC_T::CTL: BYPASS Position            */
-#define DAC_CTL_BYPASS_Msk               (0x1ul << DAC_CTL_BYPASS_Pos)                     /*!< DAC_T::CTL: BYPASS Mask                */
-
-#define DAC_CTL_LALIGN_Pos               (10)                                              /*!< DAC_T::CTL: LALIGN Position            */
-#define DAC_CTL_LALIGN_Msk               (0x1ul << DAC_CTL_LALIGN_Pos)                     /*!< DAC_T::CTL: LALIGN Mask                */
-
 #define DAC_CTL_ETRGSEL_Pos              (12)                                              /*!< DAC_T::CTL: ETRGSEL Position           */
 #define DAC_CTL_ETRGSEL_Msk              (0x3ul << DAC_CTL_ETRGSEL_Pos)                    /*!< DAC_T::CTL: ETRGSEL Mask               */
-
-#define DAC_CTL_BWSEL_Pos                (14)                                              /*!< DAC_T::CTL: BWSEL Position             */
-#define DAC_CTL_BWSEL_Msk                (0x3ul << DAC_CTL_BWSEL_Pos)                      /*!< DAC_T::CTL: BWSEL Mask                 */
-
-#define DAC_CTL_GRPEN_Pos                (16)                                              /*!< DAC_T::CTL: GRPEN Position             */
-#define DAC_CTL_GRPEN_Msk                (0x1ul << DAC_CTL_GRPEN_Pos)                      /*!< DAC_T::CTL: GRPEN Mask                 */
 
 #define DAC_SWTRG_SWTRG_Pos              (0)                                               /*!< DAC_T::SWTRG: SWTRG Position           */
 #define DAC_SWTRG_SWTRG_Msk              (0x1ul << DAC_SWTRG_SWTRG_Pos)                    /*!< DAC_T::SWTRG: SWTRG Mask               */
 
 #define DAC_DAT_DACDAT_Pos               (0)                                               /*!< DAC_T::DAT: DACDAT Position            */
-#define DAC_DAT_DACDAT_Msk               (0xfffful << DAC_DAT_DACDAT_Pos)                  /*!< DAC_T::DAT: DACDAT Mask                */
+#define DAC_DAT_DACDAT_Msk               (0xfful << DAC_DAT_DACDAT_Pos)                    /*!< DAC_T::DAT: DACDAT Mask                */
 
 #define DAC_DATOUT_DATOUT_Pos            (0)                                               /*!< DAC_T::DATOUT: DATOUT Position         */
 #define DAC_DATOUT_DATOUT_Msk            (0xffful << DAC_DATOUT_DATOUT_Pos)                /*!< DAC_T::DATOUT: DATOUT Mask             */
@@ -200,6 +190,11 @@ typedef struct
 #define DAC_TCTL_SETTLET_Pos             (0)                                               /*!< DAC_T::TCTL: SETTLET Position          */
 #define DAC_TCTL_SETTLET_Msk             (0x3fful << DAC_TCTL_SETTLET_Pos)                 /*!< DAC_T::TCTL: SETTLET Mask              */
 
+#define DAC_VREF_SELVREF_Pos             (4)                                               /*!< DAC_T::VREF: SELVREF Position          */
+#define DAC_VREF_SELVREF_Msk             (0x1ul << DAC_VREF_SELVREF_Pos)                   /*!< DAC_T::VREF: SELVREF Mask              */
+
+#define DAC_VREF_OUTFLOAT_Pos            (5)                                               /*!< DAC_T::VREF: OUTFLOAT Position         */
+#define DAC_VREF_OUTFLOAT_Msk            (0x1ul << DAC_VREF_OUTFLOAT_Pos)                  /*!< DAC_T::VREF: OUTFLOAT Mask             */
 /**@}*/ /* DAC_CONST */
 /**@}*/ /* end of DAC register group */
 /**@}*/ /* end of REGISTER group */

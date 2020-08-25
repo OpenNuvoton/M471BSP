@@ -4,7 +4,7 @@
  * @brief    M471 BPWM driver source file
  *
  * @note
- * SPDX-License-Identifier: Apache-2.0
+ * SPDX-License-Identifier: Apache-2.0 
  * Copyright (C) 2020 Nuvoton Technology Corp. All rights reserved.
  *
  *****************************************************************************/
@@ -52,8 +52,8 @@ uint32_t BPWM_ConfigCaptureChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_
 
     if(u32Src == 0U)
     {
-        /* clock source is from PLL clock */
-        u32PWMClockSrc = CLK_GetPLLClockFreq();
+        /* clock source is from HCLK clock */
+        u32PWMClockSrc = CLK_GetHCLKFreq();
     }
     else
     {
@@ -147,8 +147,8 @@ uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t
 
     if(u32Src == 0U)
     {
-        /* clock source is from PLL clock */
-        u32PWMClockSrc = CLK_GetPLLClockFreq();
+        /* clock source is from HCLK clock */
+        u32PWMClockSrc = CLK_GetHCLKFreq();
     }
     else
     {
@@ -176,11 +176,11 @@ uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t
     }
     /* Store return value here 'cos we're gonna change u16Prescale & u16CNR to the real value to fill into register */
     i = u32PWMClockSrc / (u32Prescale * u32CNR);
-    /* BPWM clock source is 96MHz = 192MHz/PCLK_DIV(2). BPWM prescale = 2 due to over CNR spec */
-    /* CNR --> Period */
-
-
-
+	/* BPWM clock source is 96MHz = 192MHz/PCLK_DIV(2). BPWM prescale = 2 due to over CNR spec */ 
+	/* CNR --> Period */
+	
+	
+	
     /* convert to real register value */
     /* all channels share a prescaler */
     u32Prescale -= 1U;

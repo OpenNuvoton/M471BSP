@@ -492,24 +492,12 @@ typedef struct
     __IO uint32_t PDMACTL;               /*!< [0x000c] SPI PDMA Control Register                                        */
     __IO uint32_t FIFOCTL;               /*!< [0x0010] SPI FIFO Control Register                                        */
     __IO uint32_t STATUS;                /*!< [0x0014] SPI Status Register                                              */
-    /// @cond HIDDEN_SYMBOLS
     __I  uint32_t STATUS2;               /*!< [0x0018] SPI Status2 Register                                             */
     __I  uint32_t RESERVE0[1];
-    /// @endcond //HIDDEN_SYMBOLS
     __O  uint32_t TX;                    /*!< [0x0020] SPI Data Transmit Register                                       */
-    /// @cond HIDDEN_SYMBOLS
     __I  uint32_t RESERVE1[3];
-    /// @endcond //HIDDEN_SYMBOLS
     __I  uint32_t RX;                    /*!< [0x0030] SPI Data Receive Register                                        */
-    /// @cond HIDDEN_SYMBOLS
-
-    __I  uint32_t RESERVExx2[5];                /*!< Offset: 0x0034 ~ 0x0044   Reserved    */
-    __IO uint32_t INTERNAL;                /*!< [0x0014] SPI Status Register                                              */
-
-    __I  uint32_t RESERVE2[5];
-
-//    __I  uint32_t RESERVE2[11];
-    /// @endcond //HIDDEN_SYMBOLS
+    __I  uint32_t RESERVE2[11];
     __IO uint32_t I2SCTL;                /*!< [0x0060] I2S Control Register                                             */
     __IO uint32_t I2SCLK;                /*!< [0x0064] I2S Clock Divider Control Register                               */
     __IO uint32_t I2SSTS;                /*!< [0x0068] I2S Status Register                                              */
@@ -572,6 +560,9 @@ typedef struct
 #define SPI_SSCTL_AUTOSS_Pos             (3)                                               /*!< SPI_T::SSCTL: AUTOSS Position          */
 #define SPI_SSCTL_AUTOSS_Msk             (0x1ul << SPI_SSCTL_AUTOSS_Pos)                   /*!< SPI_T::SSCTL: AUTOSS Mask              */
 
+#define SPI_SSCTL_SLV3WIRE_Pos           (4)                                               /*!< SPI_T::SSCTL: SLV3WIRE Position        */
+#define SPI_SSCTL_SLV3WIRE_Msk           (0x1ul << SPI_SSCTL_SLV3WIRE_Pos)                 /*!< SPI_T::SSCTL: SLV3WIRE Mask            */
+
 #define SPI_SSCTL_SLVBEIEN_Pos           (8)                                               /*!< SPI_T::SSCTL: SLVBEIEN Position        */
 #define SPI_SSCTL_SLVBEIEN_Msk           (0x1ul << SPI_SSCTL_SLVBEIEN_Pos)                 /*!< SPI_T::SSCTL: SLVBEIEN Mask            */
 
@@ -583,9 +574,6 @@ typedef struct
 
 #define SPI_SSCTL_SSINAIEN_Pos           (13)                                              /*!< SPI_T::SSCTL: SSINAIEN Position        */
 #define SPI_SSCTL_SSINAIEN_Msk           (0x1ul << SPI_SSCTL_SSINAIEN_Pos)                 /*!< SPI_T::SSCTL: SSINAIEN Mask            */
-
-#define SPI_SSCTL_SLVTOCNT_Pos           (16)                                              /*!< SPI_T::SSCTL: SLVTOCNT Position        */
-#define SPI_SSCTL_SLVTOCNT_Msk           (0xfffful << SPI_SSCTL_SLVTOCNT_Pos)              /*!< SPI_T::SSCTL: SLVTOCNT Mask            */
 
 #define SPI_PDMACTL_TXPDMAEN_Pos         (0)                                               /*!< SPI_T::PDMACTL: TXPDMAEN Position      */
 #define SPI_PDMACTL_TXPDMAEN_Msk         (0x1ul << SPI_PDMACTL_TXPDMAEN_Pos)               /*!< SPI_T::PDMACTL: TXPDMAEN Mask          */
@@ -695,6 +683,9 @@ typedef struct
 #define SPI_STATUS_TXCNT_Pos             (28)                                              /*!< SPI_T::STATUS: TXCNT Position          */
 #define SPI_STATUS_TXCNT_Msk             (0xful << SPI_STATUS_TXCNT_Pos)                   /*!< SPI_T::STATUS: TXCNT Mask              */
 
+#define SPI_STATUS2_SLVBENUM_Pos         (24)                                              /*!< SPI_T::STATUS2: SLVBENUM Position      */
+#define SPI_STATUS2_SLVBENUM_Msk         (0x3ful << SPI_STATUS2_SLVBENUM_Pos)              /*!< SPI_T::STATUS2: SLVBENUM Mask          */
+
 #define SPI_TX_TX_Pos                    (0)                                               /*!< SPI_T::TX: TX Position                 */
 #define SPI_TX_TX_Msk                    (0xfffffffful << SPI_TX_TX_Pos)                   /*!< SPI_T::TX: TX Mask                     */
 
@@ -747,7 +738,7 @@ typedef struct
 #define SPI_I2SCTL_FORMAT_Msk            (0x3ul << SPI_I2SCTL_FORMAT_Pos)                  /*!< SPI_T::I2SCTL: FORMAT Mask             */
 
 #define SPI_I2SCTL_SLVERRIEN_Pos         (31)                                              /*!< SPI_T::I2SCTL: Bit Clock Error Position*/
-#define SPI_I2SCTL_SLVERRIEN_Msk         (0x3ul << SPI_I2SCTL_SLVERRIEN_Pos)               /*!< SPI_T::I2SCTL: Bit Clock Error Mask    */
+#define SPI_I2SCTL_SLVERRIEN_Msk         (0x1ul << SPI_I2SCTL_SLVERRIEN_Pos)               /*!< SPI_T::I2SCTL: SLVERRIEN Mask          */
 
 #define SPI_I2SCLK_MCLKDIV_Pos           (0)                                               /*!< SPI_T::I2SCLK: MCLKDIV Position        */
 #define SPI_I2SCLK_MCLKDIV_Msk           (0x7ful << SPI_I2SCLK_MCLKDIV_Pos)                /*!< SPI_T::I2SCLK: MCLKDIV Mask            */
@@ -756,10 +747,10 @@ typedef struct
 #define SPI_I2SCLK_BCLKDIV_Msk           (0x3fful << SPI_I2SCLK_BCLKDIV_Pos)               /*!< SPI_T::I2SCLK: BCLKDIV Mask            */
 
 #define SPI_I2SCLK_I2SMODE_Pos           (24)                                               /*!< SPI_T::I2SCLK: I2SMODE Position        */
-#define SPI_I2SCLK_I2SMODE_Msk           (0x1ul << SPI_I2SCLK_I2SMODE_Pos)                  /*!< SPI_T::I2SCLK: I2SMODE Mask            */
+#define SPI_I2SCLK_I2SMODE_Msk           (0x1ul << SPI_I2SCLK_I2SMODE_Pos)               	/*!< SPI_T::I2SCLK: I2SMODE Mask            */
 
 #define SPI_I2SCLK_I2SSLAVE_Pos          (25)                                               /*!< SPI_T::I2SCLK: I2SSLAVE Position        */
-#define SPI_I2SCLK_I2SSLAVE_Msk          (0x1ul << SPI_I2SCLK_I2SSLAVE_Pos)                 /*!< SPI_T::I2SCLK: I2SSLAVE Mask            */
+#define SPI_I2SCLK_I2SSLAVE_Msk          (0x1ul << SPI_I2SCLK_I2SSLAVE_Pos)               	/*!< SPI_T::I2SCLK: I2SSLAVE Mask            */
 
 #define SPI_I2SSTS_RIGHT_Pos             (4)                                               /*!< SPI_T::I2SSTS: RIGHT Position          */
 #define SPI_I2SSTS_RIGHT_Msk             (0x1ul << SPI_I2SSTS_RIGHT_Pos)                   /*!< SPI_T::I2SSTS: RIGHT Mask              */
