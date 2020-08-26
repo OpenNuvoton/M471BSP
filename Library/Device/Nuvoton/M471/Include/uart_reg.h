@@ -104,7 +104,7 @@ typedef struct
      * |        |          |Set this bit, the Single-wire Half Duplex Bit Error Detection Interrupt SWBEINT(UART_INTSTS[24]) is generated when Single-wire Bit Error Detection SWBEIF(UART_INTSTS[16]) is set.
      * |        |          |0 = Single-wire Bit Error Detect Inerrupt Disabled.
      * |        |          |1 = Single-wire Bit Error Detect Inerrupt Enabled.
-     * |        |          |Note: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is select UART Single-wire mode.
+     * |        |          |Note: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is set as UART Single-wire mode.
      * |[18]    |ABRIEN    |Auto-baud Rate Interrupt Enable Bit
      * |        |          |0 = Auto-baud rate interrupt Disabled.
      * |        |          |1 = Auto-baud rate interrupt Enabled.
@@ -122,13 +122,13 @@ typedef struct
      * |        |          |0 = No effect.
      * |        |          |1 = Reset the RX internal state machine and pointers.
      * |        |          |Note1: This bit will automatically clear at least 3 UART peripheral clock cycles.
-     * |        |          |Note2: Before setting this bit, it should wait for the RXIDLE (UART_FIFOSTS[29]) be set.
+     * |        |          |Note 2: Before setting this bit, it should wait for the RXIDLE (UART_FIFOSTS[29]) to be set.
      * |[2]     |TXRST     |TX Field Software Reset
      * |        |          |When TXRST (UART_FIFO[2]) is set, all the byte in the transmit FIFO and TX internal state machine are cleared.
      * |        |          |0 = No effect.
      * |        |          |1 = Reset the TX internal state machine and pointers.
      * |        |          |Note1: This bit will automatically clear at least 3 UART peripheral clock cycles.
-     * |        |          |Note2: Before setting this bit, it should wait for the TXEMPTYF (UART_FIFOSTS[28]) be set.
+     * |        |          |Note 2: Before setting this bit, it should wait for the TXEMPTYF (UART_FIFOSTS[28]) to be set.
      * |[7:4]   |RFITL     |RX FIFO Interrupt Trigger Level
      * |        |          |When the number of bytes in the receive FIFO equals the RFITL, the RDAIF (UART_INTSTS[0]) will be set (if RDAIEN (UART_INTEN [0]) enabled, and an interrupt will be generated).
      * |        |          |0000 = RX FIFO Interrupt Trigger Level is 1 byte.
@@ -192,15 +192,15 @@ typedef struct
      * |[8]     |TXDINV    |TX Data Inverted
      * |        |          |0 = Transmitted data signal inverted Disabled.
      * |        |          |1 = Transmitted data signal inverted Enabled.
-     * |        |          |Note1: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then waited for TXRXACT (UART_FIFOSTS[31]) is cleared
-     * |        |          |When the configuration is done, cleared TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
-     * |        |          |Note 2: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is select UART, LIN or RS485 function.
+     * |        |          |Note 1: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then wait for TXRXACT (UART_FIFOSTS[31]) to be cleared
+     * |        |          |When the configuration is done, clear TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
+     * |        |          |Note 2: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is set as UART, LIN or RS485 function.
      * |[9]     |RXDINV    |RX Data Inverted
      * |        |          |0 = Received data signal inverted Disabled.
      * |        |          |1 = Received data signal inverted Enabled.
-     * |        |          |Note1: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then waited for TXRXACT (UART_FIFOSTS[31]) is cleared.
-     * |        |          |When the configuration is done, cleared TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
-     * |        |          |Note 2: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is select UART, LIN or RS485 function.
+     * |        |          |Note 1: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then wait for TXRXACT (UART_FIFOSTS[31]) to be cleared
+     * |        |          |When the configuration is done, clear TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
+     * |        |          |Note 2: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is set as UART, LIN or RS485 function.
      * @var UART_T::MODEM
      * Offset: 0x10  UART Modem Control Register
      * ---------------------------------------------------------------------------------------------------
@@ -212,15 +212,15 @@ typedef struct
      * |        |          |1 = nRTS signal is inactive.
      * |        |          |Note1: The nRTS signal control bit is not effective when nRTS auto-flow control is enabled in UART function mode.
      * |        |          |Note2: The nRTS signal control bit is not effective when RS-485 auto direction mode (AUD) is enabled in RS-485 function mode.
-     * |        |          |Note3: Single-wire mode is support this feature.
+     * |        |          |Note 3: Single-wire mode supports this feature.
      * |[9]     |RTSACTLV  |nRTS Pin Active Level
      * |        |          |This bit defines the active level state of nRTS pin output.
      * |        |          |0 = nRTS pin output is high level active.
      * |        |          |1 = nRTS pin output is low level active. (Default).
-     * |        |          |Note 1: Refer to Figure 7.15-13 and Figure 7.15-14 for UART function mode.
-     * |        |          |Note 2: Refer to Figure 7.15-24 and Figure 7.15-25 for RS-485 function mode.
-     * |        |          |Note3: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then waited for TXRXACT (UART_FIFOSTS[31]) is cleared.
-     * |        |          |When the configuration is done, cleared TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
+     * |        |          |Note 1: Refer to Figure 6.14-13 and Figure 6.14-14 for UART function mode.
+     * |        |          |Note 2: Refer to Figure 6.14-24 and Figure 6.14-25 for RS-485 function mode.
+     * |        |          |Note 3: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then wait for TXRXACT (UART_FIFOSTS[31]) to be cleared
+     * |        |          |When the configuration is done, clear TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
      * |[13]    |RTSSTS    |nRTS Pin Status (Read Only)
      * |        |          |This bit mirror from nRTS pin output of voltage logic status.
      * |        |          |0 = nRTS pin output is low level voltage logic state.
@@ -244,8 +244,8 @@ typedef struct
      * |        |          |This bit defines the active level state of nCTS pin input.
      * |        |          |0 = nCTS pin input is high level active.
      * |        |          |1 = nCTS pin input is low level active. (Default).
-     * |        |          |Note: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then waited for TXRXACT (UART_FIFOSTS[31]) is cleared.
-     * |        |          |When the configuration is done, cleared TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
+     * |        |          |Note: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then wait for TXRXACT (UART_FIFOSTS[31]) to be cleared
+     * |        |          |When the configuration is done, clear TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
      * @var UART_T::FIFOSTS
      * Offset: 0x18  UART FIFO Status Register
      * ---------------------------------------------------------------------------------------------------
@@ -436,7 +436,7 @@ typedef struct
      * |        |          |This bit is set when the single wire bus state not equals to UART controller TX state in Single-wire mode.
      * |        |          |0 = No single-wire bit error detection interrupt flag is generated.
      * |        |          |1 = Single-wire bit error detection interrupt flag is generated.
-     * |        |          |Note1: This bit is active when FUNCSEL (UART_FUNCSEL[2:0]) is select UART Single-wire mode.
+     * |        |          |Note 1: This bit is active when FUNCSEL (UART_FUNCSEL[2:0]) is set as UART Single-wire mode.
      * |        |          |Note2: This bit can be cleared by writing "1" to it.
      * |[18]    |HWRLSIF   |PDMA Mode Receive Line Status Flag (Read Only)
      * |        |          |This bit is set when the RX receive data have parity error, frame error or break error (at least one of 3 bits, BIF (UART_FIFOSTS[6]), FEF (UART_FIFOSTS[5]) and PEF (UART_FIFOSTS[4]) is set).
@@ -521,10 +521,10 @@ typedef struct
      * |[15:0]  |BRD       |Baud Rate Divider
      * |        |          |The field indicates the baud rate divider.
      * |        |          |This filed is used in baud rate calculation.
-     * |        |          |The detail description is shown in Table 7.15-4.
+     * |        |          |The detail description is shown in Table 6.14-4.
      * |[27:24] |EDIVM1    |Extra Divider for BAUD Rate Mode 1
      * |        |          |This field is used for baud rate calculation in mode 1 and has no effect for baud rate calculation in mode 0 and mode 2.
-     * |        |          |The detail description is shown in Table 7.15-4
+     * |        |          |The detail description is shown in Table 6.14-4
      * |[28]    |BAUDM0    |BAUD Rate Mode Selection Bit 0
      * |        |          |This bit is baud rate mode selection bit 0
      * |        |          |UART provides three baud rate calculation modes.
@@ -534,7 +534,7 @@ typedef struct
      * |        |          |This bit is baud rate mode selection bit 1.
      * |        |          |UART provides three baud rate calculation modes.
      * |        |          |This bit combines with BAUDM0 (UART_BAUD[28]) to select baud rate calculation mode.
-     * |        |          |The detail description is shown in Table 7.15-4.
+     * |        |          |The detail description is shown in Table 6.14-4.
      * |        |          |Note: In IrDA mode must be operated in mode 0.
      * @var UART_T::IRDA
      * Offset: 0x28  UART IrDA Control Register
@@ -547,15 +547,15 @@ typedef struct
      * |[5]     |TXINV     |IrDA Inverse Transmitting Output Signal
      * |        |          |0 = None inverse transmitting signal. (Default).
      * |        |          |1 = Inverse transmitting output signal.
-     * |        |          |Note1: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then waited for TXRXACT (UART_FIFOSTS[31]) is cleared
-     * |        |          |When the configuration is done, cleared TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
-     * |        |          |Note 2: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is select IrDA function.
+     * |        |          |Note 1: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then wait for TXRXACT (UART_FIFOSTS[31]) to be cleared
+     * |        |          |When the configuration is done, clear TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
+     * |        |          |Note 2: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is set as IrDA function.
      * |[6]     |RXINV     |IrDA Inverse Receive Input Signal
      * |        |          |0 = None inverse receiving input signal.
      * |        |          |1 = Inverse receiving input signal. (Default)
-     * |        |          |Note1: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then waited for TXRXACT (UART_FIFOSTS[31]) is cleared
-     * |        |          |When the configuration is done, cleared TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
-     * |        |          |Note 2: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is select IrDA function.
+     * |        |          |Note 1: Before setting this bit, TXRXDIS (UART_FUNCSEL[3]) should be set then wait for TXRXACT (UART_FIFOSTS[31]) to be cleared
+     * |        |          |When the configuration is done, clear TXRXDIS (UART_FUNCSEL[3]) to activate UART controller.
+     * |        |          |Note 2: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is set as IrDA function.
      * @var UART_T::ALTCTL
      * Offset: 0x2C  UART Alternate Control/Status Register
      * ---------------------------------------------------------------------------------------------------
@@ -623,7 +623,7 @@ typedef struct
      * |        |          |Setting this bit can disable TX and RX.
      * |        |          |0 = TX and RX Enabled.
      * |        |          |1 = TX and RX Disabled.
-     * |        |          |Note: The TX and RX will not disable immediately when this bit is set.
+     * |        |          |Note: The TX and RX will not be disabled immediately when this bit is set
      * |        |          |The TX and RX compelet current task before disable TX and RX.
      * |        |          |When TX and RX disable, the TXRXACT (UART_FIFOSTS[31]) is cleared.
      * |[6]     |DGE       |Deglitch Enable Bit
@@ -650,7 +650,7 @@ typedef struct
      * |        |          |1 = LIN automatic resynchronization Enabled.
      * |        |          |Note 1: This bit only is valid in LIN slave mode (SLVEN (UART_LINCTL[0]) = 1).
      * |        |          |Note2: When operation in Automatic Resynchronization mode, the baud rate setting must be mode2 (BAUDM1 (UART_BAUD [29]) and BAUDM0 (UART_BAUD [28]) must be 1).
-     * |        |          |Note3: The control and interactions of this field are explained in 1.1.5.10 (Slave mode with automatic resynchronization).
+     * |        |          |Note 3: The control and interactions of this field are explained in 6.14.5.10 (Slave mode with automatic resynchronization).
      * |[3]     |SLVDUEN   |LIN Slave Divider Update Method Enable Bit
      * |        |          |0 = UART_BAUD updated is written by software (if no automatic resynchronization update occurs at the same time).
      * |        |          |1 = UART_BAUD is updated at the next received character
@@ -658,11 +658,11 @@ typedef struct
      * |        |          |Note 1: This bit only is valid in LIN slave mode (SLVEN (UART_LINCTL[0]) = 1).
      * |        |          |Note2: This bit used for LIN Slave Automatic Resynchronization mode
      * |        |          |(for Non-Automatic Resynchronization mode, this bit should be kept cleared)
-     * |        |          |Note3: The control and interactions of this field are explained in 1.1.5.10 (Slave mode with automatic resynchronization).
+     * |        |          |Note 3: The control and interactions of this field are explained in 6.14.5.10 (Slave mode with automatic resynchronization).
      * |[4]     |MUTE      |LIN Mute Mode Enable Bit
      * |        |          |0 = LIN mute mode Disabled.
      * |        |          |1 = LIN mute mode Enabled.
-     * |        |          |Note: The exit from mute mode condition and each control and interactions of this field are explained in 1.1.5.10 (LIN slave mode).
+     * |        |          |Note: The exit from mute mode condition and each control and interactions of this field are explained in 6.14.5.10 (LIN slave mode).
      * |[8]     |SENDH     |LIN TX Send Header Enable Bit
      * |        |          |The LIN TX header can be u201Cbreak fieldu201D or u201Cbreak and sync fieldu201D or u201Cbreak, sync and frame ID fieldu201D, it is depend on setting HSEL (UART_LINCTL[23:22]).
      * |        |          |0 = Send LIN TX header Disabled.
@@ -837,7 +837,7 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[15:0]  |STCOMP    |START Bit Compensation Value
-     * |        |          |These bits field indicate how many clock cycle selected by UART_CLK do the UART controller can get the 1st bit (start bit) when the device is wake-up from Power-down mode.
+     * |        |          |These bits field indicate how many clock cycle selected by UART_CLK do the UART controller can get the 1st bit (START bit) when the device is woken up from Power-down mode.
      * |        |          |Note: It is valid only when WKDATEN (UART_WKCTL[1]) is set.
      */
     __IO uint32_t DAT;                   /*!< [0x0000] UART Receive/Transmit Buffer Register                            */
