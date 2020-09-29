@@ -1715,6 +1715,412 @@ typedef struct
      * |[5]     |APDMAEN5  |Channel N Accumulator PDMA Enable Bits
      * |        |          |0 = Channel n PDMA function Disabled.
      * |        |          |1 = Channel n PDMA function Enabled for the channel n to trigger PDMA to transfer memory data to register.
+	 * @var EPWM_T::FDEN
+	 * Offset: 0x160  EPWM Fault Detect Enable Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[0]     |FDEN0     |EPWM Fault Detect Function Enable Bits
+	 * |        |          |0 = Fault detect function Disabled.
+	 * |        |          |1 = Fault detect function Enabled.
+	 * |[1]     |FDEN1     |EPWM Fault Detect Function Enable Bits
+	 * |        |          |0 = Fault detect function Disabled.
+	 * |        |          |1 = Fault detect function Enabled.
+	 * |[2]     |FDEN2     |EPWM Fault Detect Function Enable Bits
+	 * |        |          |0 = Fault detect function Disabled.
+	 * |        |          |1 = Fault detect function Enabled.
+	 * |[3]     |FDEN3     |EPWM Fault Detect Function Enable Bits
+	 * |        |          |0 = Fault detect function Disabled.
+	 * |        |          |1 = Fault detect function Enabled.
+	 * |[4]     |FDEN4     |EPWM Fault Detect Function Enable Bits
+	 * |        |          |0 = Fault detect function Disabled.
+	 * |        |          |1 = Fault detect function Enabled.
+	 * |[5]     |FDEN5     |EPWM Fault Detect Function Enable Bits
+	 * |        |          |0 = Fault detect function Disabled.
+	 * |        |          |1 = Fault detect function Enabled.
+	 * |[8]     |FDODIS0   |EPWM Channel n Output Fault Detect Disable Bits
+	 * |        |          |0 = EPWM detect fault and output Enabled.
+	 * |        |          |1 = EPWM detect fault and output Disabled.
+	 * |[9]     |FDODIS1   |EPWM Channel n Output Fault Detect Disable Bits
+	 * |        |          |0 = EPWM detect fault and output Enabled.
+	 * |        |          |1 = EPWM detect fault and output Disabled.
+	 * |[10]    |FDODIS2   |EPWM Channel n Output Fault Detect Disable Bits
+	 * |        |          |0 = EPWM detect fault and output Enabled.
+	 * |        |          |1 = EPWM detect fault and output Disabled.
+	 * |[11]    |FDODIS3   |EPWM Channel n Output Fault Detect Disable Bits
+	 * |        |          |0 = EPWM detect fault and output Enabled.
+	 * |        |          |1 = EPWM detect fault and output Disabled.
+	 * |[12]    |FDODIS4   |EPWM Channel n Output Fault Detect Disable Bits
+	 * |        |          |0 = EPWM detect fault and output Enabled.
+	 * |        |          |1 = EPWM detect fault and output Disabled.
+	 * |[13]    |FDODIS5   |EPWM Channel n Output Fault Detect Disable Bits
+	 * |        |          |0 = EPWM detect fault and output Enabled.
+	 * |        |          |1 = EPWM detect fault and output Disabled.
+	 * |[16]    |FDCKS0    |EPWM Channel n Fault Detect Clock Source Select Bits
+	 * |        |          |0 = EPWMx_CLK, x denotes 0 or 1.
+	 * |        |          |1 = EPWMx_CLK divide by prescaler, x denotes 0 or 1.
+	 * |[17]    |FDCKS1    |EPWM Channel n Fault Detect Clock Source Select Bits
+	 * |        |          |0 = EPWMx_CLK, x denotes 0 or 1.
+	 * |        |          |1 = EPWMx_CLK divide by prescaler, x denotes 0 or 1.
+	 * |[18]    |FDCKS2    |EPWM Channel n Fault Detect Clock Source Select Bits
+	 * |        |          |0 = EPWMx_CLK, x denotes 0 or 1.
+	 * |        |          |1 = EPWMx_CLK divide by prescaler, x denotes 0 or 1.
+	 * |[19]    |FDCKS3    |EPWM Channel n Fault Detect Clock Source Select Bits
+	 * |        |          |0 = EPWMx_CLK, x denotes 0 or 1.
+	 * |        |          |1 = EPWMx_CLK divide by prescaler, x denotes 0 or 1.
+	 * |[20]    |FDCKS4    |EPWM Channel n Fault Detect Clock Source Select Bits
+	 * |        |          |0 = EPWMx_CLK, x denotes 0 or 1.
+	 * |        |          |1 = EPWMx_CLK divide by prescaler, x denotes 0 or 1.
+	 * |[21]    |FDCKS5    |EPWM Channel n Fault Detect Clock Source Select Bits
+	 * |        |          |0 = EPWMx_CLK, x denotes 0 or 1.
+	 * |        |          |1 = EPWMx_CLK divide by prescaler, x denotes 0 or 1.
+	 * @var EPWM_T::FDCTL0
+	 * Offset: 0x164  EPWM Fault Detect Control Register 0
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[6:0]   |TRMSKCNT  |Transition Mask Counter
+	 * |        |          |The fault detect result will be masked before counter count from 0 to TRMSKCNT.
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Mask time is EPWMx_CLK * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Mask time EPWMx_CLK * CLKPSC * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[15]    |FDMSKEN   |Fault Detect Mask Enable Bit
+	 * |        |          |0 = Fault detect mask function Disabled.
+	 * |        |          |1 = Fault detect mask function Enabled.
+	 * |[18:16] |DGSMPCYC  |Deglitch Sampling Cycle
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * CLKPSC * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[29:28] |FDCKSEL   |EPWM Channel Fault Detect Clock Select
+	 * |        |          |00 = FLT_CLK/1.
+	 * |        |          |01 = FLT_CLK/2.
+	 * |        |          |10 = FLT_CLK/4.
+	 * |        |          |11 = FLT_CLK/8.
+	 * |        |          |Note: FLT_CLK is FDCKSn (EPWM_FDENn[16+n], n=0,1..5) selected clock.
+	 * |[31]    |FDDGEN    |Fault Detect Deglitch Enable Bit
+	 * |        |          |0 = Fault detect deglitch function Disabled.
+	 * |        |          |1 = Fault detect deglitch function Enabled.
+	 * @var EPWM_T::FDCTL1
+	 * Offset: 0x168  EPWM Fault Detect Control Register 1
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[6:0]   |TRMSKCNT  |Transition Mask Counter
+	 * |        |          |The fault detect result will be masked before counter count from 0 to TRMSKCNT.
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Mask time is EPWMx_CLK * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Mask time EPWMx_CLK * CLKPSC * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[15]    |FDMSKEN   |Fault Detect Mask Enable Bit
+	 * |        |          |0 = Fault detect mask function Disabled.
+	 * |        |          |1 = Fault detect mask function Enabled.
+	 * |[18:16] |DGSMPCYC  |Deglitch Sampling Cycle
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * CLKPSC * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[29:28] |FDCKSEL   |EPWM Channel Fault Detect Clock Select
+	 * |        |          |00 = FLT_CLK/1.
+	 * |        |          |01 = FLT_CLK/2.
+	 * |        |          |10 = FLT_CLK/4.
+	 * |        |          |11 = FLT_CLK/8.
+	 * |        |          |Note: FLT_CLK is FDCKSn (EPWM_FDENn[16+n], n=0,1..5) selected clock.
+	 * |[31]    |FDDGEN    |Fault Detect Deglitch Enable Bit
+	 * |        |          |0 = Fault detect deglitch function Disabled.
+	 * |        |          |1 = Fault detect deglitch function Enabled.
+	 * @var EPWM_T::FDCTL2
+	 * Offset: 0x16C  EPWM Fault Detect Control Register 2
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[6:0]   |TRMSKCNT  |Transition Mask Counter
+	 * |        |          |The fault detect result will be masked before counter count from 0 to TRMSKCNT.
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Mask time is EPWMx_CLK * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Mask time EPWMx_CLK * CLKPSC * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[15]    |FDMSKEN   |Fault Detect Mask Enable Bit
+	 * |        |          |0 = Fault detect mask function Disabled.
+	 * |        |          |1 = Fault detect mask function Enabled.
+	 * |[18:16] |DGSMPCYC  |Deglitch Sampling Cycle
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * CLKPSC * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[29:28] |FDCKSEL   |EPWM Channel Fault Detect Clock Select
+	 * |        |          |00 = FLT_CLK/1.
+	 * |        |          |01 = FLT_CLK/2.
+	 * |        |          |10 = FLT_CLK/4.
+	 * |        |          |11 = FLT_CLK/8.
+	 * |        |          |Note: FLT_CLK is FDCKSn (EPWM_FDENn[16+n], n=0,1..5) selected clock.
+	 * |[31]    |FDDGEN    |Fault Detect Deglitch Enable Bit
+	 * |        |          |0 = Fault detect deglitch function Disabled.
+	 * |        |          |1 = Fault detect deglitch function Enabled.
+	 * @var EPWM_T::FDCTL3
+	 * Offset: 0x170  EPWM Fault Detect Control Register 3
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[6:0]   |TRMSKCNT  |Transition Mask Counter
+	 * |        |          |The fault detect result will be masked before counter count from 0 to TRMSKCNT.
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Mask time is EPWMx_CLK * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Mask time EPWMx_CLK * CLKPSC * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[15]    |FDMSKEN   |Fault Detect Mask Enable Bit
+	 * |        |          |0 = Fault detect mask function Disabled.
+	 * |        |          |1 = Fault detect mask function Enabled.
+	 * |[18:16] |DGSMPCYC  |Deglitch Sampling Cycle
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * CLKPSC * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[29:28] |FDCKSEL   |EPWM Channel Fault Detect Clock Select
+	 * |        |          |00 = FLT_CLK/1.
+	 * |        |          |01 = FLT_CLK/2.
+	 * |        |          |10 = FLT_CLK/4.
+	 * |        |          |11 = FLT_CLK/8.
+	 * |        |          |Note: FLT_CLK is FDCKSn (EPWM_FDENn[16+n], n=0,1..5) selected clock.
+	 * |[31]    |FDDGEN    |Fault Detect Deglitch Enable Bit
+	 * |        |          |0 = Fault detect deglitch function Disabled.
+	 * |        |          |1 = Fault detect deglitch function Enabled.
+	 * @var EPWM_T::FDCTL4
+	 * Offset: 0x174  EPWM Fault Detect Control Register 4
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[6:0]   |TRMSKCNT  |Transition Mask Counter
+	 * |        |          |The fault detect result will be masked before counter count from 0 to TRMSKCNT.
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Mask time is EPWMx_CLK * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Mask time EPWMx_CLK * CLKPSC * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[15]    |FDMSKEN   |Fault Detect Mask Enable Bit
+	 * |        |          |0 = Fault detect mask function Disabled.
+	 * |        |          |1 = Fault detect mask function Enabled.
+	 * |[18:16] |DGSMPCYC  |Deglitch Sampling Cycle
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * CLKPSC * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[29:28] |FDCKSEL   |EPWM Channel Fault Detect Clock Select
+	 * |        |          |00 = FLT_CLK/1.
+	 * |        |          |01 = FLT_CLK/2.
+	 * |        |          |10 = FLT_CLK/4.
+	 * |        |          |11 = FLT_CLK/8.
+	 * |        |          |Note: FLT_CLK is FDCKSn (EPWM_FDENn[16+n], n=0,1..5) selected clock.
+	 * |[31]    |FDDGEN    |Fault Detect Deglitch Enable Bit
+	 * |        |          |0 = Fault detect deglitch function Disabled.
+	 * |        |          |1 = Fault detect deglitch function Enabled.
+	 * @var EPWM_T::FDCTL5
+	 * Offset: 0x178  EPWM Fault Detect Control Register 5
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[6:0]   |TRMSKCNT  |Transition Mask Counter
+	 * |        |          |The fault detect result will be masked before counter count from 0 to TRMSKCNT.
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Mask time is EPWMx_CLK * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Mask time EPWMx_CLK * CLKPSC * (2^FDCKSEL) * (TRMSKCNT+2)
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[15]    |FDMSKEN   |Fault Detect Mask Enable Bit
+	 * |        |          |0 = Fault detect mask function Disabled.
+	 * |        |          |1 = Fault detect mask function Enabled.
+	 * |[18:16] |DGSMPCYC  |Deglitch Sampling Cycle
+	 * |        |          |FDCKS is set to 0:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |FDCKS is set to 1:
+	 * |        |          |Sampling detect signal each EPWMx_CLK * CLKPSC * (2^FDCKSEL) period and detect DGSMPCYC+1 times
+	 * |        |          |Note:
+	 * |        |          |CLKPSC (EPWM_CLKPSCn[11:0]) is 0:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 2
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 1:
+	 * |        |          |TRMSKCNT >= DGSMPCYC + 1
+	 * |        |          |FDCKS is 1 and CLKPSC (EPWM_CLKPSCn[11:0]) is 2:
+	 * |        |          |TRMSKCNT >= DGSMPCYC
+	 * |[29:28] |FDCKSEL   |EPWM Channel Fault Detect Clock Select
+	 * |        |          |00 = FLT_CLK/1.
+	 * |        |          |01 = FLT_CLK/2.
+	 * |        |          |10 = FLT_CLK/4.
+	 * |        |          |11 = FLT_CLK/8.
+	 * |        |          |Note: FLT_CLK is FDCKSn (EPWM_FDENn[16+n], n=0,1..5) selected clock.
+	 * |[31]    |FDDGEN    |Fault Detect Deglitch Enable Bit
+	 * |        |          |0 = Fault detect deglitch function Disabled.
+	 * |        |          |1 = Fault detect deglitch function Enabled.
+	 * @var EPWM_T::FDIEN
+	 * Offset: 0x17C  EPWM Fault Detect Interrupt Enable Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[0]     |FDIENn    |EPWM Channel n Fault Detect Interrupt Enable Bit
+	 * |        |          |0 = EPWM Channel n Fault Detect Interrupt Disabled.
+	 * |        |          |1 = EPWM Channel n Fault Detect Interrupt Enabled.
+	 * @var EPWM_T::FDSTS
+	 * Offset: 0x180  EPWM Fault Detect Interrupt Flag Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[5:0]   |FDIFn     |EPWM Channel n Fault Detect Interrupt Flag Bit
+	 * |        |          |Fault Detect Interrupt Flag will be set when EPWM output short
+	 * |        |          |Software can clear this bit by writing 1 to it.
+	 * @var EPWM_T::EADCPSCCTL
+	 * Offset: 0x184  EPWM Trigger EADC Prescale Control Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[0]     |PSCEN0    |EPWM Trigger EADC Pre-scale Function Enable Bits
+	 * |        |          |0 = EPWM Trigger EADC Pre-scale function Disabled.
+	 * |        |          |1 = EPWM Trigger EADC Pre-scale function Enabled.
+	 * |[1]     |PSCEN1    |EPWM Trigger EADC Pre-scale Function Enable Bits
+	 * |        |          |0 = EPWM Trigger EADC Pre-scale function Disabled.
+	 * |        |          |1 = EPWM Trigger EADC Pre-scale function Enabled.
+	 * |[2]     |PSCEN2    |EPWM Trigger EADC Pre-scale Function Enable Bits
+	 * |        |          |0 = EPWM Trigger EADC Pre-scale function Disabled.
+	 * |        |          |1 = EPWM Trigger EADC Pre-scale function Enabled.
+	 * |[3]     |PSCEN3    |EPWM Trigger EADC Pre-scale Function Enable Bits
+	 * |        |          |0 = EPWM Trigger EADC Pre-scale function Disabled.
+	 * |        |          |1 = EPWM Trigger EADC Pre-scale function Enabled.
+	 * |[4]     |PSCEN4    |EPWM Trigger EADC Pre-scale Function Enable Bits
+	 * |        |          |0 = EPWM Trigger EADC Pre-scale function Disabled.
+	 * |        |          |1 = EPWM Trigger EADC Pre-scale function Enabled.
+	 * |[5]     |PSCEN5    |EPWM Trigger EADC Pre-scale Function Enable Bits
+	 * |        |          |0 = EPWM Trigger EADC Pre-scale function Disabled.
+	 * |        |          |1 = EPWM Trigger EADC Pre-scale function Enabled.
+	 * @var EPWM_T::EADCPSC0
+	 * Offset: 0x188  EPWM Trigger EADC Prescale Register 0
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[3:0]   |EADCPSC0  |EPWM Channel 0 Trigger EADC Prescale
+	 * |        |          |The register sets the count number which defines (EADCPSC0+1) times of EPWM_CH0 trigger EADC event occurs to trigger EADC and set trigger EADC flag bit EADCTRGF0.
+	 * |[11:8]  |EADCPSC1  |EPWM Channel 1 Trigger EADC Prescale
+	 * |        |          |The register sets the count number which defines (EADCPSC1+1) times of EPWM_CH1 trigger EADC event occurs to trigger EADC and set trigger EADC flag bit EADCTRGF1.
+	 * |[19:16] |EADCPSC2  |EPWM Channel 2 Trigger EADC Prescale
+	 * |        |          |The register sets the count number which defines (EADCPSC2+1) times of EPWM_CH2 trigger EADC event occurs to trigger EADC and set trigger EADC flag bit EADCTRGF2.
+	 * |[27:24] |EADCPSC3  |EPWM Channel 3 Trigger EADC Prescale
+	 * |        |          |The register sets the count number which defines (EADCPSC3+1) times of EPWM_CH3 trigger EADC event occurs to trigger EADC and set trigger EADC flag bit EADCTRGF3.
+	 * @var EPWM_T::EADCPSC1
+	 * Offset: 0x18C  EPWM Trigger EADC Prescale Register 1
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[3:0]   |EADCPSC4  |EPWM Channel 4 Trigger EADC Prescale
+	 * |        |          |The register sets the count number which defines (EADCPSC4+1) times of EPWM_CH4 trigger EADC event occurs to trigger EADC and set trigger EADC flag bit EADCTRGF4.
+	 * |[11:8]  |EADCPSC5  |EPWM Channel 5 Trigger EADC Prescale
+	 * |        |          |The register sets the count number which defines (EADCPSC5+1) times of EPWM_CH5 trigger EADC event occurs to trigger EADC and set trigger EADC flag bit EADCTRGF5.
+	 * @var EPWM_T::EADCPSCNT0
+	 * Offset: 0x190  EPWM Trigger EADC Prescale Counter Register 0
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[3:0]   |PSCNT0    |EPWM Trigger EADC Prescale Counter 0
+	 * |        |          |User can monitor PSCNT0 to know the current value in 4-bit trigger EADC prescale counter.
+	 * |        |          |Note 1: user can write only when PSCEN0 is 0.
+	 * |        |          |Note 2: Write data limitation: PSCNT0 < EADCPSC0.
+	 * |[11:8]  |PSCNT1    |EPWM Trigger EADC Prescale Counter 1
+	 * |        |          |User can monitor PSCNT1 to know the current value in 4-bit trigger EADC prescale counter.
+	 * |        |          |Note 1: user can write only when PSCEN1 is 0.
+	 * |        |          |Note 2: Write data limitation: PSCNT1 < EADCPSC1.
+	 * |[19:16] |PSCNT2    |EPWM Trigger EADC Prescale Counter 2
+	 * |        |          |User can monitor PSCNT2 to know the current value in 4-bit trigger EADC prescale counter.
+	 * |        |          |Note 1: user can write only when PSCEN2 is 0.
+	 * |        |          |Note 2: Write data limitation: PSCNT2 < EADCPSC2.
+	 * |[27:24] |PSCNT3    |EPWM Trigger EADC Prescale Counter 3
+	 * |        |          |User can monitor PSCNT3 to know the current value in 4-bit trigger EADC prescale counter.
+	 * |        |          |Note 1: user can write only when PSCEN3 is 0.
+	 * |        |          |Note 2: Write data limitation: PSCNT3 < EADCPSC3.
+	 * @var EPWM_T::EADCPSCNT1
+	 * Offset: 0x194  EPWM Trigger EADC Prescale Counter Register 1
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[3:0]   |PSCNT4    |EPWM Trigger EADC Prescale Counter 4
+	 * |        |          |User can monitor PSCNT4 to know the current value in 4-bit trigger EADC prescale counter.
+	 * |        |          |Note 1: user can write only when PSCEN4 is 0.
+	 * |        |          |Note 2: Write data limitation: PSCNT4 < EADCPSC4.
+	 * |[11:8]  |PSCNT5    |EPWM Trigger EADC Prescale Counter 5
+	 * |        |          |User can monitor PSCNT5 to know the current value in 4-bit trigger EADC prescale counter.
+	 * |        |          |Note 1: user can write only when PSCEN5 is 0.
+	 * |        |          |Note 2: Write data limitation: PSCNT5 < EADCPSC5.
      * @var EPWM_T::CAPINEN
      * Offset: 0x200  EPWM Capture Input Enable Register
      * ---------------------------------------------------------------------------------------------------
