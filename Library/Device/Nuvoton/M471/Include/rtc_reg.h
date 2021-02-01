@@ -444,6 +444,9 @@ typedef struct
 #define RTC_LXTCTL_RTCCKSEL_Pos          (7)                                               /*!< RTC_T::LXTCTL: RTCCKSEL Position       */
 #define RTC_LXTCTL_RTCCKSEL_Msk          (0x1ul << RTC_LXTCTL_RTCCKSEL_Pos)                /*!< RTC_T::LXTCTL: RTCCKSEL Mask           */
 
+#define RTC_LXTCTL_C32KS_Pos             (7)                                               /*!< RTC_T::LXTCTL: C32KS Position          */
+#define RTC_LXTCTL_C32KS_Msk             (0x1ul << RTC_LXTCTL_C32KS_Pos)                   /*!< RTC_T::LXTCTL: C32KS Mask              */
+
 #define RTC_DSTCTL_ADDHR_Pos             (0)                                               /*!< RTC_T::DSTCTL: ADDHR Position          */
 #define RTC_DSTCTL_ADDHR_Msk             (0x1ul << RTC_DSTCTL_ADDHR_Pos)                   /*!< RTC_T::DSTCTL: ADDHR Mask              */
 
