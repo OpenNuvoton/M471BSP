@@ -217,8 +217,9 @@ uint32_t CLK_SetCoreClock(uint32_t u32Hclk)
     if(u32Hclk < (FREQ_51MHZ))
         u32Hclk = (FREQ_51MHZ);
 
-    /* Switch FMC access cycle to maximum value for safe */
+    /* Switch FMC/DFMC access cycle to maximum value for safe */
     FMC->CYCCTL = 6;
+    DFMC->CYCCTL = 8;
 
     /* Switch HCLK clock source to HIRC clock for safe */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
@@ -273,8 +274,9 @@ void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv)
     /* Read HIRC clock source stable flag */
     u32HIRCSTB = CLK->STATUS & CLK_STATUS_HIRCSTB_Msk;
 
-    /* Switch FMC access cycle to maximum value for safe */
+    /* Switch FMC/DMFC access cycle to maximum value for safe */
     FMC->CYCCTL = 6;
+    DFMC->CYCCTL = 8;
 
     /* Switch to HIRC for Safe. Avoid HCLK too high when applying new divider. */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
@@ -303,6 +305,24 @@ void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv)
         FMC->CYCCTL = 2;
     else
         FMC->CYCCTL = 1;
+
+    /* Switch DFMC access cycle to suitable value base on HCLK */
+    if (SystemCoreClock > 192000000)
+        DFMC->CYCCTL = 8;
+    else if (SystemCoreClock > 162000000)
+        DFMC->CYCCTL = 7;
+    else if (SystemCoreClock > 135000000)
+        DFMC->CYCCTL = 6;
+    else if (SystemCoreClock > 108000000)
+        DFMC->CYCCTL = 5;
+    else if (SystemCoreClock > 81000000)
+        DFMC->CYCCTL = 4;
+    else if (SystemCoreClock > 54000000)
+        DFMC->CYCCTL = 3;
+    else if (SystemCoreClock > 27000000)
+        DFMC->CYCCTL = 2;
+    else
+        DFMC->CYCCTL = 1;
 
     /* Disable HIRC if HIRC is disabled before switching HCLK source */
     if(u32HIRCSTB == 0)
