@@ -52,11 +52,8 @@ extern "C"
 #define ACMP_CTL_NEGSEL_VBG          (2UL << ACMP_CTL_NEGSEL_Pos)  /*!< ACMP_CTL setting for selecting internal Band-gap voltage as the source of ACMP V-. \hideinitializer */
 #define ACMP_CTL_NEGSEL_DAC          (3UL << ACMP_CTL_NEGSEL_Pos)  /*!< ACMP_CTL setting for selecting DAC output voltage as the source of ACMP V-. \hideinitializer */
 #define ACMP_CTL_HYSTERESIS_DISABLE  (0UL << ACMP_CTL_HYSSEL_Pos)  /*!< ACMP_CTL setting for disabling the hysteresis function. \hideinitializer */
-#define ACMP_CTL_HYSTERESIS_10MV     (1UL << ACMP_CTL_HYSSEL_Pos)  /*!< ACMP_CTL setting for enabling the hysteresis function at 10mV. \hideinitializer */
 #define ACMP_CTL_HYSTERESIS_20MV     (2UL << ACMP_CTL_HYSSEL_Pos)  /*!< ACMP_CTL setting for enabling the hysteresis function at 20mV. \hideinitializer */
-#define ACMP_CTL_HYSTERESIS_30MV     (3UL << ACMP_CTL_HYSSEL_Pos)  /*!< ACMP_CTL setting for enabling the hysteresis function at 30mV. \hideinitializer */
 #define ACMP_CTL_HYSTERESIS_40MV     (4UL << ACMP_CTL_HYSSEL_Pos)  /*!< ACMP_CTL setting for enabling the hysteresis function at 40mV. \hideinitializer */
-#define ACMP_CTL_HYSTERESIS_50MV     (5UL << ACMP_CTL_HYSSEL_Pos)  /*!< ACMP_CTL setting for enabling the hysteresis function at 50mV. \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* ACMP_VREF constant definitions                                                                          */
@@ -119,11 +116,8 @@ extern "C"
   * @param[in] acmp The pointer of the specified ACMP module
   * @param[in] u32ChNum The ACMP number
   * @param[in] u32HysSel The hysteresis function option. Including:
-  *                  - \ref ACMP_CTL_HYSTERESIS_50MV
   *                  - \ref ACMP_CTL_HYSTERESIS_40MV
-  *                  - \ref ACMP_CTL_HYSTERESIS_30MV
   *                  - \ref ACMP_CTL_HYSTERESIS_20MV
-  *                  - \ref ACMP_CTL_HYSTERESIS_10MV
   *                  - \ref ACMP_CTL_HYSTERESIS_DISABLE
   * \hideinitializer
   * @return None
@@ -138,7 +132,7 @@ extern "C"
   * @details This macro will set HYSEN bit of ACMP_CTL register to enable hysteresis function.
   * \hideinitializer
   */
-#define ACMP_ENABLE_HYSTERESIS(acmp, u32ChNum) ((acmp)->CTL[(u32ChNum)] = ((acmp)->CTL[(u32ChNum)] & ~ACMP_CTL_HYSSEL_Msk) | ACMP_CTL_HYSTERESIS_30MV)
+#define ACMP_ENABLE_HYSTERESIS(acmp, u32ChNum) ((acmp)->CTL[(u32ChNum)] = ((acmp)->CTL[(u32ChNum)] & ~ACMP_CTL_HYSSEL_Msk) | ACMP_CTL_HYSTERESIS_20MV)
 
 /**
   * @brief This macro is used to disable hysteresis function

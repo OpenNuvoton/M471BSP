@@ -34,11 +34,8 @@
   *                  - \ref ACMP_CTL_NEGSEL_VBG
   *                  - \ref ACMP_CTL_NEGSEL_DAC
   * @param[in]  u32HysSel The hysteresis function option. Including:
-  *                  - \ref ACMP_CTL_HYSTERESIS_50MV
   *                  - \ref ACMP_CTL_HYSTERESIS_40MV
-  *                  - \ref ACMP_CTL_HYSTERESIS_30MV
   *                  - \ref ACMP_CTL_HYSTERESIS_20MV
-  *                  - \ref ACMP_CTL_HYSTERESIS_10MV
   *                  - \ref ACMP_CTL_HYSTERESIS_DISABLE
   *
   * @return     None
