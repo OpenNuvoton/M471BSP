@@ -70,7 +70,6 @@ extern "C"
 #define EADC_SCTL_TRGDLYDIV_DIVIDER_4       (0x2UL<<EADC_SCTL_TRGDLYDIV_Pos)       /*!< Trigger delay clock frequency is ADC_CLK/4 \hideinitializer */
 #define EADC_SCTL_TRGDLYDIV_DIVIDER_16      (0x3UL<<EADC_SCTL_TRGDLYDIV_Pos)       /*!< Trigger delay clock frequency is ADC_CLK/16 \hideinitializer */
 
-
 /*---------------------------------------------------------------------------------------------------------*/
 /* EADC_CMP Constant Definitions                                                                           */
 /*---------------------------------------------------------------------------------------------------------*/
@@ -80,6 +79,12 @@ extern "C"
 #define EADC_CMP_CMPWEN_DISABLE             (~EADC_CMP_CMPWEN_Msk)   /*!< Compare window mode disable \hideinitializer */
 #define EADC_CMP_ADCMPIE_ENABLE             (EADC_CMP_ADCMPIE_Msk)   /*!< A/D result compare interrupt enable \hideinitializer */
 #define EADC_CMP_ADCMPIE_DISABLE            (~EADC_CMP_ADCMPIE_Msk)  /*!< A/D result compare interrupt disable \hideinitializer */
+
+/*---------------------------------------------------------------------------------------------------------*/
+/* EADC_VREF Constant Definitions                                                                          */
+/*---------------------------------------------------------------------------------------------------------*/
+#define EADC_VREF_REFSEL_AVDD               (0UL<<EADC_VREF_REFSEL_Pos)   /*!< The positive reference voltage source is AVdd \hideinitializer */
+#define EADC_VREF_REFSEL_VREFP              (1UL<<EADC_VREF_REFSEL_Pos)   /*!< The positive reference voltage source is the VREF pin \hideinitializer */
 
 /*@}*/ /* end of group EADC_EXPORTED_CONSTANTS */
 
@@ -568,6 +573,7 @@ void EADC_Close(EADC_T *eadc);
 void EADC_ConfigSampleModule(EADC_T *eadc, uint32_t u32ModuleNum, uint32_t u32TriggerSrc, uint32_t u32Channel);
 void EADC_SetTriggerDelayTime(EADC_T *eadc, uint32_t u32ModuleNum, uint32_t u32TriggerDelayTime, uint32_t u32DelayClockDivider);
 void EADC_SetExtendSampleTime(EADC_T *eadc, uint32_t u32ModuleNum, uint32_t u32ExtendSampleTime);
+void EADC_SetVRef(EADC_T *eadc, uint32_t u32VRefCTL);
 
 /*@}*/ /* end of group EADC_EXPORTED_FUNCTIONS */
 

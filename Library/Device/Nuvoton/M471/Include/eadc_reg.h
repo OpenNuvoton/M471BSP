@@ -821,6 +821,8 @@ typedef struct
     __I  uint32_t RESERVE5[24];
     __I  uint32_t DAT19[8];             /*!< [0x0200 - 0x021c] EADC Data Register 19~26 for Sample Module 19~26         */
     __IO uint32_t SCTL19[8];            /*!< [0x0220 - 0x023c] EADC Sample Module 19~26 Control Register                */
+    __I  uint32_t RESERVE6[878];
+    __IO uint32_t VREF;                 /*!< [0x0FF8] EADC Reference Voltage Control Register                           */
 } EADC_T;
 
 /**
@@ -2546,6 +2548,9 @@ typedef struct
 
 #define EADC_M23CTL1_ACU_Pos            (4)                                                 /*!< EADC_T::M23CTL1: ACU Position          */
 #define EADC_M23CTL1_ACU_Msk            (0xful << EADC_M23CTL1_ACU_Pos)                     /*!< EADC_T::M23CTL1: ACU Mask              */
+
+#define EADC_VREF_REFSEL_Pos            (1)                                                 /*!< EADC_T::VREF: REFSEL Position          */
+#define EADC_VREF_REFSEL_Msk            (0x1ul << EADC_VREF_REFSEL_Pos)                     /*!< EADC_T::VREF: REFSEL Mask              */
 
 /**@}*/ /* EADC_CONST */
 /**@}*/ /* end of EADC register group */

@@ -33,6 +33,9 @@
   */
 void EADC_Open(EADC_T *eadc, uint32_t u32InputMode)
 {
+    /* Enable EADC Boost mode */
+    outpw(EADC_BASE+0xFF4, inpw(EADC_BASE+0xFF4) | BIT1);
+
     eadc->CTL &= (~EADC_CTL_DIFFEN_Msk);
 
     eadc->CTL |= (u32InputMode | EADC_CTL_ADCEN_Msk);
@@ -153,6 +156,20 @@ void EADC_SetExtendSampleTime(EADC_T *eadc, uint32_t u32ModuleNum, uint32_t u32E
         eadc->SCTL19[u32ModuleNum-19] &= ~EADC_SCTL_EXTSMPT_Msk;
         eadc->SCTL19[u32ModuleNum-19] |= (u32ExtendSampleTime << EADC_SCTL_EXTSMPT_Pos);
     }
+}
+
+/**
+  * @brief      Set EADC Reference Voltage
+  * @param[in]  eadc The pointer of the specified EADC module.
+  * @param[in]  u32VRefCTL is EADC reference voltage setting. Including :
+  *             - \ref EADC_VREF_REFSEL_AVDD    : The reference voltage source is AVdd
+  *             - \ref EADC_VREF_REFSEL_VREFP   : The reference voltage source is the VRef pin
+  * @return     None
+  * @details    This function select EADC reference voltage.
+  */
+void EADC_SetVRef(EADC_T *eadc, uint32_t u32VRefCTL)
+{
+    (eadc)->VREF = ((eadc)->VREF & (~EADC_VREF_REFSEL_Msk)) | (u32VRefCTL);
 }
 
 /*@}*/ /* end of group EADC_EXPORTED_FUNCTIONS */
