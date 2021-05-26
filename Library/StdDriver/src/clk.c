@@ -773,7 +773,7 @@ void CLK_DisablePLL(void)
   */
 uint32_t CLK_WaitClockReady(uint32_t u32ClkMask)
 {
-    int32_t i32TimeOutCnt = 2160000;
+    int32_t i32TimeOutCnt = 2580000;
 
     while((CLK->STATUS & u32ClkMask) != u32ClkMask)
     {
