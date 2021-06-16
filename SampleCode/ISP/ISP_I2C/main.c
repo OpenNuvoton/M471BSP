@@ -37,6 +37,10 @@ void SYS_Init(void)
 
     /* Enable I2C controller */
     CLK->APBCLK0 |= CLK_APBCLK0_I2C0CKEN_Msk;
+
+    /* Enable GPIO clock */
+    CLK->AHBCLK |= CLK_AHBCLK_GPCCKEN_Msk;
+
     /* Update System Core Clock */
     SystemCoreClock = __HIRC;
     CyclesPerUs = (SystemCoreClock + 500000) / 1000000;
@@ -46,6 +50,10 @@ void SYS_Init(void)
     /* Set I2C0 multi-function pins */
     SYS->GPC_MFPL = (SYS->GPC_MFPL & ~(SYS_GPC_MFPL_PC0MFP_Msk | SYS_GPC_MFPL_PC1MFP_Msk)) |
                     (SYS_GPC_MFPL_PC0MFP_I2C0_SDA | SYS_GPC_MFPL_PC1MFP_I2C0_SCL);
+
+    /* I2C pin enable schmitt trigger */
+    PC->SMTEN |= (GPIO_SMTEN_SMTEN0_Msk | GPIO_SMTEN_SMTEN1_Msk);
+
 #ifdef ReadyPin
     PB->MODE = (PB->MODE & ~(GPIO_MODE_MODE0_Msk << (6 << 1))) | (GPIO_MODE_OUTPUT << (6 << 1));
     ReadyPin = 1;

@@ -176,6 +176,9 @@ void SYS_Init(void)
     /* Enable I2C0 clock */
     CLK_EnableModuleClock(I2C0_MODULE);
 
+    /* Enable GPIO clock */
+    CLK_EnableModuleClock(GPC_MODULE);
+
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock and cyclesPerUs automatically. */
     SystemCoreClockUpdate();
@@ -190,6 +193,9 @@ void SYS_Init(void)
     /* Set I2C0 multi-function pins */
     SYS->GPC_MFPL = (SYS->GPC_MFPL & ~(SYS_GPC_MFPL_PC0MFP_Msk | SYS_GPC_MFPL_PC1MFP_Msk)) |
                     (SYS_GPC_MFPL_PC0MFP_I2C0_SDA | SYS_GPC_MFPL_PC1MFP_I2C0_SCL);
+
+    /* I2C pin enable schmitt trigger */
+    PC->SMTEN |= (GPIO_SMTEN_SMTEN0_Msk | GPIO_SMTEN_SMTEN1_Msk);
 
     /* Lock protected registers */
     SYS_LockReg();

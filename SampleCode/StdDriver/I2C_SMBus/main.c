@@ -589,6 +589,10 @@ void SYS_Init(void)
     /* Enable I2C1 clock */
     CLK_EnableModuleClock(I2C1_MODULE);
 
+    /* Enable GPIO clock */
+    CLK_EnableModuleClock(GPB_MODULE);
+    CLK_EnableModuleClock(GPC_MODULE);
+
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock and cyclesPerUs automatically. */
     SystemCoreClockUpdate();
@@ -613,6 +617,10 @@ void SYS_Init(void)
 
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB8MFP_Msk | SYS_GPB_MFPH_PB9MFP_Msk)) |
                     (SYS_GPB_MFPH_PB8MFP_I2C1_SMBSUS | SYS_GPB_MFPH_PB9MFP_I2C1_SMBAL);
+
+    /* I2C pin enable schmitt trigger */
+    PB->SMTEN |= (GPIO_SMTEN_SMTEN0_Msk | GPIO_SMTEN_SMTEN1_Msk);
+    PC->SMTEN |= (GPIO_SMTEN_SMTEN0_Msk | GPIO_SMTEN_SMTEN1_Msk);
 
     /* Lock protected registers */
     SYS_LockReg();

@@ -372,6 +372,10 @@ void SYS_Init(void)
     /* Enable PDMA clock */
     CLK_EnableModuleClock(PDMA_MODULE);
 
+    /* Enable GPIO clock */
+    CLK_EnableModuleClock(GPB_MODULE);
+    CLK_EnableModuleClock(GPC_MODULE);
+
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock and cyclesPerUs automatically. */
     SystemCoreClockUpdate();
@@ -390,6 +394,10 @@ void SYS_Init(void)
     /* Set I2C1 multi-function pins */
     SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB0MFP_Msk | SYS_GPB_MFPL_PB1MFP_Msk)) |
                     (SYS_GPB_MFPL_PB0MFP_I2C1_SDA | SYS_GPB_MFPL_PB1MFP_I2C1_SCL);
+
+    /* I2C pin enable schmitt trigger */
+    PB->SMTEN |= (GPIO_SMTEN_SMTEN0_Msk | GPIO_SMTEN_SMTEN1_Msk);
+    PC->SMTEN |= (GPIO_SMTEN_SMTEN0_Msk | GPIO_SMTEN_SMTEN1_Msk);
 
     /* Lock protected registers */
     SYS_LockReg();
