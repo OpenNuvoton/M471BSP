@@ -97,5 +97,8 @@ void SystemInit (void)
 
     HXTInit();
 
+    /* Enable ICLKON bit by BSP. */
+    /* This bit can be disabled to save system power if no special application concern. */
+    GPIO->DBCTL |= GPIO_DBCTL_ICLKON_Msk;
 }
 /*** (C) COPYRIGHT 2016 Nuvoton Technology Corp. ***/
