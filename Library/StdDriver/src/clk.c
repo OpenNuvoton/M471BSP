@@ -715,9 +715,6 @@ uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq)
                   ((u32MinNR - 2) << CLK_PLLCTL_INDIV_Pos) |
                   ((u32MinNF - 2) << CLK_PLLCTL_FBDIV_Pos);
 
-    /* Wait 500us for PLL unstable */
-    CLK_SysTickDelay(500);
-
     /* Wait for PLL clock stable */
     CLK_WaitClockReady(CLK_STATUS_PLLSTB_Msk);
 
