@@ -36,8 +36,8 @@ void SYS_Init(void)
     /* Set core clock as 72MHz from PLL */
     CLK_SetCoreClock(FREQ_72MHZ);
 
-    /* Set PCLK0/PCLK1 to HCLK/2 */
-    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
+    /* Set PCLK0/PCLK1 to HCLK/1 */
+    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV1 | CLK_PCLKDIV_APB1DIV_DIV1);
 
     /* Enable UART clock */
     CLK_EnableModuleClock(UART0_MODULE);
@@ -50,7 +50,15 @@ void SYS_Init(void)
     SystemCoreClockUpdate();
 
     /* Enable EADC peripheral clock */
-    CLK_SetModuleClock(EADC_MODULE, 0, CLK_CLKDIV0_EADC(1));
+    /* Note: The EADC_CLK speed should meet datasheet spec (<36MHz) and rules in following table.   */
+    /* +--------------+------------------+                                                          */
+    /* | PCLK divider | EADC_CLK divider |                                                          */
+    /* +--------------+------------------+                                                          */
+    /* | 1            | 1, 2, 3, 4, ...  |                                                          */
+    /* +--------------+------------------+                                                          */
+    /* | 2, 4, 8, 16  | 2, 4, 6, 8, ...  |                                                          */
+    /* +--------------+------------------+                                                          */
+    CLK_SetModuleClock(EADC_MODULE, 0, CLK_CLKDIV0_EADC(2));
 
     /* Enable EADC module clock */
     CLK_EnableModuleClock(EADC_MODULE);

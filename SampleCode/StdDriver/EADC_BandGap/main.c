@@ -46,6 +46,14 @@ void SYS_Init(void)
     SystemCoreClockUpdate();
 
     /* Enable EADC peripheral clock */
+    /* Note: The EADC_CLK speed should meet datasheet spec (<36MHz) and rules in following table.   */
+    /* +--------------+------------------+                                                          */
+    /* | PCLK divider | EADC_CLK divider |                                                          */
+    /* +--------------+------------------+                                                          */
+    /* | 1            | 1, 2, 3, 4, ...  |                                                          */
+    /* +--------------+------------------+                                                          */
+    /* | 2, 4, 8, 16  | 2, 4, 6, 8, ...  |                                                          */
+    /* +--------------+------------------+                                                          */
     CLK_SetModuleClock(EADC_MODULE, 0, CLK_CLKDIV0_EADC(36));
 
     /* Enable EADC module clock */

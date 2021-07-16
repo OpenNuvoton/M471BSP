@@ -61,6 +61,14 @@ void SYS_Init(void)
     CLK_EnableModuleClock(EPWM0_MODULE);
 
     /* EADC clock source PCLK1, set divider to 8, EADC clock is PCLK1/8 MHz */
+    /* Note: The EADC_CLK speed should meet datasheet spec (<36MHz) and rules in following table.   */
+    /* +--------------+------------------+                                                          */
+    /* | PCLK divider | EADC_CLK divider |                                                          */
+    /* +--------------+------------------+                                                          */
+    /* | 1            | 1, 2, 3, 4, ...  |                                                          */
+    /* +--------------+------------------+                                                          */
+    /* | 2, 4, 8, 16  | 2, 4, 6, 8, ...  |                                                          */
+    /* +--------------+------------------+                                                          */
     CLK_SetModuleClock(EADC_MODULE, 0, CLK_CLKDIV0_EADC(8));
 
     /* Enable EADC module clock */
