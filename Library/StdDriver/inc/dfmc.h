@@ -45,6 +45,7 @@ extern "C"
 #define DFMC_ISPCMD_READ_CKS     0x0DUL          /*!< ISP Command: Read checksum            \hideinitializer */
 #define DFMC_ISPCMD_PROGRAM      0x21UL          /*!< ISP Command: Write flash word         \hideinitializer */
 #define DFMC_ISPCMD_PAGE_ERASE   0x22UL          /*!< ISP Command: Page Erase Flash         \hideinitializer */
+#define DFMC_ISPCMD_MASS_ERASE   0x26UL          /*!< ISP Command: Mass Erase Flash         \hideinitializer */
 #define DFMC_ISPCMD_RUN_ALL1     0x28UL          /*!< ISP Command: Run all-one verification \hideinitializer */
 #define DFMC_ISPCMD_RUN_CKS      0x2DUL          /*!< ISP Command: Run checksum calculation \hideinitializer */
 
@@ -129,9 +130,13 @@ __STATIC_INLINE uint32_t DFMC_ReadPID(void)
 
 extern void     DFMC_Close(void);
 extern int32_t  DFMC_Erase(uint32_t u32PageAddr);
+extern void     DFMC_Erase_NonBlocking(uint32_t u32PageAddr);
+extern int32_t  DFMC_Mass_Erase(void);
+extern void     DFMC_Mass_Erase_NonBlocking(void);
 extern void     DFMC_Open(void);
 extern uint32_t DFMC_Read(uint32_t u32Addr);
 extern void     DFMC_Write(uint32_t u32Addr, uint32_t u32Data);
+extern void     DFMC_Write_NonBlocking(uint32_t u32Addr, uint32_t u32Data);
 extern int32_t DFMC_GetChkSum(uint32_t u32addr, uint32_t u32count);
 extern int32_t DFMC_CheckAllOne(uint32_t u32addr, uint32_t u32count);
 

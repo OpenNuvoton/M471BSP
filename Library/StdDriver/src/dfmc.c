@@ -61,6 +61,57 @@ int32_t DFMC_Erase(uint32_t u32PageAddr)
 }
 
 /**
+  * @brief Execute DFMC_ISPCMD_PAGE_ERASE command to erase a flash page with non-blocking mode. The page size is 256 bytes.
+  * @param[in]  u32PageAddr Address of the flash page to be erased.
+  *             It must be a 256 bytes aligned address.
+  * @return ISP page erase success or not.
+  * @retval    0  Success
+  * @retval   -1  Erase failed
+  */
+void DFMC_Erase_NonBlocking(uint32_t u32PageAddr)
+{
+    DFMC->ISPCMD = DFMC_ISPCMD_PAGE_ERASE;
+    DFMC->ISPADDR = u32PageAddr;
+    DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
+}
+
+
+/**
+  * @brief Execute DFMC_ISPCMD_MASS_ERASE command to erase entire data flash.
+  * @return ISP mass erase success or not.
+  * @retval    0  Success
+  * @retval   -1  Erase failed
+  */
+int32_t DFMC_Mass_Erase(void)
+{
+    int32_t  ret = 0;
+
+    DFMC->ISPCMD = DFMC_ISPCMD_MASS_ERASE;
+    DFMC->ISPADDR = DFMC_DFLASH_BASE;
+    DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
+
+    while (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk) { }
+
+    if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
+    {
+        DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
+        ret = -1;
+    }
+    return ret;
+}
+
+/**
+  * @brief Execute DFMC_ISPCMD_MASS_ERASE command to erase a entire data flash with non-blocking mode.
+  * @return None
+  */
+void DFMC_Mass_Erase_NonBlocking(void)
+{
+    DFMC->ISPCMD = DFMC_ISPCMD_MASS_ERASE;
+    DFMC->ISPADDR = DFMC_DFLASH_BASE;
+    DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
+}
+
+/**
   * @brief Enable DFMC ISP function
   * @return None
   */
@@ -106,7 +157,21 @@ void DFMC_Write(uint32_t u32Addr, uint32_t u32Data)
         DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
     }
 }
-
+    
+/**
+  * @brief Execute ISP DFMC_ISPCMD_PROGRAM to program a word to flash in non-blocking mode.
+  * @param[in]  u32Addr Address of the flash location to be programmed.
+  *             It must be a word aligned address.
+  * @param[in]  u32Data The word data to be programmed.
+  * @return None
+  */
+void DFMC_Write_NonBlocking(uint32_t u32Addr, uint32_t u32Data)
+{
+    DFMC->ISPCMD = DFMC_ISPCMD_PROGRAM;
+    DFMC->ISPADDR = u32Addr;
+    DFMC->ISPDAT = u32Data;
+    DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
+}
 
 /**
   * @brief Run CRC32 checksum calculation and get result.

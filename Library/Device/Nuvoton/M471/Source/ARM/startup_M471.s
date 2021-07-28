@@ -72,7 +72,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     PWRWU_IRQHandler          ; 2: Power down wake up
                 DCD     RAMPE_IRQHandler          ; 3: RAM parity error
                 DCD     CKFAIL_IRQHandler         ; 4: Clock detection fail
-                DCD     Default_Handler           ; 5: Reserved
+                DCD     FMC_IRQHandler            ; 5: FMC Handler
                 DCD     RTC_IRQHandler            ; 6: Real Time Clock
                 DCD     Default_Handler           ; 7: 
                 DCD     WDT_IRQHandler            ; 8: Watchdog timer
@@ -291,6 +291,7 @@ Default_Handler PROC
                 EXPORT  PWRWU_IRQHandler          [WEAK]
                 EXPORT  RAMPE_IRQHandler          [WEAK]
                 EXPORT  CKFAIL_IRQHandler         [WEAK]
+                EXPORT  FMC_IRQHandler            [WEAK]
                 EXPORT  RTC_IRQHandler            [WEAK]
                 EXPORT  WDT_IRQHandler            [WEAK]
                 EXPORT  WWDT_IRQHandler           [WEAK]
@@ -351,6 +352,7 @@ IRC_IRQHandler
 PWRWU_IRQHandler
 RAMPE_IRQHandler
 CKFAIL_IRQHandler
+FMC_IRQHandler
 RTC_IRQHandler
 WDT_IRQHandler
 WWDT_IRQHandler
