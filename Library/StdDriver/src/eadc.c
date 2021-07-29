@@ -43,7 +43,7 @@ void EADC_Open(EADC_T *eadc, uint32_t u32InputMode)
 
 /**
   * @brief Disable EADC_module.
-  * @param[in] eadc The pointer of the specified EADC module..
+  * @param[in] eadc The pointer of the specified EADC module.
   * @return None
   * @details Clear ADCEN bit (EADC_CTL[0]) to disable A/D converter analog circuit power consumption.
   */
