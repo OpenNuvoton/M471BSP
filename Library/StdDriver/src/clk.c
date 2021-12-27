@@ -802,9 +802,24 @@ void CLK_EnableSysTick(uint32_t u32ClkSrc, uint32_t u32Count)
 
     /* Set System Tick clock source */
     if(u32ClkSrc == CLK_CLKSEL0_STCLKSEL_HCLK)
+    {
+        /* Disable System Tick clock source from external reference clock */
+        CLK->AHBCLK &= ~CLK_AHBCLK_STCLKEN_Msk;
+
+        /* Select System Tick clock source from core */
         SysTick->CTRL |= SysTick_CTRL_CLKSOURCE_Msk;
+    }
     else
+    {
+        /* Enable System Tick clock source from external reference clock */
+        CLK->AHBCLK |= CLK_AHBCLK_STCLKEN_Msk;
+
+        /* Select System Tick external reference clock source */
         CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_STCLKSEL_Msk) | u32ClkSrc;
+
+        /* Select System Tick clock source from external reference clock */
+        SysTick->CTRL &= ~SysTick_CTRL_CLKSOURCE_Msk;
+    }
 
     /* Set System Tick reload value */
     SysTick->LOAD = u32Count;
