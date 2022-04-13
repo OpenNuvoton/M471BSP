@@ -134,6 +134,7 @@ void UART0_Init()
 /*---------------------------------------------------------------------------------------------------------*/
 int32_t main(void)
 {
+    uint32_t u32TimeOutCount;
     uint32_t u32NewCNR = 0;
     /* Init System, IP clock and multi-function I/O
        In the end of SYS_Init() will issue SYS_LockReg()
@@ -225,7 +226,16 @@ int32_t main(void)
     s_u32IsTestOver = 0;
 
     /* Wait for PDMA transfer done */
-    while(s_u32IsTestOver != 1);
+    u32TimeOutCount = SystemCoreClock;
+    while(s_u32IsTestOver != 1)
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("\nTimeout is happened, please check if it. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
 
     u32NewCNR = EPWM_GET_CNR(EPWM1, 0);
     printf("\n\nEPWM1 channel0 period register is updated to %d(0x%x)\n", u32NewCNR, u32NewCNR);
@@ -236,7 +246,16 @@ int32_t main(void)
     EPWM_Stop(EPWM1, EPWM_CH_0_MASK);
 
     /* Wait until EPWM1 channel 0 Timer Stop */
-    while((EPWM1->CNT[0] & EPWM_CNT0_CNT_Msk) != 0);
+    u32TimeOutCount = SystemCoreClock;
+    while((EPWM1->CNT[0] & EPWM_CNT0_CNT_Msk) != 0)
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("\nTimeout is happened, please check if it. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
 
     /* Disable Timer for EPWM1 channel 0 */
     EPWM_ForceStop(EPWM1, EPWM_CH_0_MASK);
