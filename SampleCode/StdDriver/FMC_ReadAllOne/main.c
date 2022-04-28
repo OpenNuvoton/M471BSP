@@ -72,25 +72,55 @@ int32_t main(void)
 
     /* Read company ID. Should be 0xDA. */
     u32Data = FMC_ReadCID();
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_ReadCID failed!\n");
+        goto lexit;
+    }
     printf("  Company ID ............................ [0x%08x]\n", u32Data);
 
     /* Read product ID. */
     u32Data = FMC_ReadPID();
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_ReadPID failed!\n");
+        goto lexit;
+    }
     printf("  Product ID ............................ [0x%08x]\n", u32Data);
 
     /* Read User Configuration CONFIG0 */
     printf("  User Config 0 ......................... [0x%08x]\n", FMC_Read(FMC_CONFIG_BASE));
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Read(FMC_CONFIG_BASE) failed!\n");
+        goto lexit;
+    }
+
     /* Read User Configuration CONFIG2 */
     printf("  User Config 2 ......................... [0x%08x]\n", FMC_Read(FMC_CONFIG_BASE + 8));
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Read(FMC_CONFIG_BASE+8) failed!\n");
+        goto lexit;
+    }
 
     /* Enable LDROM update. */
     FMC_ENABLE_LD_UPDATE();
 
     /* Erase LDROM page 0. */
-    FMC_Erase(FMC_LDROM_BASE);
+    if (FMC_Erase(FMC_LDROM_BASE) != 0)     /* Erase LDROM page 0. */
+    {
+        printf("FMC_Erase(FMC_LDROM_BASE) failed!\n");
+        goto lexit;
+    }
 
     /* Run and check flash contents are all 0xFFFFFFFF. */
     u32ret = FMC_CheckAllOne(FMC_LDROM_BASE, FMC_FLASH_PAGE_SIZE);
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_CheckAllOne failed!\n");
+        goto lexit;
+    }
 
     if (u32ret == READ_ALLONE_YES)
         printf("READ_ALLONE_YES success.\n");
@@ -98,10 +128,19 @@ int32_t main(void)
         printf("READ_ALLONE_YES failed!\n");
 
     /* Program a 0 to LDROM to make it not all 0xFFFFFFFF. */
-    FMC_Write(FMC_LDROM_BASE, 0);
+    if (FMC_Write(FMC_LDROM_BASE, 0) != 0)       /* program a 0 to LDROM to make it not all 0xFFFFFFFF. */
+    {
+        printf("FMC_Write FMC_LDROM_BASE failed!\n");
+        goto lexit;
+    }
 
     /* Run and check flash contents are not all 0xFFFFFFFF. */
     u32ret = FMC_CheckAllOne(FMC_LDROM_BASE, FMC_FLASH_PAGE_SIZE);
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_CheckAllOne failed!\n");
+        goto lexit;
+    }
 
     if (u32ret == READ_ALLONE_NOT)
         printf("READ_ALLONE_NOT success.\n");
@@ -109,6 +148,7 @@ int32_t main(void)
         printf("READ_ALLONE_NOT failed!\n");
 
     printf("\nFMC Read-All-One test done.\n");
+lexit:
 
     /* Disable FMC ISP function */
     FMC_Close();

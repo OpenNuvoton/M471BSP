@@ -72,28 +72,47 @@ int32_t main(void)
 
     /* Read company ID. Should be 0xDA. */
     u32Data = DFMC_ReadCID();
+    if (g_DFMC_i32ErrCode != 0)
+    {
+        printf("DFMC_ReadCID failed!\n");
+        goto lexit;
+    }
     printf("  Company ID ............................ [0x%08x]\n", u32Data);
 
     /* Read product ID. */
     u32Data = DFMC_ReadPID();
+    if (g_DFMC_i32ErrCode != 0)
+    {
+        printf("DFMC_ReadPID failed!\n");
+        goto lexit;
+    }		
     printf("  Product ID ............................ [0x%08x]\n", u32Data);
 
     /* Enable Update. */
     DFMC_ENABLE_UPDATE();
 
     /* Erase Dataflash page 0. */
-    DFMC_Erase(DFMC_DFLASH_BASE);
-
+    if (DFMC_Erase(DFMC_DFLASH_BASE) != 0)     /* Erase Dataflash page 0. */
+    {
+        printf("DFMC_Erase(DFMC_DFLASH_BASE) failed!\n");
+        goto lexit;
+    }
+		
     /* Run and check flash contents are all 0xFFFFFFFF. */
     u32ret = DFMC_CheckAllOne(DFMC_DFLASH_BASE, DFMC_DFLASH_SIZE);
-
+    if (g_DFMC_i32ErrCode != 0)
+    {
+        printf("DFMC_CheckAllOne failed!\n");
+        goto lexit;
+    }
     if (u32ret == DREAD_ALLONE_YES)
         printf("DREAD_ALLONE_YES success.\n");
     else
         printf("DREAD_ALLONE_YES failed!\n");
 
     printf("\nDFMC Read-All-One test done.\n");
-
+		
+lexit:
     /* Disable DFMC ISP function */
     DFMC_Close();
 

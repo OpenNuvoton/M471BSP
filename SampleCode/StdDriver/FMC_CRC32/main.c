@@ -69,34 +69,62 @@ int32_t main(void)
     printf("|   M471 FMC CRC32 Sample Demo       |\n");
     printf("+------------------------------------+\n");
 
-    /* Unlock protected registers to operate FMC ISP function */
-    SYS_UnlockReg();
+    SYS_UnlockReg();                   /* Unlock protected registers */
 
-    /* Enable FMC ISP function */
-    FMC_Open();
+    FMC_Open();                        /* Enable FMC ISP function */
 
-    /* FMC_ReadCID */
-    u32Data = FMC_ReadCID();
+    u32Data = FMC_ReadCID();           /* Read company ID. Should be 0xDA. */
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_ReadCID failed!\n");
+        goto lexit;
+    }
+
     printf("  Company ID ............................ [0x%08x]\n", u32Data);
 
     /* FMC_ReadPID */
-    u32Data = FMC_ReadPID();
+    u32Data = FMC_ReadPID();           /* Read product ID. */
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_ReadPID failed!\n");
+        goto lexit;
+    }
     printf("  Product ID ............................ [0x%08x]\n", u32Data);
 
     /* Read User Configuration CONFIG0 */
     printf("  User Config 0 ......................... [0x%08x]\n", FMC_Read(FMC_CONFIG_BASE));
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Read(FMC_CONFIG_BASE) failed!\n");
+        goto lexit;
+    }
+
     /* Read User Configuration CONFIG2 */
     printf("  User Config 2 ......................... [0x%08x]\n", FMC_Read(FMC_CONFIG_BASE + 8));
-
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Read(FMC_CONFIG_BASE+8) failed!\n");
+        goto lexit;
+    }
     printf("\nLDROM (0x100000 ~ 0x%x) CRC32 checksum =>  ", (FMC_LDROM_BASE + FMC_MIN_LDROM_SIZE));
 
     /* Erase the first page of LDROM */
     FMC_ENABLE_LD_UPDATE();
 
     FMC_Erase(0x100000);
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Erase failed!\n");
+        goto lexit;
+    }
 
     /* Write one word on LD */
     FMC_Write(0x100000, 0x55AABBCC);
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Write failed!\n");
+        goto lexit;
+    }
 
     /*
      *  Request FMC hardware to run CRC32 calculation on LDROM.

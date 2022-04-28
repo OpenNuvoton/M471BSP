@@ -25,6 +25,8 @@
   @{
 */
 
+int32_t  g_DFMC_i32ErrCode;
+
 /**
   * @brief Disable DFMC ISP function.
   * @return None
@@ -41,23 +43,37 @@ void DFMC_Close(void)
   * @return ISP page erase success or not.
   * @retval    0  Success
   * @retval   -1  Erase failed
+  *
+  * @note     Global error code g_DFMC_i32ErrCode
+  *           -1  Erase failed or erase time-out  
   */
 int32_t DFMC_Erase(uint32_t u32PageAddr)
 {
-    int32_t  ret = 0;
-
+    uint32_t  tout;
+    
+    g_DFMC_i32ErrCode = 0;
+	
     DFMC->ISPCMD = DFMC_ISPCMD_PAGE_ERASE;
     DFMC->ISPADDR = u32PageAddr;
     DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
 
-    while (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk) { }
-
+    tout = DFMC_TIMEOUT_ERASE;    
+	
+    while ((--tout > 0) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
+    
+    if (tout == 0)
+    {
+        g_DFMC_i32ErrCode = -1;
+        return -1;
+    }
+    
     if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
     {
         DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
-        ret = -1;
+        g_DFMC_i32ErrCode = -1;
+        return -1;
     }
-    return ret;
+    return 0;
 }
 
 /**
@@ -81,23 +97,36 @@ void DFMC_Erase_NonBlocking(uint32_t u32PageAddr)
   * @return ISP mass erase success or not.
   * @retval    0  Success
   * @retval   -1  Erase failed
+  *
+  * @note     Global error code g_DFMC_i32ErrCode
+  *           -1  Erase failed or erase time-out
   */
 int32_t DFMC_Mass_Erase(void)
 {
-    int32_t  ret = 0;
-
+    uint32_t  tout;
+	
+    g_DFMC_i32ErrCode = 0;
+    
     DFMC->ISPCMD = DFMC_ISPCMD_MASS_ERASE;
     DFMC->ISPADDR = DFMC_DFLASH_BASE;
     DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
 
-    while (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk) { }
+    tout = DFMC_TIMEOUT_MERASE;    
+	
+    while ((--tout > 0) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
+    if (tout == 0)
+    {
+        g_DFMC_i32ErrCode = -1;
+        return -1;
+    }
 
     if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
     {
         DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
-        ret = -1;
+        g_DFMC_i32ErrCode = -1;
+        return -1;
     }
-    return ret;
+    return 0;
 }
 
 /**
@@ -126,14 +155,28 @@ void DFMC_Open(void)
   * @param[in]  u32Addr Address of the flash location to be read.
   *             It must be a word aligned address.
   * @return The word data read from specified flash address.
+  *          Return 0xFFFFFFFF if read failed.
+  *
+  * @note     Global error code g_DFMC_i32ErrCode
+  *           -1  Read time-out
   */
 uint32_t DFMC_Read(uint32_t u32Addr)
 {
+    uint32_t  tout;
+
+    g_DFMC_i32ErrCode = 0;
     DFMC->ISPCMD = DFMC_ISPCMD_READ;
     DFMC->ISPADDR = u32Addr;
     DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
-    while (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk) { }
-
+	
+    tout = DFMC_TIMEOUT_READ;    
+	
+    while ((--tout > 0) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
+    if (tout == 0)
+    {
+        g_DFMC_i32ErrCode = -1;
+        return 0xFFFFFFFF;
+    }
     return DFMC->ISPDAT;
 }
 
@@ -142,20 +185,38 @@ uint32_t DFMC_Read(uint32_t u32Addr)
   * @param[in]  u32Addr Address of the flash location to be programmed.
   *             It must be a word aligned address.
   * @param[in]  u32Data The word data to be programmed.
-  * @return None
+  * @return   0   Success
+  * @return   -1  Program Failed
+  *
+  * @note     Global error code g_DFMC_i32ErrCode
+  *           -1  Program failed or time-out  
   */
-void DFMC_Write(uint32_t u32Addr, uint32_t u32Data)
+int32_t DFMC_Write(uint32_t u32Addr, uint32_t u32Data)
 {
+    uint32_t  tout;
+
+    g_DFMC_i32ErrCode = 0;
     DFMC->ISPCMD = DFMC_ISPCMD_PROGRAM;
     DFMC->ISPADDR = u32Addr;
     DFMC->ISPDAT = u32Data;
     DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
-    while (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk) { }
-
+	
+    tout = DFMC_TIMEOUT_WRITE;    
+	
+    while ((--tout > 0) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
+		
+    if (tout == 0)
+    {
+        g_DFMC_i32ErrCode = -1;
+        return -1;
+    }
     if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
     {
         DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
+        g_DFMC_i32ErrCode = -1;
+        return -1;
     }
+    return 0;
 }
     
 /**
@@ -179,47 +240,63 @@ void DFMC_Write_NonBlocking(uint32_t u32Addr, uint32_t u32Data)
   * @param[in] u32count  Byte count of flash to be calculated. It must be multiple of 256 bytes.
   * @return Success or not.
   * @retval   0           Success.
-  * @retval   0xFFFFFFFF  Invalid parameter.
+  * @retval   0xFFFFFFFF  Invalid parameter or command failed.
+  *
+  * @note     Global error code g_DFMC_i32ErrCode
+  *           -1  Run/Read check sum time-out failed
+  *           -2  u32addr or u32count must be aligned with 512
   */
 int32_t  DFMC_GetChkSum(uint32_t u32addr, uint32_t u32count)
 {
-    int32_t   ret;
+    uint32_t  tout;
 
     if ((u32addr % 256UL) || (u32count % 256UL))
     {
-        ret = 0xFFFFFFFF;
+        g_DFMC_i32ErrCode = -2;
+        return 0xFFFFFFFF;
     }
-    else
+    DFMC->ISPCMD  = DFMC_ISPCMD_RUN_CKS;
+    DFMC->ISPADDR = u32addr;
+    DFMC->ISPDAT  = u32count;
+    DFMC->ISPTRG  = DFMC_ISPTRG_ISPGO_Msk;
+
+    tout = DFMC_TIMEOUT_CHKSUM;
+		
+    while ((--tout > 0) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
+		
+    if (tout == 0)
     {
-        DFMC->ISPCMD  = DFMC_ISPCMD_RUN_CKS;
-        DFMC->ISPADDR = u32addr;
-        DFMC->ISPDAT  = u32count;
-        DFMC->ISPTRG  = DFMC_ISPTRG_ISPGO_Msk;
-
-        while (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk) { }
-
-
-        if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
-        {
-            DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
-            ret = -1;
-        }
-
-        DFMC->ISPCMD = DFMC_ISPCMD_READ_CKS;
-        DFMC->ISPADDR    = u32addr;
-        DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
-
-        while (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk) { }
-
-        if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
-        {
-            DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
-            ret = -1;
-        }
-        ret = DFMC->ISPDAT;
+        g_DFMC_i32ErrCode = -1;
+        return 0xFFFFFFFF;
     }
 
-    return ret;
+    if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
+    {
+        DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
+        g_DFMC_i32ErrCode = -2;
+        return 0xFFFFFFFF;
+    }
+
+    DFMC->ISPCMD = DFMC_ISPCMD_READ_CKS;
+    DFMC->ISPADDR    = u32addr;
+    DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
+
+    tout = FMC_TIMEOUT_CHKSUM;
+		
+    while ((--tout > 0) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
+		
+    if (tout == 0)
+    {
+        g_DFMC_i32ErrCode = -1;
+        return 0xFFFFFFFF;
+    }
+    if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
+    {
+        DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
+        g_DFMC_i32ErrCode = -2;
+        return 0xFFFFFFFF;
+    }
+    return DFMC->ISPDAT;
 }
 
 
@@ -230,11 +307,16 @@ int32_t  DFMC_GetChkSum(uint32_t u32addr, uint32_t u32count)
   * @retval   DREAD_ALLONE_YES       The contents of verified flash area are 0xFFFFFFFF.
   * @retval   DREAD_ALLONE_NOT       Some contents of verified flash area are not 0xFFFFFFFF.
   * @retval   DREAD_ALLONE_CMD_FAIL  Unexpected error occurred.
+  *
+  * @note     Global error code g_DFMC_i32ErrCode
+  *           -1  RUN_ALL_ONE or CHECK_ALL_ONE commands time-out  
   */
 int32_t  DFMC_CheckAllOne(uint32_t u32addr, uint32_t u32count)
 {
-    int32_t  ret = DREAD_ALLONE_CMD_FAIL;
+    uint32_t  tout;
 
+    g_DFMC_i32ErrCode = READ_ALLONE_CMD_FAIL;
+	
     DFMC->ISPSTS = DFMC_ISPSTS_ALLONE_Msk;   /* clear check all one bit */
 
     DFMC->ISPCMD   = DFMC_ISPCMD_RUN_ALL1;
@@ -242,40 +324,49 @@ int32_t  DFMC_CheckAllOne(uint32_t u32addr, uint32_t u32count)
     DFMC->ISPDAT   = u32count;
     DFMC->ISPTRG   = DFMC_ISPTRG_ISPGO_Msk;
 
-    while (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk) { }
+    tout = FMC_TIMEOUT_CHKALLONE;
+	
+    while ((--tout > 0) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
 
+    if (tout == 0)
+        return -1;
 
     if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
     {
         DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
-        ret = -1;
+        return -1;
     }
 
+    tout = DFMC_TIMEOUT_CHKALLONE;
     do
     {
         DFMC->ISPCMD = DFMC_ISPCMD_READ_ALL1;
         DFMC->ISPADDR    = u32addr;
         DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
-        while (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk) { }
+			
+        while ((--tout > 0) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
+				
+        if (tout == 0)
+            return -1;
     }
     while (DFMC->ISPDAT == 0UL);
 
     if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
     {
         DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
-        ret = -1;
+        return -1;
     }
 
-    if (DFMC->ISPDAT == DREAD_ALLONE_YES)
+    if ((DFMC->ISPDAT == DREAD_ALLONE_YES) || (DFMC->ISPDAT == DREAD_ALLONE_NOT))
     {
-        ret = DFMC->ISPDAT;
+			  g_DFMC_i32ErrCode = 0;
+        return DFMC->ISPDAT;
     }
-
-    if (DFMC->ISPDAT == DREAD_ALLONE_NOT)
+    else
     {
-        ret = DFMC->ISPDAT;
+        g_DFMC_i32ErrCode = READ_ALLONE_CMD_FAIL;
+        return -1;
     }
-    return ret;
 }
 
 /*@}*/ /* end of group DFMC_EXPORTED_FUNCTIONS */

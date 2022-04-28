@@ -53,7 +53,12 @@ extern "C"
 #define DREAD_ALLONE_NOT         0xA1100000UL    /*!< Check-all-one result is not all one.  \hideinitializer */
 #define DREAD_ALLONE_CMD_FAIL    0xFFFFFFFFUL    /*!< Check-all-one command failed.         \hideinitializer */
 
-
+#define DFMC_TIMEOUT_READ        ((SystemCoreClock/10)*2) /*!< Read command time-out 100 ms         \hideinitializer */
+#define DFMC_TIMEOUT_WRITE       ((SystemCoreClock/10)*2) /*!< Write command time-out 100 ms        \hideinitializer */
+#define DFMC_TIMEOUT_ERASE       ((SystemCoreClock/10)*4) /*!< Erase command time-out 200 ms        \hideinitializer */
+#define DFMC_TIMEOUT_MERASE      (SystemCoreClock)        /*!< Erase command time-out 1 s        \hideinitializer */
+#define DFMC_TIMEOUT_CHKSUM      (SystemCoreClock*2)      /*!< Get checksum command time-out 2 s    \hideinitializer */
+#define DFMC_TIMEOUT_CHKALLONE   (SystemCoreClock*2)      /*!< Check-all-one command time-out 2 s   \hideinitializer */
 /*@}*/ /* end of group DFMC_EXPORTED_CONSTANTS */
 
 
@@ -78,6 +83,10 @@ extern "C"
 
 /*@}*/ /* end of group DFMC_EXPORTED_MACROS */
 
+/*---------------------------------------------------------------------------------------------------------*/
+/*  Global variables                                                                                       */
+/*---------------------------------------------------------------------------------------------------------*/
+extern int32_t  g_DFMC_i32ErrCode;
 
 /** @addtogroup DFMC_EXPORTED_FUNCTIONS DFMC Exported Functions
   @{
@@ -90,39 +99,64 @@ __STATIC_INLINE uint32_t DFMC_ReadPID(void);
 /**
   * @brief    Read company ID
   * @param    None
-  * @return   The company ID (32-bit)
+  * @return   The company ID (32-bit). 0xFFFFFFFF means read failed.
   * @details  The company ID of Nuvoton is fixed to be 0xDA
+  *
+  * @note     Global error code g_DFMC_i32ErrCode
+  *           -1  Read time-out 
   */
 __STATIC_INLINE uint32_t DFMC_ReadCID(void)
 {
+    uint32_t  tout = DFMC_TIMEOUT_READ;
+
+    g_DFMC_i32ErrCode = 0;
+
     DFMC->ISPCMD = DFMC_ISPCMD_READ_CID;           /* Set ISP Command Code */
     DFMC->ISPADDR = 0x0u;                          /* Must keep 0x0 when read CID */
     DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;          /* Trigger to start ISP procedure */
 #if ISBEN
     __ISB();
 #endif                                             /* To make sure ISP/CPU be Synchronized */
-    while(DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk) {} /* Waiting for ISP Done */
+    while (tout-- > 0)
+    {
+        if (!(DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk))  /* Waiting for ISP Done */
+        {
+            return DFMC->ISPDAT;
+        }
+    }
+    g_DFMC_i32ErrCode = -1;
+    return 0xFFFFFFFF;
 
-    return DFMC->ISPDAT;
 }
 
 /**
   * @brief    Read product ID
   * @param    None
-  * @return   The product ID (32-bit)
+  * @return   The product ID (32-bit). 0xFFFFFFFF means read failed.
   * @details  This function is used to read product ID.
+  *
+  * @note     Global error code g_DFMC_i32ErrCode
+  *           -1  Read time-out 
   */
 __STATIC_INLINE uint32_t DFMC_ReadPID(void)
 {
+    uint32_t  tout = DFMC_TIMEOUT_READ;
+
+    g_DFMC_i32ErrCode = 0;
+
     DFMC->ISPCMD = DFMC_ISPCMD_READ_DID;          /* Set ISP Command Code */
     DFMC->ISPADDR = 0x04u;                        /* Must keep 0x4 when read PID */
     DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;         /* Trigger to start ISP procedure */
 #if ISBEN
     __ISB();
 #endif                                          /* To make sure ISP/CPU be Synchronized */
-    while(DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk) {} /* Waiting for ISP Done */
-
-    return DFMC->ISPDAT;
+    while (tout-- > 0)
+    {
+        if (!(DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk))  /* Waiting for ISP Done */
+            return DFMC->ISPDAT;
+    }
+    g_DFMC_i32ErrCode = -1;
+    return 0xFFFFFFFF;
 }
 
 /*  Functions                                                                                              */
@@ -135,7 +169,7 @@ extern int32_t  DFMC_Mass_Erase(void);
 extern void     DFMC_Mass_Erase_NonBlocking(void);
 extern void     DFMC_Open(void);
 extern uint32_t DFMC_Read(uint32_t u32Addr);
-extern void     DFMC_Write(uint32_t u32Addr, uint32_t u32Data);
+extern int32_t  DFMC_Write(uint32_t u32Addr, uint32_t u32Data);
 extern void     DFMC_Write_NonBlocking(uint32_t u32Addr, uint32_t u32Data);
 extern int32_t DFMC_GetChkSum(uint32_t u32addr, uint32_t u32count);
 extern int32_t DFMC_CheckAllOne(uint32_t u32addr, uint32_t u32count);

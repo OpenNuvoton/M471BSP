@@ -70,7 +70,11 @@ int32_t fill_data_pattern(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u
 
     for (u32Addr = u32StartAddr; u32Addr < u32EndAddr; u32Addr += 4)
     {
-        DFMC_Write(u32Addr, u32Pattern);
+        if (DFMC_Write(u32Addr, u32Pattern) != 0)          /* Program flash */
+        {
+            printf("DFMC_Write address 0x%x failed!\n", u32Addr);
+            return -1;
+        }			
     }
     return 0;
 }
@@ -83,6 +87,13 @@ int32_t  verify_data(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u32Pat
     for (u32Addr = u32StartAddr; u32Addr < u32EndAddr; u32Addr += 4)
     {
         u32data = DFMC_Read(u32Addr);
+			
+        if (g_DFMC_i32ErrCode != 0)
+        {
+            printf("DFMC_Read address 0x%x failed!\n", u32Addr);
+            return -1;
+        }
+
         if (u32data != u32Pattern)
         {
             printf("\nDFMC_Read data verify failed at address 0x%x, read=0x%x, expect=0x%x\n", u32Addr, u32data, u32Pattern);
@@ -102,8 +113,11 @@ int32_t  flash_test(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u32Patt
         printf("    Flash test address: 0x%x    \r", u32Addr);
 
         /* Erase page */
-        DFMC_Erase(u32Addr);
-
+        if (DFMC_Erase(u32Addr) != 0)            /* Erase page */
+        {
+            printf("DFMC_Erase address 0x%x failed!\n", u32Addr);
+            return -1;
+        }
         /* Verify if page contents are all 0xFFFFFFFF */
         if (verify_data(u32Addr, u32Addr + DFMC_DFLASH_PAGE_SIZE, 0xFFFFFFFF) < 0)
         {
@@ -125,8 +139,12 @@ int32_t  flash_test(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u32Patt
             return -1;
         }
 
-        DFMC_Erase(u32Addr);
-
+        /* Erase page */
+        if (DFMC_Erase(u32Addr) != 0)
+        {
+            printf("FMC_Erase address 0x%x failed!\n", u32Addr);
+            return -1;
+        }
         /* Verify if page contents are all 0xFFFFFFFF */
         if (verify_data(u32Addr, u32Addr + DFMC_DFLASH_PAGE_SIZE, 0xFFFFFFFF) < 0)
         {
@@ -160,9 +178,19 @@ int main()
     DFMC_Open();
 
     u32Data = DFMC_ReadCID();
+    if (g_DFMC_i32ErrCode != 0)
+    {
+        printf("DFMC_ReadCID failed!\n");
+        goto lexit;
+    }	
     printf("  Company ID ............................ [0x%08x]\n", u32Data);
 
     u32Data = DFMC_ReadPID();
+    if (g_DFMC_i32ErrCode != 0)
+    {
+        printf("DFMC_ReadPID failed!\n");
+        goto lexit;
+    }		
     printf("  Product ID ............................ [0x%08x]\n", u32Data);
 
     run_crc32_checksum();

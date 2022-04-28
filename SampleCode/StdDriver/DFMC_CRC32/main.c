@@ -75,20 +75,38 @@ int32_t main(void)
 
     /* DFMC_ReadCID */
     u32Data = DFMC_ReadCID();
+    if (g_DFMC_i32ErrCode != 0)
+    {
+        printf("DFMC_ReadCID failed!\n");
+        goto lexit;
+    }		
     printf("  Company ID ............................ [0x%08x]\n", u32Data);
 
     /* DFMC_ReadPID */
     u32Data = DFMC_ReadPID();
+    if (g_DFMC_i32ErrCode != 0)
+    {
+        printf("DFMC_ReadPID failed!\n");
+        goto lexit;
+    }		
     printf("  Product ID ............................ [0x%08x]\n", u32Data);
 
     /* Erase the first page of Dataflash */
     DFMC_ENABLE_UPDATE();
 
     DFMC_Erase(DFMC_DFLASH_BASE);
-
+    if (g_DFMC_i32ErrCode != 0)
+    {
+        printf("DFMC_Erase failed!\n");
+        goto lexit;
+    }
     /* Write one word on Dataflash */
     DFMC_Write(DFMC_DFLASH_BASE, 0x55AABBCC);
-
+    if (g_DFMC_i32ErrCode != 0)
+    {
+        printf("DFMC_Write failed!\n");
+        goto lexit;
+    }
     printf("\nDataflash address (0x%X ~ 0x%X) CRC32 checksum =>  ",DFMC_DFLASH_BASE, DFMC_DFLASH_END);
     /*
      *  Request DFMC hardware to run CRC32 calculation on APROM address 0x00400000 ~ 0x00408000.
