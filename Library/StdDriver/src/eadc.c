@@ -16,6 +16,8 @@
   @{
 */
 
+int32_t g_EADC_i32ErrCode = 0;       /*!< EADC global error code */
+
 /** @addtogroup EADC_EXPORTED_FUNCTIONS EADC Exported Functions
   @{
 */

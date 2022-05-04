@@ -99,7 +99,14 @@ extern "C"
 #define EADC_VREF_REFSEL_AVDD               (0UL<<EADC_VREF_REFSEL_Pos)   /*!< The positive reference voltage source is AVdd \hideinitializer */
 #define EADC_VREF_REFSEL_VREFP              (1UL<<EADC_VREF_REFSEL_Pos)   /*!< The positive reference voltage source is the VREF pin \hideinitializer */
 
+/*---------------------------------------------------------------------------------------------------------*/
+/* Define Error Code                                                                           */
+/*---------------------------------------------------------------------------------------------------------*/
+#define EADC_TIMEOUT_ERR                    (-1)                     /*!< EADC operation abort due to timeout error \hideinitializer */
+
 /*@}*/ /* end of group EADC_EXPORTED_CONSTANTS */
+
+extern int32_t g_EADC_i32ErrCode;
 
 /** @addtogroup EADC_EXPORTED_FUNCTIONS EADC Exported Functions
   @{
