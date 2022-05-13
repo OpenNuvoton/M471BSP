@@ -704,7 +704,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\CONFIG\generic_cortex.icf</state>
+          <state>$TOOLKIT_DIR$\config\linker\Nuvoton\M471.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -958,6 +958,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\sys.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\timer.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\uart.c</name>

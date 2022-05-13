@@ -66,7 +66,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1505296430233</id>
+			<id>1652406665617</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -75,7 +75,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1505296430239</id>
+			<id>1652406665627</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -84,7 +84,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1505296430245</id>
+			<id>1652406665636</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -93,7 +93,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1505296430251</id>
+			<id>1652406665655</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -102,12 +102,21 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1505296430257</id>
+			<id>1652406665666</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-retarget.c</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1652406665676</id>
+			<name>Library/Library</name>
+			<type>5</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-timer.c</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>
