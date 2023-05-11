@@ -417,7 +417,7 @@ extern "C"
 /* Function prototype declaration */
 void ACMP_Open(ACMP_T *, uint32_t u32ChNum, uint32_t u32NegSrc, uint32_t u32HysteresisEn);
 void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
-
+void ACMP_Calibration(ACMP_T *acmp);
 
 
 /*@}*/ /* end of group ACMP_EXPORTED_FUNCTIONS */
