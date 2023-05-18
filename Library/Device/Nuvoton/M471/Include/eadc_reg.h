@@ -793,6 +793,14 @@ typedef struct
      * |[31:24] |EXTSMPT   |EADC Sampling Time Extend
      * |        |          |When EADC is converting at high conversion rate, the sampling time of analog input voltage may not be enough if input channel loading is heavy, and software can extend EADC sampling time after trigger source is coming to get enough sampling time.
      * |        |          |The range of start delay time is from 0~255 EADC clock.
+     * @var EADC_T::VREF
+     * Offset: 0xFF8  EADC Reference Voltage Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[1    ] |REFSEL    |Positive Reference Voltage Source Selection
+     * |        |          |0 = Positive Reference Voltage Source from AVDD
+     * |        |          |1 = Positive Reference Voltage Source from VREF
      */
     __I  uint32_t DAT[19];              /*!< [0x0000 - 0x0048] EADC Data Register 0~18 for Sample Module 0~18           */
     __I  uint32_t CURDAT;               /*!< [0x004c] EADC PDMA Current Transfer Data Register                          */
