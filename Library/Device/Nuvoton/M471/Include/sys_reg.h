@@ -503,13 +503,109 @@ typedef struct
      * |[15:12] |PI3MFP    |PI.3 Multi-function Pin Selection
      * |[19:16] |PI4MFP    |PI.4 Multi-function Pin Selection
      * |[23:20] |PI5MFP    |PI.5 Multi-function Pin Selection
-     * @var SYS_T::GPx_MFOS
-     * Offset: 0x80/0x84/0x88/0x8C/0x90/0x94/0x98/0x9C/0xA0  GPIOA-I Multiple Function Output Select Register
+     * @var SYS_T::GPA_MFOS
+     * Offset: 0x80  GPIOA Multiple Function Output Select Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[n]     |MFOSn     |GPIOA-I Pin[n] Multiple Function Pin Output Mode Select
-     * |        |          |This bit used to select multiple function pin output mode type for Px.n pin
+     * |[n]     |MFOSn     |GPIOA Pin[n] Multiple Function Pin Output Mode Select
+     * |        |          |This bit used to select multiple function pin output mode type for PA.n pin
+     * |        |          |0 = Multiple function pin output mode type is Push-pull mode.
+     * |        |          |1 = Multiple function pin output mode type is Open-drain mode.
+     * |        |          |Note:
+     * |        |          |Max. n=5 for port I.
+     * |        |          |The PC15/PG0/PG1/PG5/PG6/PG7/PG8/PH0/PH1/PH2/PH3/PH12/PH13/PH14/PH15 pins are not available.
+     * @var SYS_T::GPB_MFOS
+     * Offset: 0x84  GPIOB Multiple Function Output Select Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[n]     |MFOSn     |GPIOB Pin[n] Multiple Function Pin Output Mode Select
+     * |        |          |This bit used to select multiple function pin output mode type for PB.n pin
+     * |        |          |0 = Multiple function pin output mode type is Push-pull mode.
+     * |        |          |1 = Multiple function pin output mode type is Open-drain mode.
+     * |        |          |Note:
+     * |        |          |Max. n=5 for port I.
+     * |        |          |The PC15/PG0/PG1/PG5/PG6/PG7/PG8/PH0/PH1/PH2/PH3/PH12/PH13/PH14/PH15 pins are not available.
+     * @var SYS_T::GPC_MFOS
+     * Offset: 0x88  GPIOC Multiple Function Output Select Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[n]     |MFOSn     |GPIOC Pin[n] Multiple Function Pin Output Mode Select
+     * |        |          |This bit used to select multiple function pin output mode type for PC.n pin
+     * |        |          |0 = Multiple function pin output mode type is Push-pull mode.
+     * |        |          |1 = Multiple function pin output mode type is Open-drain mode.
+     * |        |          |Note:
+     * |        |          |Max. n=5 for port I.
+     * |        |          |The PC15/PG0/PG1/PG5/PG6/PG7/PG8/PH0/PH1/PH2/PH3/PH12/PH13/PH14/PH15 pins are not available.
+     * @var SYS_T::GPD_MFOS
+     * Offset: 0x8C  GPIOD Multiple Function Output Select Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[n]     |MFOSn     |GPIOD Pin[n] Multiple Function Pin Output Mode Select
+     * |        |          |This bit used to select multiple function pin output mode type for PD.n pin
+     * |        |          |0 = Multiple function pin output mode type is Push-pull mode.
+     * |        |          |1 = Multiple function pin output mode type is Open-drain mode.
+     * |        |          |Note:
+     * |        |          |Max. n=5 for port I.
+     * |        |          |The PC15/PG0/PG1/PG5/PG6/PG7/PG8/PH0/PH1/PH2/PH3/PH12/PH13/PH14/PH15 pins are not available.
+     * @var SYS_T::GPE_MFOS
+     * Offset: 0x90  GPIOE Multiple Function Output Select Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[n]     |MFOSn     |GPIOE Pin[n] Multiple Function Pin Output Mode Select
+     * |        |          |This bit used to select multiple function pin output mode type for PE.n pin
+     * |        |          |0 = Multiple function pin output mode type is Push-pull mode.
+     * |        |          |1 = Multiple function pin output mode type is Open-drain mode.
+     * |        |          |Note:
+     * |        |          |Max. n=5 for port I.
+     * |        |          |The PC15/PG0/PG1/PG5/PG6/PG7/PG8/PH0/PH1/PH2/PH3/PH12/PH13/PH14/PH15 pins are not available.
+     * @var SYS_T::GPF_MFOS
+     * Offset: 0x94  GPIOF Multiple Function Output Select Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[n]     |MFOSn     |GPIOF Pin[n] Multiple Function Pin Output Mode Select
+     * |        |          |This bit used to select multiple function pin output mode type for PF.n pin
+     * |        |          |0 = Multiple function pin output mode type is Push-pull mode.
+     * |        |          |1 = Multiple function pin output mode type is Open-drain mode.
+     * |        |          |Note:
+     * |        |          |Max. n=5 for port I.
+     * |        |          |The PC15/PG0/PG1/PG5/PG6/PG7/PG8/PH0/PH1/PH2/PH3/PH12/PH13/PH14/PH15 pins are not available.
+     * @var SYS_T::GPG_MFOS
+     * Offset: 0x98  GPIOG Multiple Function Output Select Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[n]     |MFOSn     |GPIOG Pin[n] Multiple Function Pin Output Mode Select
+     * |        |          |This bit used to select multiple function pin output mode type for PG.n pin
+     * |        |          |0 = Multiple function pin output mode type is Push-pull mode.
+     * |        |          |1 = Multiple function pin output mode type is Open-drain mode.
+     * |        |          |Note:
+     * |        |          |Max. n=5 for port I.
+     * |        |          |The PC15/PG0/PG1/PG5/PG6/PG7/PG8/PH0/PH1/PH2/PH3/PH12/PH13/PH14/PH15 pins are not available.
+     * @var SYS_T::GPH_MFOS
+     * Offset: 0x9C  GPIOH Multiple Function Output Select Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[n]     |MFOSn     |GPIOH Pin[n] Multiple Function Pin Output Mode Select
+     * |        |          |This bit used to select multiple function pin output mode type for PH.n pin
+     * |        |          |0 = Multiple function pin output mode type is Push-pull mode.
+     * |        |          |1 = Multiple function pin output mode type is Open-drain mode.
+     * |        |          |Note:
+     * |        |          |Max. n=5 for port I.
+     * |        |          |The PC15/PG0/PG1/PG5/PG6/PG7/PG8/PH0/PH1/PH2/PH3/PH12/PH13/PH14/PH15 pins are not available.
+     * @var SYS_T::GPI_MFOS
+     * Offset: 0xA0  GPIOI Multiple Function Output Select Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[n]     |MFOSn     |GPIOI Pin[n] Multiple Function Pin Output Mode Select
+     * |        |          |This bit used to select multiple function pin output mode type for PI.n pin
      * |        |          |0 = Multiple function pin output mode type is Push-pull mode.
      * |        |          |1 = Multiple function pin output mode type is Open-drain mode.
      * |        |          |Note:
