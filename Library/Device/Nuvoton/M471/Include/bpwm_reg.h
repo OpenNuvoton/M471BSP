@@ -1134,20 +1134,19 @@ typedef struct
     __IO uint32_t CAPINEN;               /*!< [0x0200] BPWM Capture Input Enable Register                               */
     __IO uint32_t CAPCTL;                /*!< [0x0204] BPWM Capture Control Register                                    */
     __I  uint32_t CAPSTS;                /*!< [0x0208] BPWM Capture Status Register                                     */
-//    BCAPDAT_T CAPDAT[6];                  /*!< [0x020C] BPWM Rising and Falling Capture Data Register 0~5                */
-    __I  uint32_t RCAPDAT0;      /* Offset: 0x20C  PWM Rising Capture Data Register 0                                */
-    __I  uint32_t FCAPDAT0;      /* Offset: 0x210  PWM Falling Capture Data Register 0                               */
-    __I  uint32_t RCAPDAT1;      /* Offset: 0x214  PWM Rising Capture Data Register 1                                */
-    __I  uint32_t FCAPDAT1;      /* Offset: 0x218  PWM Falling Capture Data Register 1                               */
-    __I  uint32_t RCAPDAT2;      /* Offset: 0x21C  PWM Rising Capture Data Register 2                                */
-    __I  uint32_t FCAPDAT2;      /* Offset: 0x220  PWM Falling Capture Data Register 2                               */
-    __I  uint32_t RCAPDAT3;      /* Offset: 0x224  PWM Rising Capture Data Register 3                                */
-    __I  uint32_t FCAPDAT3;      /* Offset: 0x228  PWM Falling Capture Data Register 3                               */
-    __I  uint32_t RCAPDAT4;      /* Offset: 0x22C  PWM Rising Capture Data Register 4                                */
-    __I  uint32_t FCAPDAT4;      /* Offset: 0x230  PWM Falling Capture Data Register 4                               */
-    __I  uint32_t RCAPDAT5;      /* Offset: 0x234  PWM Rising Capture Data Register 5                                */
-    __I  uint32_t FCAPDAT5;      /* Offset: 0x238  PWM Falling Capture Data Register 5                               */
-
+//    BCAPDAT_T CAPDAT[6];               /*!< [0x020C] BPWM Rising and Falling Capture Data Register 0~5                */
+    __I  uint32_t RCAPDAT0;      		 /*!< [0x020C] BPWM Rising Capture Data Register 0                            */
+    __I  uint32_t FCAPDAT0;      		 /*!< [0x0210] BPWM Falling Capture Data Register 0                           */
+    __I  uint32_t RCAPDAT1;      		 /*!< [0x0214] BPWM Rising Capture Data Register 1                            */
+    __I  uint32_t FCAPDAT1;      		 /*!< [0x0218] BPWM Falling Capture Data Register 1                           */
+    __I  uint32_t RCAPDAT2;      		 /*!< [0x021C] BPWM Rising Capture Data Register 2                            */
+    __I  uint32_t FCAPDAT2;      		 /*!< [0x0220] BPWM Falling Capture Data Register 2                           */
+    __I  uint32_t RCAPDAT3;      		 /*!< [0x0224] BPWM Rising Capture Data Register 3                            */
+    __I  uint32_t FCAPDAT3;      		 /*!< [0x0228] BPWM Falling Capture Data Register 3                           */
+    __I  uint32_t RCAPDAT4;      		 /*!< [0x022C] BPWM Rising Capture Data Register 4                            */
+    __I  uint32_t FCAPDAT4;      		 /*!< [0x0230] BPWM Falling Capture Data Register 4                           */
+    __I  uint32_t RCAPDAT5;      		 /*!< [0x0234] BPWM Rising Capture Data Register 5                            */
+    __I  uint32_t FCAPDAT5;      		 /*!< [0x0238] BPWM Falling Capture Data Register 5                           */
     /// @cond HIDDEN_SYMBOLS
     __I  uint32_t RESERVE13[5];
     /// @endcond //HIDDEN_SYMBOLS

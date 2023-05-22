@@ -313,6 +313,16 @@ typedef struct
      * |        |          |This bit field indicates the valid data count of receive FIFO buffer.
      * |[31:28] |TXCNT     |Transmit FIFO Data Count (Read Only)
      * |        |          |This bit field indicates the valid data count of transmit FIFO buffer.
+     * @var SPI_T::STATUS2
+     * Offset: 0x18  SPI Status2 Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[29:24] |SLVBENUM  |Effective Bit Number of Uncompleted RX Data
+     * |        |          |This status register indicates that effective bit number of uncompleted RX data when SLVBERX (SPIx_FIFOCTL[10]) is enabled and RX bit count error event happen in SPI Slave mode
+     * |        |          |This status register will be fixed to 0x0 when SLVBERX (SPIx_FIFOCTL[10]) is disabled.
+     * |        |          |Note 1: This register will be cleared to 0x0 when user writes 0x1 to SLVBEIF (SPIx_STATUS[6]).
+     * |        |          |Note 2: Slave mode only.
      * @var SPI_T::TX
      * Offset: 0x20  SPI Data Transmit Register
      * ---------------------------------------------------------------------------------------------------
