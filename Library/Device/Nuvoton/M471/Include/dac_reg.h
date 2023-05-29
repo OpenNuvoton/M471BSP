@@ -131,6 +131,17 @@ typedef struct
      * |        |          |User software needs to write appropriate value to these bits to meet DAC conversion settling time base on PCLK (APB clock) speed.
      * |        |          |For example, DAC controller clock speed is 80MHz and DAC conversion settling time is 1 us, SETTLETvalue must be greater than 0x50.
      * |        |          |SELTTLET = DAC controller clock speed x settling time.
+	 * @var DAC_T::VREF
+	 * Offset: 0x20  DAC0 Reference Voltage Control Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[4]     |SELVREF   |DAC Reference Voltage Selection
+	 * |        |          |0 = DAC reference voltage is from AVDD
+	 * |        |          |1 = DAC reference voltage is from VREFP
+	 * |[5]     |OUTFLOAT  |DAC Output Floating Selection
+	 * |        |          |0 = DAC_OUT output DAC_ROUT
+	 * |        |          |1 = DAC_OUT output Hi-z
      */
     __IO uint32_t CTL;                   /*!< [0x0000] DAC Control Register                                             */
     __IO uint32_t SWTRG;                 /*!< [0x0004] DAC Software Trigger Control Register                            */

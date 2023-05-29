@@ -2280,6 +2280,90 @@ typedef struct
      * |[13]    |CFLIFOV5  |Capture Falling Latch Interrupt Flag Overrun Status (Read Only)
      * |        |          |This flag indicates if falling latch happened when the corresponding CFLIF is 1.
      * |        |          |Note: This bit will be cleared automatically when user clear corresponding CFLIF.
+	 * @var EPWM_T::RCAPDAT0
+	 * Offset: 0x20C  EPWM Rising Capture Data Register 0
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |RCAPDAT   |EPWM Rising Capture Data Register (Read Only)
+	 * |        |          |When rising capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::FCAPDAT0
+	 * Offset: 0x210  EPWM Falling Capture Data Register 0
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |FCAPDAT   |EPWM Falling Capture Data Register (Read Only)
+	 * |        |          |When falling capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::RCAPDAT1
+	 * Offset: 0x214  EPWM Rising Capture Data Register 1
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |RCAPDAT   |EPWM Rising Capture Data Register (Read Only)
+	 * |        |          |When rising capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::FCAPDAT1
+	 * Offset: 0x218  EPWM Falling Capture Data Register 1
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |FCAPDAT   |EPWM Falling Capture Data Register (Read Only)
+	 * |        |          |When falling capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::RCAPDAT2
+	 * Offset: 0x21C  EPWM Rising Capture Data Register 2
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |RCAPDAT   |EPWM Rising Capture Data Register (Read Only)
+	 * |        |          |When rising capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::FCAPDAT2
+	 * Offset: 0x220  EPWM Falling Capture Data Register 2
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |FCAPDAT   |EPWM Falling Capture Data Register (Read Only)
+	 * |        |          |When falling capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::RCAPDAT3
+	 * Offset: 0x224  EPWM Rising Capture Data Register 3
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |RCAPDAT   |EPWM Rising Capture Data Register (Read Only)
+	 * |        |          |When rising capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::FCAPDAT3
+	 * Offset: 0x228  EPWM Falling Capture Data Register 3
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |FCAPDAT   |EPWM Falling Capture Data Register (Read Only)
+	 * |        |          |When falling capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::RCAPDAT4
+	 * Offset: 0x22C  EPWM Rising Capture Data Register 4
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |RCAPDAT   |EPWM Rising Capture Data Register (Read Only)
+	 * |        |          |When rising capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::FCAPDAT4
+	 * Offset: 0x230  EPWM Falling Capture Data Register 4
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |FCAPDAT   |EPWM Falling Capture Data Register (Read Only)
+	 * |        |          |When falling capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::RCAPDAT5
+	 * Offset: 0x234  EPWM Rising Capture Data Register 5
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |RCAPDAT   |EPWM Rising Capture Data Register (Read Only)
+	 * |        |          |When rising capture condition happened, the EPWM counter value will be saved in this register.
+	 * @var EPWM_T::FCAPDAT5
+	 * Offset: 0x238  EPWM Falling Capture Data Register 5
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |FCAPDAT   |EPWM Falling Capture Data Register (Read Only)
+	 * |        |          |When falling capture condition happened, the EPWM counter value will be saved in this register.
      * @var EPWM_T::PDMACTL
      * Offset: 0x23C  EPWM PDMA Control Register
      * ---------------------------------------------------------------------------------------------------
@@ -2330,13 +2414,27 @@ typedef struct
      * |[20]    |CHSEL4_5  |Select Channel 4/5 to Do PDMA Transfer
      * |        |          |0 = Channel4.
      * |        |          |1 = Channel5.
-     * @var EPWM_T::PDMACAP[3]
-     * Offset: 0x240  EPWM Capture Channel 01 PDMA Register
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CAPBUF    |EPWM Capture PDMA Register (Read Only)
-     * |        |          |This register is use as a buffer to transfer EPWM capture rising or falling data to memory by PDMA.
+	 * @var EPWM_T::PDMACAP0_1
+	 * Offset: 0x240  EPWM Capture Channel 01 PDMA Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |CAPBUF    |EPWM Capture PDMA Register (Read Only)
+	 * |        |          |This register is used as a buffer to transfer EPWM capture rising or falling data to memory by PDMA.
+	 * @var EPWM_T::PDMACAP2_3
+	 * Offset: 0x244  EPWM Capture Channel 23 PDMA Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |CAPBUF    |EPWM Capture PDMA Register (Read Only)
+	 * |        |          |This register is used as a buffer to transfer EPWM capture rising or falling data to memory by PDMA.
+	 * @var EPWM_T::PDMACAP4_5
+	 * Offset: 0x248  EPWM Capture Channel 45 PDMA Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |CAPBUF    |EPWM Capture PDMA Register (Read Only)
+	 * |        |          |This register is used as a buffer to transfer EPWM capture rising or falling data to memory by PDMA.
      * @var EPWM_T::CAPIEN
      * Offset: 0x250  EPWM Capture Interrupt Enable Register
      * ---------------------------------------------------------------------------------------------------
@@ -2443,6 +2541,226 @@ typedef struct
      * |        |          |0 = No capture falling latch condition happened.
      * |        |          |1 = Capture falling latch condition happened, this flag will be set to high.
      * |        |          |Note: When Capture with PDMA operating, CAPIF corresponding channel CFLIF will cleared by hardware after PDMA transfer data.
+	 * @var EPWM_T::CAPNF[6]
+	 * Offset: 0x258  EPWM Capture Input Noise Filter Register 0~5
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[0]     |CAPNFEN   |Capture Noise Filter Enable
+	 * |        |          |0 = Capture Noise Filter function Disabled.
+	 * |        |          |1 = Capture Noise Filter function Enabled.
+	 * |[6:4]   |CAPNFSEL  |Capture Edge Detector Noise Filter Clock Selection
+	 * |        |          |000 = Filter clock = PCLK.
+	 * |        |          |001 = Filter clock = PCLK/2.
+	 * |        |          |010 = Filter clock = PCLK/4.
+	 * |        |          |011 = Filter clock = PCLK/8.
+	 * |        |          |100 = Filter clock = PCLK/16.
+	 * |        |          |101 = Filter clock = PCLK/32.
+	 * |        |          |110 = Filter clock = PCLK/64.
+	 * |        |          |111 = Filter clock = PCLK/128.
+	 * |[10:8]  |CAPNFCNT  |Capture Edge Detector Noise Filter Count
+	 * |        |          |The register bits control the capture filter counter to count from 0 to CAPNFCNT.
+	 * @var EPWM_T::EXTETCTL[6]
+	 * Offset: 0x270  EPWM External Event Trigger Control Register 0~5
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[0]     |EXETEN    |External Event Trigger Enable Bit
+	 * |        |          |0 = External Event Trigger function Disabled.
+	 * |        |          |1 = External Event Trigger function Enabled.
+	 * |[5:4]   |CNTACTS   |Counter Action Selection
+	 * |        |          |00 = Counter reset
+	 * |        |          |01 = Counter start
+	 * |        |          |10 = Counter reset and start
+	 * |        |          |11 = Reseved
+	 * |[11:8]  |EXTTRGS   |External Trigger Selection
+	 * |        |          |0000 = INT0
+	 * |        |          |0001 = INT1
+	 * |        |          |0010 = INT2
+	 * |        |          |0011 = INT3
+	 * |        |          |0100 = INT4
+	 * |        |          |0101 = INT5
+	 * |        |          |0110 = INT6
+	 * |        |          |0111 = INT7
+	 * |        |          |Other = Resrved
+	 * @var EPWM_T::SWEOFCTL
+	 * Offset: 0x288  EPWM Software Event Output Force Control Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[1:0]   |OUTACTS0  |Output Action Selection
+	 * |        |          |00 = Do nothing
+	 * |        |          |01 = EPWM output Low.
+	 * |        |          |10 = EPWM output High.
+	 * |        |          |11 = EPWM output Toggle.
+	 * |[3:2]   |OUTACTS1  |Output Action Selection
+	 * |        |          |00 = Do nothing
+	 * |        |          |01 = EPWM output Low.
+	 * |        |          |10 = EPWM output High.
+	 * |        |          |11 = EPWM output Toggle.
+	 * |[5:4]   |OUTACTS2  |Output Action Selection
+	 * |        |          |00 = Do nothing
+	 * |        |          |01 = EPWM output Low.
+	 * |        |          |10 = EPWM output High.
+	 * |        |          |11 = EPWM output Toggle.
+	 * |[7:6]   |OUTACTS3  |Output Action Selection
+	 * |        |          |00 = Do nothing
+	 * |        |          |01 = EPWM output Low.
+	 * |        |          |10 = EPWM output High.
+	 * |        |          |11 = EPWM output Toggle.
+	 * |[9:8]   |OUTACTS4  |Output Action Selection
+	 * |        |          |00 = Do nothing
+	 * |        |          |01 = EPWM output Low.
+	 * |        |          |10 = EPWM output High.
+	 * |        |          |11 = EPWM output Toggle.
+	 * |[11:10] |OUTACTS5  |Output Action Selection
+	 * |        |          |00 = Do nothing
+	 * |        |          |01 = EPWM output Low.
+	 * |        |          |10 = EPWM output High.
+	 * |        |          |11 = EPWM output Toggle.
+	 * @var EPWM_T::SWEOFTRG
+	 * Offset: 0x28C  EPWM Software Event Output Force Trigger Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[0]     |SWETRG0   |Software Event Trigger
+	 * |        |          |Write 1 to this bit will change EPWM output status according to OUTACTSn in EPWMx_SWEOFCTL setting.
+	 * |        |          |Note: This bit will auto cleared by hardware.
+	 * |[1]     |SWETRG1   |Software Event Trigger
+	 * |        |          |Write 1 to this bit will change EPWM output status according to OUTACTSn in EPWMx_SWEOFCTL setting.
+	 * |        |          |Note: This bit will auto cleared by hardware.
+	 * |[2]     |SWETRG2   |Software Event Trigger
+	 * |        |          |Write 1 to this bit will change EPWM output status according to OUTACTSn in EPWMx_SWEOFCTL setting.
+	 * |        |          |Note: This bit will auto cleared by hardware.
+	 * |[3]     |SWETRG3   |Software Event Trigger
+	 * |        |          |Write 1 to this bit will change EPWM output status according to OUTACTSn in EPWMx_SWEOFCTL setting.
+	 * |        |          |Note: This bit will auto cleared by hardware.
+	 * |[4]     |SWETRG4   |Software Event Trigger
+	 * |        |          |Write 1 to this bit will change EPWM output status according to OUTACTSn in EPWMx_SWEOFCTL setting.
+	 * |        |          |Note: This bit will auto cleared by hardware.
+	 * |[5]     |SWETRG5   |Software Event Trigger
+	 * |        |          |Write 1 to this bit will change EPWM output status according to OUTACTSn in EPWMx_SWEOFCTL setting.
+	 * |        |          |Note: This bit will auto cleared by hardware.
+	 * @var EPWM_T::CLKPSC1[6]
+	 * Offset: 0x290  EPWM Clock Prescale Register 0~5
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[11:0]  |CLKPSC    |EPWM Counter Clock Prescale
+	 * |        |          |The clock of EPWM counter is decided by clock prescaler
+	 * |        |          |Each EPWM pair share one EPWM counter clock prescaler
+	 * |        |          |The clock of EPWM counter is divided by (CLKPSC+ 1)
+	 * @var EPWM_T::RDTCNT0_1
+	 * Offset: 0x2A8  EPWM Rising Dead-time Counter Register 0/1
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[11:0]  |RDTCNT    |Rising Dead-time Counter (Write Protect)
+	 * |        |          |The Rising dead-time can be calculated from the following formula:
+	 * |        |          |RDTCKSEL=0: Rising Dead-time = (RDTCNT[11:0]+1) * EPWM_CLK period.
+	 * |        |          |RDTCKSEL=1: Rising Dead-time = (RDTCNT[11:0]+1) * EPWM_CLK period * (CLKPSC+1).
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * @var EPWM_T::RDTCNT2_3
+	 * Offset: 0x2AC  EPWM Rising Dead-time Counter Register 2/3
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[11:0]  |RDTCNT    |Rising Dead-time Counter (Write Protect)
+	 * |        |          |The Rising dead-time can be calculated from the following formula:
+	 * |        |          |RDTCKSEL=0: Rising Dead-time = (RDTCNT[11:0]+1) * EPWM_CLK period.
+	 * |        |          |RDTCKSEL=1: Rising Dead-time = (RDTCNT[11:0]+1) * EPWM_CLK period * (CLKPSC+1).
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * @var EPWM_T::RDTCNT4_5
+	 * Offset: 0x2B0  EPWM Rising Dead-time Counter Register 4/5
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[11:0]  |RDTCNT    |Rising Dead-time Counter (Write Protect)
+	 * |        |          |The Rising dead-time can be calculated from the following formula:
+	 * |        |          |RDTCKSEL=0: Rising Dead-time = (RDTCNT[11:0]+1) * EPWM_CLK period.
+	 * |        |          |RDTCKSEL=1: Rising Dead-time = (RDTCNT[11:0]+1) * EPWM_CLK period * (CLKPSC+1).
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * @var EPWM_T::FDTCNT0_1
+	 * Offset: 0x2B4  EPWM Falling Dead-time Counter Register 0/1
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[11:0]  |FDTCNT    |Falling Dead-time Counter (Write Protect)
+	 * |        |          |The dead-time can be calculated from the following formula:
+	 * |        |          |FDTCKSEL=0: Falling Dead-time = (FDTCNT[11:0]+1) * EPWM_CLK period.
+	 * |        |          |FDTCKSEL=1: Falling Dead-time = (FDTCNT[11:0]+1) * EPWM_CLK period * (CLKPSC+1).
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * @var EPWM_T::FDTCNT2_3
+	 * Offset: 0x2B8  EPWM Falling Dead-time Counter Register 2/3
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[11:0]  |FDTCNT    |Falling Dead-time Counter (Write Protect)
+	 * |        |          |The dead-time can be calculated from the following formula:
+	 * |        |          |FDTCKSEL=0: Falling Dead-time = (FDTCNT[11:0]+1) * EPWM_CLK period.
+	 * |        |          |FDTCKSEL=1: Falling Dead-time = (FDTCNT[11:0]+1) * EPWM_CLK period * (CLKPSC+1).
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * @var EPWM_T::FDTCNT4_5
+	 * Offset: 0x2BC  EPWM Falling Dead-time Counter Register 4/5
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[11:0]  |FDTCNT    |Falling Dead-time Counter (Write Protect)
+	 * |        |          |The dead-time can be calculated from the following formula:
+	 * |        |          |FDTCKSEL=0: Falling Dead-time = (FDTCNT[11:0]+1) * EPWM_CLK period.
+	 * |        |          |FDTCKSEL=1: Falling Dead-time = (FDTCNT[11:0]+1) * EPWM_CLK period * (CLKPSC+1).
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * @var EPWM_T::DTCTL0
+	 * Offset: 0x2C0  EPWM Dead-time Control Register
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[0]     |RDTEN0    |Enable Rising Dead-time Insertion for EPWM Pair
+	 * |        |          |?(EPWM_CH(n/2), EPWM_CH(n/2+1)) (Write Protect)
+	 * |        |          |Rising Dead-time insertion is only active when this pair of complementary EPWM is enabled
+	 * |        |          |If rising dead- time insertion is inactive, the outputs of pin pair are complementary without any delay.
+	 * |        |          |0 = Rising Dead-time insertion Disabled on the pin pair.
+	 * |        |          |1 = Rising Dead-time insertion Enabled on the pin pair.
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * |[1]     |RDTEN2    |Enable Rising Dead-time Insertion for EPWM Pair
+	 * |        |          |?(EPWM_CH(n/2), EPWM_CH(n/2+1)) (Write Protect)
+	 * |        |          |Rising Dead-time insertion is only active when this pair of complementary EPWM is enabled
+	 * |        |          |If rising dead- time insertion is inactive, the outputs of pin pair are complementary without any delay.
+	 * |        |          |0 = Rising Dead-time insertion Disabled on the pin pair.
+	 * |        |          |1 = Rising Dead-time insertion Enabled on the pin pair.
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * |[2]     |RDTEN4    |Enable Rising Dead-time Insertion for EPWM Pair
+	 * |        |          |?(EPWM_CH(n/2), EPWM_CH(n/2+1)) (Write Protect)
+	 * |        |          |Rising Dead-time insertion is only active when this pair of complementary EPWM is enabled
+	 * |        |          |If rising dead- time insertion is inactive, the outputs of pin pair are complementary without any delay.
+	 * |        |          |0 = Rising Dead-time insertion Disabled on the pin pair.
+	 * |        |          |1 = Rising Dead-time insertion Enabled on the pin pair.
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * |[8]     |FDTEN0    |Enable Falling Dead-time Insertion for EPWM Pair
+	 * |        |          |Enable Falling Dead-time Insertion for EPWM Pair (EPWM_CH(n/2), EPWM_CH(n/2+1)) (Write Protect)
+	 * |        |          |Falling Dead-time insertion is only active when this pair of complementary EPWM is enabled
+	 * |        |          |If falling dead- time insertion is inactive, the outputs of pin pair are complementary without any delay.
+	 * |        |          |0 = Falling Dead-time insertion Disabled on the pin pair.
+	 * |        |          |1 = Falling Dead-time insertion Enabled on the pin pair.
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * |[9]     |FDTEN2    |Enable Falling Dead-time Insertion for EPWM Pair
+	 * |        |          |Enable Falling Dead-time Insertion for EPWM Pair (EPWM_CH(n/2), EPWM_CH(n/2+1)) (Write Protect)
+	 * |        |          |Falling Dead-time insertion is only active when this pair of complementary EPWM is enabled
+	 * |        |          |If falling dead- time insertion is inactive, the outputs of pin pair are complementary without any delay.
+	 * |        |          |0 = Falling Dead-time insertion Disabled on the pin pair.
+	 * |        |          |1 = Falling Dead-time insertion Enabled on the pin pair.
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * |[10]    |FDTEN4    |Enable Falling Dead-time Insertion for EPWM Pair
+	 * |        |          |Enable Falling Dead-time Insertion for EPWM Pair (EPWM_CH(n/2), EPWM_CH(n/2+1)) (Write Protect)
+	 * |        |          |Falling Dead-time insertion is only active when this pair of complementary EPWM is enabled
+	 * |        |          |If falling dead- time insertion is inactive, the outputs of pin pair are complementary without any delay.
+	 * |        |          |0 = Falling Dead-time insertion Disabled on the pin pair.
+	 * |        |          |1 = Falling Dead-time insertion Enabled on the pin pair.
+	 * |        |          |Note: This bit is write protected. Refer to SYS_REGLCTL register.
+	 * |[16]    |DTCKSELn  |Dead-time Clock Select for EPWM Pair (Write Protect)
+	 * |        |          |0 = Dead-time clock source from EPWM_CLK.
+	 * |        |          |1 = Dead-time clock source from prescaler output.
+	 * |        |          |Note: This bit is write protected. Refer to REGWRPROT register.
      * @var EPWM_T::PBUF[6]
      * Offset: 0x304  EPWM PERIOD0~5 Buffer
      * ---------------------------------------------------------------------------------------------------
@@ -2457,20 +2775,48 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[15:0]  |CMPBUF    |EPWM Comparator Register Buffer (Read Only)
      * |        |          |Used as CMP active register.
-     * @var EPWM_T::CPSCBUF[3]
-     * Offset: 0x334  EPWM CLKPSC0_1/2_3/4_5 Buffer
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[11:0]  |CPSCBUF   |EPWM Counter Clock Prescale Buffer
-     * |        |          |Use as EPWM counter clock prescale active register.
-     * @var EPWM_T::FTCBUF[3]
-     * Offset: 0x340  EPWM FTCMPDAT0_1/2_3/4_5 Buffer
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |FTCMPBUF  |EPWM FTCMPDAT Buffer (Read Only)
-     * |        |          |Used as FTCMPDAT active register.
+	 * @var EPWM_T::CPSCBUF0_1
+	 * Offset: 0x334  EPWM CLKPSC0_1 Buffer
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[11:0]  |CPSCBUF   |EPWM Counter Clock Prescale Buffer
+	 * |        |          |Used as EPWM counter clock pre-scare active register.
+	 * @var EPWM_T::CPSCBUF2_3
+	 * Offset: 0x338  EPWM CLKPSC2_3 Buffer
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[11:0]  |CPSCBUF   |EPWM Counter Clock Prescale Buffer
+	 * |        |          |Used as EPWM counter clock pre-scare active register.
+	 * @var EPWM_T::CPSCBUF4_5
+	 * Offset: 0x33C  EPWM CLKPSC4_5 Buffer
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[11:0]  |CPSCBUF   |EPWM Counter Clock Prescale Buffer
+	 * |        |          |Used as EPWM counter clock pre-scare active register.
+	 * @var EPWM_T::FTCBUF0_1
+	 * Offset: 0x340  EPWM FTCMPDAT0_1 Buffer
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |FTCMPBUF  |EPWM FTCMPDAT Buffer (Read Only)
+	 * |        |          |Used as FTCMP active buffer.
+	 * @var EPWM_T::FTCBUF2_3
+	 * Offset: 0x344  EPWM FTCMPDAT2_3 Buffer
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |FTCMPBUF  |EPWM FTCMPDAT Buffer (Read Only)
+	 * |        |          |Used as FTCMP active buffer.
+	 * @var EPWM_T::FTCBUF4_5
+	 * Offset: 0x348  EPWM FTCMPDAT4_5 Buffer
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |FTCMPBUF  |EPWM FTCMPDAT Buffer (Read Only)
+	 * |        |          |Used as FTCMP active buffer.
      * @var EPWM_T::FTCI
      * Offset: 0x34C  EPWM FTCMPDAT Indicator Register
      * ---------------------------------------------------------------------------------------------------
@@ -2488,6 +2834,13 @@ typedef struct
      * |        |          |Indicator will be set to high when FTCMPDATn equal to CNTn and DIRF=0, software can write 1 to clear this bit.
      * |[10]    |FTCMD4    |EPWM FTCMPDAT Down Indicator
      * |        |          |Indicator will be set to high when FTCMPDATn equal to CNTn and DIRF=0, software can write 1 to clear this bit.
+	 * @var EPWM_T::IFACNT[6]
+	 * Offset: 0x368  EPWM Interrupt Flag Accumulator Counter 0 ~ 5
+	 * ---------------------------------------------------------------------------------------------------
+	 * |Bits    |Field     |Descriptions
+	 * | :----: | :----:   | :---- |
+	 * |[15:0]  |ACUCNT    |Accumulator Counter (Read Only)
+	 * |        |          |This value indicates how many interrupt are accumulated when using interrupt flag accumulator function.
      */
     __IO uint32_t CTL0;                  /*!< [0x0000] EPWM Control Register 0                                           */
     __IO uint32_t CTL1;                  /*!< [0x0004] EPWM Control Register 1                                           */
@@ -2559,22 +2912,22 @@ typedef struct
     __IO uint32_t CAPINEN;               /*!< [0x0200] EPWM Capture Input Enable Register                                */
     __IO uint32_t CAPCTL;                /*!< [0x0204] EPWM Capture Control Register                                     */
     __I  uint32_t CAPSTS;                /*!< [0x0208] EPWM Capture Status Register                                      */
-    __I  uint32_t RCAPDAT0;      /* Offset: 0x20C  PWM Rising Capture Data Register 0                                */
-    __I  uint32_t FCAPDAT0;      /* Offset: 0x210  PWM Falling Capture Data Register 0                               */
-    __I  uint32_t RCAPDAT1;      /* Offset: 0x214  PWM Rising Capture Data Register 1                                */
-    __I  uint32_t FCAPDAT1;      /* Offset: 0x218  PWM Falling Capture Data Register 1                               */
-    __I  uint32_t RCAPDAT2;      /* Offset: 0x21C  PWM Rising Capture Data Register 2                                */
-    __I  uint32_t FCAPDAT2;      /* Offset: 0x220  PWM Falling Capture Data Register 2                               */
-    __I  uint32_t RCAPDAT3;      /* Offset: 0x224  PWM Rising Capture Data Register 3                                */
-    __I  uint32_t FCAPDAT3;      /* Offset: 0x228  PWM Falling Capture Data Register 3                               */
-    __I  uint32_t RCAPDAT4;      /* Offset: 0x22C  PWM Rising Capture Data Register 4                                */
-    __I  uint32_t FCAPDAT4;      /* Offset: 0x230  PWM Falling Capture Data Register 4                               */
-    __I  uint32_t RCAPDAT5;      /* Offset: 0x234  PWM Rising Capture Data Register 5                                */
-    __I  uint32_t FCAPDAT5;      /* Offset: 0x238  PWM Falling Capture Data Register 5                               */
-	__IO uint32_t PDMACTL;               /*!< [0x023c] EPWM PDMA Control Register                                        */
-    __I  uint32_t PDMACAP0_1;    /* Offset: 0x240  PWM Capture Channel 01 PDMA Register                              */
-    __I  uint32_t PDMACAP2_3;    /* Offset: 0x244  PWM Capture Channel 23 PDMA Register                              */
-    __I  uint32_t PDMACAP4_5;    /* Offset: 0x248  PWM Capture Channel 45 PDMA Register                              */
+    __I  uint32_t RCAPDAT0;      		 /*!< [0x020C] EPWM Rising Capture Data Register 0                            */
+    __I  uint32_t FCAPDAT0;      		 /*!< [0x0210] EPWM Falling Capture Data Register 0                           */
+    __I  uint32_t RCAPDAT1;      		 /*!< [0x0214] EPWM Rising Capture Data Register 1                            */
+    __I  uint32_t FCAPDAT1;      		 /*!< [0x0218] EPWM Falling Capture Data Register 1                           */
+    __I  uint32_t RCAPDAT2;      		 /*!< [0x021C] EPWM Rising Capture Data Register 2                            */
+    __I  uint32_t FCAPDAT2;      		 /*!< [0x0220] EPWM Falling Capture Data Register 2                           */
+    __I  uint32_t RCAPDAT3;      		 /*!< [0x0224] EPWM Rising Capture Data Register 3                            */
+    __I  uint32_t FCAPDAT3;      		 /*!< [0x0228] EPWM Falling Capture Data Register 3                           */
+    __I  uint32_t RCAPDAT4;      		 /*!< [0x022C] EPWM Rising Capture Data Register 4                            */
+    __I  uint32_t FCAPDAT4;      		 /*!< [0x0230] EPWM Falling Capture Data Register 4                           */
+    __I  uint32_t RCAPDAT5;      		 /*!< [0x0234] EPWM Rising Capture Data Register 5                            */
+    __I  uint32_t FCAPDAT5;      		 /*!< [0x0238] EPWM Falling Capture Data Register 5                           */
+	__IO uint32_t PDMACTL;               /*!< [0x023c] EPWM PDMA Control Register                                     */
+    __I  uint32_t PDMACAP0_1;    		 /*!< [0x0240] EPWM Capture Channel 01 PDMA Register                          */
+    __I  uint32_t PDMACAP2_3;    		 /*!< [0x0244] EPWM Capture Channel 23 PDMA Register                          */
+    __I  uint32_t PDMACAP4_5;    		 /*!< [0x0248] EPWM Capture Channel 45 PDMA Register                          */
     __I  uint32_t RESERVE12[1];
     __IO uint32_t CAPIEN;                /*!< [0x0250] EPWM Capture Interrupt Enable Register                            */
     __IO uint32_t CAPIF;                 /*!< [0x0254] EPWM Capture Interrupt Flag Register                              */
@@ -4465,7 +4818,6 @@ typedef struct
 
 #define EPWM_EXTETCTL5_EXTTRGS_Pos       (8)                                               /*!< EPWM_T::EXTETCTL5: EXTTRGS Position    */
 #define EPWM_EXTETCTL5_EXTTRGS_Msk       (0xful << EPWM_EXTETCTL5_EXTTRGS_Pos)             /*!< EPWM_T::EXTETCTL5: EXTTRGS Mask        */
-
 
 #define EPWM_SWEOFCTL_OUTACTS0_Pos		  (0)                                               /*!< EPWM_T::SWEOFCTL: OUTACTS0 Position     */
 #define EPWM_SWEOFCTL_OUTACTS0_Msk        (0x3ul << EPWM_SWEOFCTL_OUTACTS0_Pos)             /*!< EPWM_T::SWEOFCTL: OUTACTS0 Mask         */
