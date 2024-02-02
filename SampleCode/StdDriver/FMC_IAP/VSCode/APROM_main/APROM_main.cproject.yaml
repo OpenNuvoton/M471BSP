@@ -1,0 +1,27 @@
+project:
+  linker:
+    - script: ../../../../../Library/Device/Nuvoton/M471/Source/GCC/gcc_arm.ld
+  setups:
+    - output:
+        type: "bin"
+  groups:
+    - group: CMSIS
+      files:
+        - file: ../../../../../Library/Device/Nuvoton/M471/Source/system_M471.c
+        - file: ../../../../../Library/Device/Nuvoton/M471/Source/GCC/startup_M471.S
+        - file: ../../../../../Library/Device/Nuvoton/M471/Source/GCC/_syscalls.c
+        - file: ../../../../../Library/Device/Nuvoton/M471/Source/GCC/semihosting.h
+        - file: ../../../../../Library/Device/Nuvoton/M471/Source/GCC/gcc_arm.ld
+    - group: User
+      files:
+        - file: ../../APROM_main.c
+        - file: ../../GCC/ap_image.S
+          define:
+          - _ARM_VSCODE_
+    - group: Library
+      files:
+        - file: ../../../../../Library/StdDriver/src/retarget.c
+        - file: ../../../../../Library/StdDriver/src/clk.c
+        - file: ../../../../../Library/StdDriver/src/sys.c
+        - file: ../../../../../Library/StdDriver/src/uart.c
+        - file: ../../../../../Library/StdDriver/src/fmc.c
