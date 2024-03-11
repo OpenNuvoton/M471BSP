@@ -1,7 +1,7 @@
 ﻿{
   "configurations": [
     {
-      "name": "m460",
+      "name": "M471",
       "generator": "Unix Makefiles",
       "configurationType": "Debug",
       "inheritEnvironments": [ "gcc-arm" ],
