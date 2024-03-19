@@ -72,7 +72,7 @@ __Vectors:
 	.long	PWRWU_IRQHandler      /*  2: PWRWU                      */
 	.long	RAMPE_IRQHandler      /*  3: RAMPE                      */
 	.long	CKFAIL_IRQHandler     /*  4: CKFAIL                     */
-	.long	0                     /*  5: Reserved                   */
+	.long	FMC_IRQHandler        /*  5: FMC                        */
 	.long	RTC_IRQHandler        /*  6: RTC                        */
 	.long	0                     /*  7: Reserved                   */
 	.long	WDT_IRQHandler        /*  8: WDT                        */
@@ -372,6 +372,7 @@ Default_Handler:
 	def_irq_handler	PWRWU_IRQHandler
 	def_irq_handler	RAMPE_IRQHandler
 	def_irq_handler	CKFAIL_IRQHandler
+	def_irq_handler	FMC_IRQHandler
 	def_irq_handler	RTC_IRQHandler
 	def_irq_handler	WDT_IRQHandler
 	def_irq_handler	WWDT_IRQHandler

@@ -52,7 +52,7 @@ __vector_table_0x1c
         DCD     PWRWU_IRQHandler          ; 2: Power down wake up
         DCD     RAMPE_IRQHandler          ; 3: RAM parity error
         DCD     CKFAIL_IRQHandler         ; 4: Clock detection fail
-        DCD     Default_Handler           ; 5: Reserved
+        DCD     FMC_IRQHandler            ; 5: FMC
         DCD     RTC_IRQHandler            ; 6: Real Time Clock
         DCD     Default_Handler           ; 7: 
         DCD     WDT_IRQHandler            ; 8: Watchdog timer
@@ -259,6 +259,7 @@ SysTick_Handler
         PUBWEAK  PWRWU_IRQHandler
         PUBWEAK  RAMPE_IRQHandler
         PUBWEAK  CKFAIL_IRQHandler
+        PUBWEAK  FMC_IRQHandler
         PUBWEAK  RTC_IRQHandler
         PUBWEAK  WDT_IRQHandler
         PUBWEAK  WWDT_IRQHandler
@@ -319,6 +320,7 @@ IRC_IRQHandler
 PWRWU_IRQHandler
 RAMPE_IRQHandler
 CKFAIL_IRQHandler
+FMC_IRQHandler
 RTC_IRQHandler
 WDT_IRQHandler
 WWDT_IRQHandler
