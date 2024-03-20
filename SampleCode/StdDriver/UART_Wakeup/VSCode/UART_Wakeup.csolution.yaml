@@ -5,7 +5,7 @@ solution:
     - pack: Nuvoton::NuMicro_DFP
   target-types:
     - type: GCC
-      device: M467HJHAE
+      device: M471KI8AE
       processor:
         trustzone: non-secure
       add-path:
