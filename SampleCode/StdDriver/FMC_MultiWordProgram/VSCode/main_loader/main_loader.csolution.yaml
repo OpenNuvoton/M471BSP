@@ -12,7 +12,7 @@ solution:
         - ../../../../../Library/CMSIS/Include
         - ../../../../../Library/Device/Nuvoton/M471/Include
         - ../../../../../Library/StdDriver/inc
-        - ../../GCC
+        - ../multi_word_prog/out/multi_word_prog/GCC/Debug
       compiler: GCC@>=10.3.1
   build-types:
     - type: Debug
