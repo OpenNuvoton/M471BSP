@@ -79,7 +79,7 @@ int32_t main(void)
     for (addr = 0x8000; addr < 0x10000; addr += FMC_FLASH_PAGE_SIZE)
     {
         printf("Multiword program APROM page 0x%x =>\n", addr);
-#if 1
+
         if (FMC_Erase(addr) < 0)
         {
             printf("    Erase failed!!\n");
@@ -122,7 +122,7 @@ int32_t main(void)
                 goto err_out;
             }
         }
-#endif
+
         printf("[OK]\n");
     }
 
