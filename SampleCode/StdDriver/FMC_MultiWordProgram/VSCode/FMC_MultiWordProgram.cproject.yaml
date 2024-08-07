@@ -1,6 +1,6 @@
 project:
   linker:
-    - script: ./FMC_ExeInSRAM.ld
+    - script: ./FMC_MultiWordProgram.ld
   setups:
     - output:
         type: "bin"

@@ -1,7 +1,7 @@
 /* Linker script to configure memory regions. */
 MEMORY
 {
-    FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x3000    /* 8k */
+    FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x8000    /* 32k */
     RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x1000    /* 4k  */
     RAM2 (rwx) : ORIGIN = 0x20001000, LENGTH = 0x1000    /* 4k */
 }
@@ -52,8 +52,8 @@ SECTIONS
 		__Vectors_Size = __Vectors_End - __Vectors;
 		__end__ = .;
 
-		/**(.text*)*/
-
+		/* *(.text*)*/
+	    *(EXCLUDE_FILE(*/fmc.c.obj) .text*)
         
 		KEEP(*(.init))
 		KEEP(*(.fini))
@@ -71,8 +71,9 @@ SECTIONS
  		*(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
  		*(SORT(.dtors.*))
  		*(.dtors)
-		*(.rodata*)
 
+		/* *(.rodata*)*/
+    	*(EXCLUDE_FILE(*/fmc.c.obj) .rodata*)
 
 		KEEP(*(.eh_frame*))
 	} > FLASH
@@ -94,12 +95,12 @@ SECTIONS
 	.ExeSramCode :
 	{
 		. = ALIGN(4);
-		./Library/Library/*.o (.text*)
-		./User/main.o (.text*)
-		__ExeSramEnd = .; 
+		__ExeSramStart__ = .;
+		*/fmc.c.obj (.text*)
+    	*/fmc.c.obj (.rodata*)
+		__ExeSramEnd__ = .; 
 	} > RAM2 AT > FLASH
-	
-    
+
 
 	/* To copy multiple ROM to RAM sections,
 	 * uncomment .copy.table section and,
@@ -111,10 +112,10 @@ SECTIONS
 		__copy_table_start__ = .;
 		LONG (__etext)
 		LONG (__data_start__)
-		LONG (__data_end__ - __data_start__)
+		LONG ((__data_end__ - __data_start__) / 4)
 		LONG (__ExeSramBase)
-		LONG (0x20001000)
-		LONG (__ExeSramEnd - 0x20001000)
+		LONG (__ExeSramStart__)
+		LONG ((__ExeSramEnd__ - __ExeSramStart__) / 4)
 		__copy_table_end__ = .;
 	} > FLASH
 
@@ -134,14 +135,6 @@ SECTIONS
 		__zero_table_end__ = .;
 	} > FLASH
 	*/
-	
-	/*. = 0x20000000;
-	
-	/*.exe_sram : AT (__exidx_end)*/
-	/*.exe_sram : 
-	{
-		./User/main.o(.text*)
-	} > RAM2  AT > FLASH*/
     
 	__etext = .;
 

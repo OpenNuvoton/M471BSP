@@ -1,8 +1,9 @@
 /* Linker script to configure memory regions. */
 MEMORY
 {
-  FLASH (rx) : ORIGIN = 0x20004000, LENGTH = 0xC000   /* 48k */
-  RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x4000   /* 16k */
+    FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x8000    /* 32k */
+    RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x2000    /* 4k  */
+    RAM2 (rwx) : ORIGIN = 0x20002000, LENGTH = 0x2000    /* 4k */
 }
 
 /* Library configurations */
@@ -51,8 +52,9 @@ SECTIONS
 		__Vectors_Size = __Vectors_End - __Vectors;
 		__end__ = .;
 
-		*(.text*)
-
+		/* *(.text*)*/
+	    *(EXCLUDE_FILE(*/fmc.c.obj) .text*)
+        
 		KEEP(*(.init))
 		KEEP(*(.fini))
 
@@ -70,7 +72,8 @@ SECTIONS
  		*(SORT(.dtors.*))
  		*(.dtors)
 
-		*(.rodata*)
+		/* *(.rodata*)*/
+    	*(EXCLUDE_FILE(*/fmc.c.obj) .rodata*)
 
 		KEEP(*(.eh_frame*))
 	} > FLASH
@@ -87,23 +90,35 @@ SECTIONS
 	} > FLASH
 	__exidx_end = .;
 
+    
+	__ExeSramBase = .;
+	.ExeSramCode :
+	{
+		. = ALIGN(4);
+		__ExeSramStart__ = .;
+		*/fmc.c.obj (.text*)
+    	*/fmc.c.obj (.rodata*)
+		__ExeSramEnd__ = .; 
+	} > RAM2 AT > FLASH
+
+
 	/* To copy multiple ROM to RAM sections,
 	 * uncomment .copy.table section and,
 	 * define __STARTUP_COPY_MULTIPLE in startup_ARMCMx.S */
-	/*
-	.copy.table :
+	 
+    .copy.table :
 	{
 		. = ALIGN(4);
 		__copy_table_start__ = .;
 		LONG (__etext)
 		LONG (__data_start__)
-		LONG (__data_end__ - __data_start__)
-		LONG (__etext2)
-		LONG (__data2_start__)
-		LONG (__data2_end__ - __data2_start__)
+		LONG ((__data_end__ - __data_start__) / 4)
+		LONG (__ExeSramBase)
+		LONG (__ExeSramStart__)
+		LONG ((__ExeSramEnd__ - __ExeSramStart__) / 4)
 		__copy_table_end__ = .;
 	} > FLASH
-	*/
+
 
 	/* To clear multiple BSS sections,
 	 * uncomment .zero.table section and,
@@ -120,7 +135,7 @@ SECTIONS
 		__zero_table_end__ = .;
 	} > FLASH
 	*/
-
+    
 	__etext = .;
 
 	.data : AT (__etext)
@@ -128,6 +143,7 @@ SECTIONS
 		__data_start__ = .;
 		*(vtable)
 		*(.data*)
+		
 
 		. = ALIGN(4);
 		/* preinit data */
@@ -154,8 +170,11 @@ SECTIONS
 		. = ALIGN(4);
 		/* All data end */
 		__data_end__ = .;
+		
+		
 
 	} > RAM
+	
 
 	.bss :
 	{

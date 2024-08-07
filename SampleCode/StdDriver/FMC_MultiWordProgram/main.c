@@ -1,20 +1,19 @@
-/****************************************************************************
- * @file     multi_word_prog.c
- * @version  V1.00
- * @brief    This sample run on SRAM to show FMC multi word program function.
+/****************************************************************************//**
+ * @file     main.c
+ * @version  V0.10
+ * @brief    Implement a code and execute in SRAM to program embedded Flash.
+ *           (Support KEIL MDK Only)
  *
  * SPDX-License-Identifier: Apache-2.0
- * @copyright (C) 2020 Nuvoton Technology Corp. All rights reserved.
+ * @copyright (C) 2019 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
-
 #include "NuMicro.h"
 
 uint32_t    page_buff[FMC_FLASH_PAGE_SIZE/4];
 
 void SYS_Init(void)
 {
-
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
@@ -49,40 +48,38 @@ void SYS_Init(void)
     /* Set GPB multi-function pins for UART0 RXD and TXD */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))    |       \
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
-    /* Lock protected registers */
-    SYS_LockReg();
 }
 
-void UART0_Init(void)
-{
-    /* Configure UART0 and set UART0 baud rate */
-    UART_Open(UART0, 115200);
-}
-
-int main()
+int32_t main(void)
 {
     uint32_t  i, addr, maddr;          /* temporary variables */
 
-    SYS_Init();                        /* Init System, IP clock and multi-function I/O */
+    /* Init System, IP clock and multi-function I/O. */
+    SYS_Init();
 
-    UART0_Init();                      /* Initialize UART0 */
+    /* Configure UART0: 115200, 8-bit word, no parity bit, 1 stop bit. */
+    UART_Open(UART0, 115200);
+
+    /*---------------------------------------------------------------------------------------------------------*/
+    /* SAMPLE CODE                                                                                             */
+    /*---------------------------------------------------------------------------------------------------------*/
 
     printf("\n\n");
-    printf("+-------------------------------------+\n");
-    printf("|    M471 Multi-word Program Sample   |\n");
-    printf("+-------------------------------------+\n");
-
-    /* Unlock protected registers to operate FMC ISP function */
-    SYS_UnlockReg();
+    printf("+---------------------------------------------+\n");
+    printf("|       Multi-word Program Sample             |\n");
+    printf("+---------------------------------------------+\n");
+    printf("Check FMC function execution address\n");
+    printf("FMC_Erase: 0x%X, FMC_WriteMultiple: 0x%X, FMC_Read: 0x%X\n\n",
+           (uint32_t)FMC_Erase, (uint32_t)FMC_WriteMultiple, (uint32_t)FMC_Read);
 
     FMC_Open();                        /* Enable FMC ISP function */
 
     FMC_ENABLE_AP_UPDATE();            /* Enable APROM erase/program */
 
-    for (addr = 0; addr < 0x20000; addr += FMC_FLASH_PAGE_SIZE)
+    for (addr = 0x8000; addr < 0x10000; addr += FMC_FLASH_PAGE_SIZE)
     {
         printf("Multiword program APROM page 0x%x =>\n", addr);
-
+#if 1
         if (FMC_Erase(addr) < 0)
         {
             printf("    Erase failed!!\n");
@@ -125,6 +122,7 @@ int main()
                 goto err_out;
             }
         }
+#endif
         printf("[OK]\n");
     }
 
@@ -136,4 +134,4 @@ err_out:
     while (1);
 }
 
-/*** (C) COPYRIGHT 2020 Nuvoton Technology Corp. ***/
+/*** (C) COPYRIGHT 2019 Nuvoton Technology Corp. ***/
