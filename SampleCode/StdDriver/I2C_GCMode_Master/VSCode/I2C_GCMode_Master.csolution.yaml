@@ -7,7 +7,7 @@ solution:
     - type: GCC
       device: M471KI8AE
       processor:
-        trustzone: non-secure
+        trustzone: off
       add-path:
         - ../../../../Library/CMSIS/Include
         - ../../../../Library/Device/Nuvoton/M471/Include
