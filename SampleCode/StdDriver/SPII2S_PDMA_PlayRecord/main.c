@@ -161,7 +161,7 @@ int32_t main(void)
 
     /* Print the transmitted data */
     printf("\nTX Buffer 1\t\tTX Buffer 2\n");
-    while(!u32PlayReady);
+    while(!u32PlayReady)
     {
         for(u32DataCount = 0; u32DataCount < BUFF_LEN; u32DataCount++)
         {
@@ -172,7 +172,7 @@ int32_t main(void)
 
     /* Print the received data */
     printf("\nRX Buffer 1\t\tRX Buffer 2\n");
-    while(!u32RecReady);
+    while(!u32RecReady)
     {
         for (u32DataCount = 0; u32DataCount < BUFF_LEN; u32DataCount++)
         {
