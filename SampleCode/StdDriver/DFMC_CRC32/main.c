@@ -107,7 +107,7 @@ int32_t main(void)
         printf("DFMC_Write failed!\n");
         goto lexit;
     }
-    printf("\nDataflash address (0x%X ~ 0x%X) CRC32 checksum =>  ",DFMC_DFLASH_BASE, DFMC_DFLASH_END);
+    printf("\nDataflash address (0x%lX ~ 0x%lX) CRC32 checksum =>  ",DFMC_DFLASH_BASE, DFMC_DFLASH_END);
     /*
      *  Request DFMC hardware to run CRC32 calculation on APROM address 0x00400000 ~ 0x00408000.
      *  Note that DFMC CRC32 checksum calculation area must page alignment.
