@@ -62,12 +62,21 @@
 	</linkedResources>
 	<filteredResources>
 		<filter>
-			<id>1505714801336</id>
+			<id>1729737969015</id>
 			<name>CMSIS/CMSIS</name>
 			<type>9</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-GCC</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1729737969024</id>
+			<name>CMSIS/CMSIS</name>
+			<type>6</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-system_M471.c</arguments>
 			</matcher>
 		</filter>
 		<filter>
@@ -104,6 +113,15 @@
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-uart.c</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1729737987688</id>
+			<name>CMSIS/CMSIS/GCC</name>
+			<type>6</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-startup_M471.S</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>
