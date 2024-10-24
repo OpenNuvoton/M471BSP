@@ -36,8 +36,28 @@ void SYS_Init(void)
 
     /* Set core clock as 96MHz from PLL */
     CLK->PLLCTL = 0x888BE;        /* PLL = 192MHz */
-    CLK_WaitClockReady(CLK_STATUS_PLLSTB_Msk);
-    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_PLL, CLK_CLKDIV0_HCLK(2));
+    
+    /* Wait for HIRC clock ready */
+    while((CLK->STATUS & CLK_STATUS_PLLSTB_Msk) != CLK_STATUS_PLLSTB_Msk);
+    
+    /* Switch FMC/DMFC access cycle to maximum value for safe */
+    FMC->CYCCTL = 6;
+    DFMC->CYCCTL = 8;
+
+    /* Switch to HIRC for Safe. Avoid HCLK too high when applying new divider. */
+
+    while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
+    CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
+
+    /* Apply new Divider */
+    CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(2);
+
+    /* Switch HCLK to new HCLK source */
+    CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_PLL;    
+    
+    FMC->CYCCTL = 6;
+
+    DFMC->CYCCTL = 7;
 
     /* Set PCLK0/PCLK1 to HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
@@ -47,10 +67,6 @@ void SYS_Init(void)
 
     /* Select UART clock source from HIRC */
     CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HIRC;
-
-    /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock. */
-    SystemCoreClockUpdate();
 
     /* Set GPB multi-function pins for UART0 RXD and TXD */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))    |       \
@@ -148,7 +164,6 @@ int main()
     PutString("\n\nPress any key to branch to APROM...\n");
     GetChar();                         /* block on waiting for any one character input from UART0 */
 
-    PutString("\n\nChange VECMAP and branch to APROM...\n");
     while (!(UART0->FIFOSTS & UART_FIFOSTS_TXEMPTY_Msk));       /* wait until UART0 TX FIFO is empty */
 
     /*  NOTE!
@@ -157,7 +172,7 @@ int main()
     FMC_SetVectorPageAddr(FMC_APROM_BASE);        /* Vector remap APROM page 0 to address 0. */
     if (g_FMC_i32ErrCode != 0)
     {
-        PutString("FMC_SetVectorPageAddr(FMC_APROM_BASE) failed!\n");
+        PutString("Set Vector Page failed!\n");
         while (1);
     }
     SYS_LockReg();                                /* Lock protected registers */

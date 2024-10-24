@@ -124,7 +124,7 @@ static int  load_image_to_flash(uint32_t image_base, uint32_t image_limit, uint3
 
     u32ImageSize = max_size;           /* Give the maximum size of programmable flash area. */
 
-    printf("Program image to flash address 0x%x...", flash_addr);    /* information message */
+    printf("Program image to flash address 0x%x... Size %d", flash_addr,u32ImageSize);    /* information message */
 
     /*
      * program the whole image to specified flash area
