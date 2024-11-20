@@ -15,7 +15,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * $Date: 20/06/17 2:35p $Revision:    V2.0
+ * $Date:        2. Feb 2017
+ * $Revision:    V2.0
  *
  * Project:      Common Driver definitions
  */

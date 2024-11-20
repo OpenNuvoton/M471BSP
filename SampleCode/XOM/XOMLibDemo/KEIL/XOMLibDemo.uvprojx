@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\..\Library\Device\Nuvoton\M471\Include;..\..\..\..\Library\CMSIS\Include;..\..\..\..\Library\StdDriver\inc;..\..\XOMLib\lib</IncludePath>
+              <IncludePath>..\..\..\..\Library\Device\Nuvoton\M471\Include;..\..\..\..\Library\CMSIS\Core\Include;..\..\..\..\Library\StdDriver\inc;..\..\XOMLib\lib</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

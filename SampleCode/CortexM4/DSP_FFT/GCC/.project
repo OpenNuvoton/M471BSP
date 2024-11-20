@@ -50,11 +50,6 @@
 			<locationURI>PARENT-4-PROJECT_LOC/Library/Device/Nuvoton/M471/Source</locationURI>
 		</link>
 		<link>
-			<name>DSP_Lib/arm_cortexM4lf_math.lib</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Library/CMSIS/Lib/ARM/arm_cortexM4lf_math.lib</locationURI>
-		</link>
-		<link>
 			<name>Library/Include</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -65,6 +60,11 @@
 			<locationURI>PARENT-4-PROJECT_LOC/Library/StdDriver/src</locationURI>
 		</link>
 		<link>
+			<name>User/DSP_Functions.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/DSP_Functions.c</locationURI>
+		</link>
+		<link>
 			<name>User/arm_fft_bin_data.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/arm_fft_bin_data.c</locationURI>
@@ -73,11 +73,6 @@
 			<name>User/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/main.c</locationURI>
-		</link>
-		<link>
-			<name>Library/Include/Include</name>
-			<type>2</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Library/CMSIS/Lib/GCC</locationURI>
 		</link>
 	</linkedResources>
 	<filteredResources>
@@ -124,15 +119,6 @@
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-uart.c</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1505201672589</id>
-			<name>Library/Include/Include</name>
-			<type>5</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-libarm_cortexM4lf_math.a</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>
