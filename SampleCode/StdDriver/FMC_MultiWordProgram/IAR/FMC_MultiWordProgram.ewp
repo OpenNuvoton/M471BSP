@@ -1069,11 +1069,11 @@
                 </option>
                 <option>
                     <name>Input description</name>
-                    <state>Automatic choice of formatter.</state>
+                    <state>Automatic choice of formatter, without multibyte support.</state>
                 </option>
                 <option>
                     <name>Output description</name>
-                    <state>Automatic choice of formatter.</state>
+                    <state>Automatic choice of formatter, without multibyte support.</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -1103,7 +1103,7 @@
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
-                    <state>7.80.3.12143</state>
+                    <state>8.32.1.18618</state>
                 </option>
                 <option>
                     <name>GeneralEnableMisra</name>
@@ -1115,7 +1115,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>M251AE series	Nuvoton M251AE series</state>
+                    <state>M471 series	Nuvoton M471V/K series</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -1149,12 +1149,12 @@
                 </option>
                 <option>
                     <name>RTConfigPath2</name>
-                    <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Full.h</state>
+                    <state>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</state>
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
                     <version>26</version>
-                    <state>58</state>
+                    <state>39</state>
                 </option>
                 <option>
                     <name>OGUseCmsis</name>
@@ -1171,21 +1171,21 @@
                 <option>
                     <name>CoreVariant</name>
                     <version>26</version>
-                    <state>58</state>
+                    <state>39</state>
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>M251AE series	Nuvoton M251AE series</state>
+                    <state>M471 series	Nuvoton M471V/K series</state>
                 </option>
                 <option>
                     <name>FPU2</name>
                     <version>0</version>
-                    <state>0</state>
+                    <state>4</state>
                 </option>
                 <option>
                     <name>NrRegs</name>
                     <version>0</version>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>NEON</name>
@@ -1194,7 +1194,7 @@
                 <option>
                     <name>GFPUCoreSlave2</name>
                     <version>26</version>
-                    <state>58</state>
+                    <state>39</state>
                 </option>
                 <option>
                     <name>OGCMSISPackSelectDevice</name>
@@ -1235,7 +1235,7 @@
                 </option>
                 <option>
                     <name>DSPExtension</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>TrustZone</name>
@@ -1366,7 +1366,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state></state>
+                    <state>$FILE_BNAME$.o</state>
                 </option>
                 <option>
                     <name>CCLibConfigHeader</name>
@@ -1382,7 +1382,9 @@
                 </option>
                 <option>
                     <name>CCIncludePath2</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..\..\..\..\Library\CMSIS\Core\Include</state>
+                    <state>$PROJ_DIR$\..\..\..\..\Library\Device\Nuvoton\M471\Include</state>
+                    <state>$PROJ_DIR$\..\..\..\..\Library\StdDriver\inc</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1407,7 +1409,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>1</state>
+                    <state>3</state>
                 </option>
                 <option>
                     <name>CompilerMisraRules98</name>
@@ -1741,7 +1743,7 @@
                 </option>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>###Unitialized###</state>
+                    <state>FMC_MultiWordProgram.out</state>
                 </option>
                 <option>
                     <name>IlinkDebugInfoEnable</name>
