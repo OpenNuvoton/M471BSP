@@ -355,6 +355,7 @@ Default_Handler:
     .type HardFault_Handler, % function
 
 HardFault_Handler:
+#ifndef __ISP_SAMPLE_
     .extern ProcessHardFault
     MOV     R0, LR
     MRS     R1, MSP
@@ -362,6 +363,7 @@ HardFault_Handler:
     LDR     R3, =ProcessHardFault
     BLX     R3
     BX      R0
+#endif    
     b    .
 
     .size   HardFault_Handler, . - HardFault_Handler
