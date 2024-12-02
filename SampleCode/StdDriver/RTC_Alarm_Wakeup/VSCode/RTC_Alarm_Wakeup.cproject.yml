@@ -65,7 +65,7 @@ project:
     - -fsigned-char
     - -g
     - --specs=nano.specs
-    - -Wl,--gc-sections,-Map=$elf()$.map
+    - -Wl,--gc-sections,-Map="$elf()$.map"
   setups:
   - output:
       type:
