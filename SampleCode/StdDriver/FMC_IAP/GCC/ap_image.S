@@ -20,7 +20,7 @@ loaderImage1Base:
 #ifndef _ARM_VSCODE_
     .incbin  "../../LDROM_iap/LDROM_iap.bin"
 #else
-    .incbin  "./LDROM_iap.bin"
+    .incbin  "../../out/fmc_ld_iap/GNUC/release/fmc_ld_iap.bin"      
 #endif    
 loaderImage1Limit:
     .space   4

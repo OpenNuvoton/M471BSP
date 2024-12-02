@@ -86,7 +86,6 @@ project:
   - ../../../../../Library/CMSIS/Core/Include
   - ../../../../../Library/StdDriver/inc
   - ../../common/inc
-  - ../../Dual_Bank_FW
   groups:
   - group: CMSIS
     files:
