@@ -25,6 +25,7 @@ project:
     - -D__MICROLIB
     ASM:
     - -D__MICROLIB
+    - -D_ARM_VSCODE_
     - -masm=auto
     Link:
     - --library_type=microlib
@@ -57,6 +58,8 @@ project:
     - -Wno-main
     - -gdwarf-4
     ASM:
+    - -D_ARM_VSCODE_
+    - -D_VSCODE_GCC_
     - -mthumb
     - -fmessage-length=0
     - -fsigned-char
@@ -104,5 +107,4 @@ project:
     files:
     - file: ../APROM_main.c
     - file: ../GCC/ap_image.S
-      define:
-        - _ARM_VSCODE_
+
