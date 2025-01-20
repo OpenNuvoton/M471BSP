@@ -1,7 +1,7 @@
 {
     "cmsis-csolution.actions": [
         {
-            "path": "Template.csolution.yml",
+            "path": "ACMP_WindowLatch.csolution.yml",
             "target": "ARMCLANG",
             "config": {
                 "run": "Flash Device",
@@ -9,7 +9,7 @@
             }
         },
         {
-            "path": "Template.csolution.yml",
+            "path": "ACMP_WindowLatch.csolution.yml",
             "target": "GNUC",
             "config": {
                 "run": "Flash Device",
