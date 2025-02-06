@@ -45,6 +45,7 @@ void SYS_Init(void)
     /* Set GPB multi-function pins for UART0 RXD and TXD */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))    |       \
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+
     /* Lock protected registers */
     SYS_LockReg();
 }
@@ -67,10 +68,10 @@ int32_t main(void)
     printf("|   M471 DFMC CRC32 Sample Demo      |\n");
     printf("+------------------------------------+\n");
 
-    /* Unlock protected registers to operate DFMC ISP function */
+    /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable DFMC ISP function */
+    /* Enable DFMC ISP function. Before using DFMC function, it should unlock system register first. */
     DFMC_Open();
 
     /* DFMC_ReadCID */
@@ -79,7 +80,7 @@ int32_t main(void)
     {
         printf("DFMC_ReadCID failed!\n");
         goto lexit;
-    }		
+    }
     printf("  Company ID ............................ [0x%08x]\n", u32Data);
 
     /* DFMC_ReadPID */
@@ -88,7 +89,7 @@ int32_t main(void)
     {
         printf("DFMC_ReadPID failed!\n");
         goto lexit;
-    }		
+    }
     printf("  Product ID ............................ [0x%08x]\n", u32Data);
 
     /* Erase the first page of Dataflash */

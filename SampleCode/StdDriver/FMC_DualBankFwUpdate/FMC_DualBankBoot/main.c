@@ -350,10 +350,12 @@ int32_t main(void)
     printf("|     M471 FMC Dual Bank Sample Demo       |\n");
     printf("+------------------------------------------+\n");
 
-    /* Unlock protected registers to operate FMC ISP function */
+    /* Unlock protected registers */
     SYS_UnlockReg();
 
-    FMC_Open();                        /* Enable FMC ISP function                        */
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
+    FMC_Open();
+
     FMC_ENABLE_AP_UPDATE();            /* Enable FMC erase/program APROM                 */
     FMC->ISPCTL |= FMC_ISPCTL_ISPEN_Msk;
 

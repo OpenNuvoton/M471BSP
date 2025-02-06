@@ -65,7 +65,7 @@ void run_crc32_checksum()
     uint32_t    chksum;
 
     chksum = FMC_GetChkSum(FMC_APROM_BASE, APROM_TEST_END - FMC_APROM_BASE);
-	
+
     if (chksum == 0xFFFFFFFF)
     {
         printf("Failed on calculating APROM CRC32 checksum!\n");
@@ -74,7 +74,7 @@ void run_crc32_checksum()
     printf("  APROM CRC32 checksum .................. [0x%08x]\n", chksum);
 
     chksum = FMC_GetChkSum(FMC_LDROM_BASE, LDROM_TEST_SIZE);
-		
+
     if (chksum == 0xFFFFFFFF)
     {
         printf("Failed on calculating LDROM CRC32 checksum!\n");
@@ -189,10 +189,10 @@ int main()
     printf("|           M471 FMC Sample Code         |\n");
     printf("+----------------------------------------+\n");
 
-    /* Unlock protected registers to operate FMC ISP function */
+    /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable FMC ISP function */
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC_Open();
 
     /* Read BS */

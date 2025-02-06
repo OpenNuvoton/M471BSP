@@ -74,7 +74,7 @@ int32_t fill_data_pattern(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u
         {
             printf("DFMC_Write address 0x%x failed!\n", u32Addr);
             return -1;
-        }			
+        }
     }
     return 0;
 }
@@ -87,7 +87,7 @@ int32_t  verify_data(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u32Pat
     for (u32Addr = u32StartAddr; u32Addr < u32EndAddr; u32Addr += 4)
     {
         u32data = DFMC_Read(u32Addr);
-			
+
         if (g_DFMC_i32ErrCode != 0)
         {
             printf("DFMC_Read address 0x%x failed!\n", u32Addr);
@@ -171,10 +171,10 @@ int main()
     printf("|           M471 DFMC Sample Code        |\n");
     printf("+----------------------------------------+\n");
 
-    /* Unlock protected registers to operate DFMC ISP function */
+    /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable DFMC ISP function */
+    /* Enable DFMC ISP function. Before using DFMC function, it should unlock system register first. */
     DFMC_Open();
 
     u32Data = DFMC_ReadCID();
@@ -190,7 +190,7 @@ int main()
     {
         printf("DFMC_ReadPID failed!\n");
         goto lexit;
-    }		
+    }
     printf("  Product ID ............................ [0x%08x]\n", u32Data);
 
     run_crc32_checksum();

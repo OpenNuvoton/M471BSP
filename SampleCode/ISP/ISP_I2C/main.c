@@ -19,6 +19,7 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Unlock protected registers */
     SYS_UnlockReg();
+
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
@@ -58,15 +59,25 @@ void SYS_Init(void)
     PB->MODE = (PB->MODE & ~(GPIO_MODE_MODE0_Msk << (6 << 1))) | (GPIO_MODE_OUTPUT << (6 << 1));
     ReadyPin = 1;
 #endif
+
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 
 int main(void)
 {
     uint32_t cmd_buff[16];
+
     SYS_Init();
 
     CLK->AHBCLK |= CLK_AHBCLK_ISPCKEN_Msk;
+
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC->ISPCTL |= (FMC_ISPCTL_ISPEN_Msk | FMC_ISPCTL_APUEN_Msk);
+
     g_apromSize = GetApromSize();
     GetDataFlashInfo(&g_dataFlashAddr, &g_dataFlashSize);
     I2C_Init();

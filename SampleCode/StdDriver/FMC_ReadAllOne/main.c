@@ -64,10 +64,10 @@ int32_t main(void)
     printf("|        FMC_ReadAllOne Sample Code        |\n");
     printf("+------------------------------------------+\n");
 
-    /* Unlock protected registers to operate FMC ISP function */
+    /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable FMC ISP function */
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC_Open();
 
     /* Read company ID. Should be 0xDA. */

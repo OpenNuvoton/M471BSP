@@ -48,6 +48,8 @@ void SYS_Init(void)
     /* Set GPB multi-function pins for UART0 RXD and TXD */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))    |       \
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 
 int32_t main(void)
@@ -72,7 +74,11 @@ int32_t main(void)
     printf("FMC_Erase: 0x%X, FMC_WriteMultiple: 0x%X, FMC_Read: 0x%X\n\n",
            (uint32_t)FMC_Erase, (uint32_t)FMC_WriteMultiple, (uint32_t)FMC_Read);
 
-    FMC_Open();                        /* Enable FMC ISP function */
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
+    FMC_Open();
 
     FMC_ENABLE_AP_UPDATE();            /* Enable APROM erase/program */
 

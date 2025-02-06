@@ -69,9 +69,11 @@ int32_t main(void)
     printf("|   M471 FMC CRC32 Sample Demo       |\n");
     printf("+------------------------------------+\n");
 
-    SYS_UnlockReg();                   /* Unlock protected registers */
+    /* Unlock protected registers */
+    SYS_UnlockReg();
 
-    FMC_Open();                        /* Enable FMC ISP function */
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
+    FMC_Open();
 
     u32Data = FMC_ReadCID();           /* Read company ID. Should be 0xDA. */
     if (g_FMC_i32ErrCode != 0)

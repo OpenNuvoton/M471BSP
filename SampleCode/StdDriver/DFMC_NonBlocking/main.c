@@ -275,11 +275,12 @@ int main()
     printf("|    M471 DFMC Non-Blocking Sample Code  |\n");
     printf("+----------------------------------------+\n");
 
-    /* Unlock protected registers to operate DFMC ISP function */
+    /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable DFMC ISP function */
+    /* Enable DFMC ISP function. Before using DFMC function, it should unlock system register first. */
     DFMC_Open();
+
     u32Data = DFMC_ReadCID();
     printf("  Company ID ............................ [0x%08x]\n", u32Data);
 

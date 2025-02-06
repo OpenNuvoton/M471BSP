@@ -64,10 +64,10 @@ int32_t main(void)
     printf("|        DFMC_ReadAllOne Sample Code       |\n");
     printf("+------------------------------------------+\n");
 
-    /* Unlock protected registers to operate DFMC ISP function */
+    /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable DFMC ISP function */
+    /* Enable DFMC ISP function. Before using DFMC function, it should unlock system register first. */
     DFMC_Open();
 
     /* Read company ID. Should be 0xDA. */
@@ -97,7 +97,7 @@ int32_t main(void)
         printf("DFMC_Erase(DFMC_DFLASH_BASE) failed!\n");
         goto lexit;
     }
-		
+
     /* Run and check flash contents are all 0xFFFFFFFF. */
     u32ret = DFMC_CheckAllOne(DFMC_DFLASH_BASE, DFMC_DFLASH_SIZE);
     if (g_DFMC_i32ErrCode != 0)
