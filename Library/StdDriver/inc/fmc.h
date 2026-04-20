@@ -46,7 +46,7 @@ extern "C"
 
 #define FMC_FLASH_PAGE_SIZE     (0x800)         /*!< Flash Page Size (2048 bytes)          \hideinitializer */
 #define FMC_PAGE_ADDR_MASK      (0xFFFFF800UL)  /*!< Flash page address mask               \hideinitializer */
-#define FMC_MULTI_WORD_PROG_LEN 512             /*!< The maximum length of a multi-word program \hideinitializer */
+#define FMC_MULTI_WORD_PROG_LEN 256             /*!< The maximum length of a multi-word program \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  XOM region number constant definitions                                                                 */
