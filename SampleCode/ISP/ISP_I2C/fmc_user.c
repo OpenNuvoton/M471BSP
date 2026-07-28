@@ -12,38 +12,51 @@
 int FMC_Proc(uint32_t u32Cmd, uint32_t addr_start, uint32_t addr_end, uint32_t *data)
 {
     unsigned int u32Addr, Reg;
+    FMC_T *pFMC;
+
+    if((addr_start & DFMC_DFLASH_BASE) != 0)
+    {
+        pFMC = (FMC_T *)DFMC;
+    }
+    else
+    {
+        pFMC = FMC;
+    }
 
     for (u32Addr = addr_start; u32Addr < addr_end; data++)
     {
-        FMC->ISPCMD = u32Cmd;
-        FMC->ISPADDR = u32Addr;
+        pFMC->ISPCMD = u32Cmd;
+        pFMC->ISPADDR = u32Addr;
 
         if (u32Cmd == FMC_ISPCMD_PROGRAM)
         {
-            FMC->ISPDAT = *data;
+            pFMC->ISPDAT = *data;
         }
 
-        FMC->ISPTRG = 0x1;
+        pFMC->ISPTRG = 0x1;
         __ISB();
 
-        while (FMC->ISPTRG & 0x1) ;  /* Wait for ISP command done. */
+        while (pFMC->ISPTRG & 0x1) ;  /* Wait for ISP command done. */
 
-        Reg = FMC->ISPCTL;
+        Reg = pFMC->ISPCTL;
 
         if (Reg & FMC_ISPCTL_ISPFF_Msk)
         {
-            FMC->ISPCTL = Reg;
-            return -1;
+            pFMC->ISPCTL = Reg;
+            return (-1);
         }
 
         if (u32Cmd == FMC_ISPCMD_READ)
         {
-            *data = FMC->ISPDAT;
+            *data = pFMC->ISPDAT;
         }
 
         if (u32Cmd == FMC_ISPCMD_PAGE_ERASE)
         {
-            u32Addr += FMC_FLASH_PAGE_SIZE;
+            if(pFMC == FMC)
+                u32Addr += FMC_FLASH_PAGE_SIZE;
+            else
+                u32Addr += DFMC_DFLASH_PAGE_SIZE;
         }
         else
         {
@@ -51,7 +64,7 @@ int FMC_Proc(uint32_t u32Cmd, uint32_t addr_start, uint32_t addr_end, uint32_t *
         }
     }
 
-    return 0;
+    return (0);
 }
 
 void UpdateConfig(uint32_t *data, uint32_t *res)

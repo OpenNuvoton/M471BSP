@@ -71,6 +71,7 @@ int32_t main(void)
 
     /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC->ISPCTL |= (FMC_ISPCTL_ISPEN_Msk | FMC_ISPCTL_APUEN_Msk);
+    DFMC->ISPCTL |= (DFMC_ISPCTL_ISPEN_Msk | DFMC_ISPCTL_DATAEN_Msk);	
 
     g_apromSize = GetApromSize();
     GetDataFlashInfo(&g_dataFlashAddr, &g_dataFlashSize);
