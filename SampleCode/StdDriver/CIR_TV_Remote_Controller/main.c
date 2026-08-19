@@ -10,6 +10,34 @@
 
 #include "NuMicro.h"
 #include "Queue.h"
+
+/* CIR timing configuration for the Panasonic-compatible remote controller. */
+#define CIR_TIMING_UNIT_US          (26U)
+#define CIR_BOUNDARY_TOLERANCE      (15U)
+#define CIR_REPEAT_CODE             (0xFFFFFFFFUL)
+#define CIR_EXPECTED_BIT_COUNT      (32U)
+#define CIR_DATA_CMP_VALUE          (0x40U)
+#define CIR_DATA_CMP_BIT_COUNT      (7U)
+
+#define CIR_HEADER_HIGH_US          (9100U)
+#define CIR_HEADER_LOW_US           (4450U)
+#define CIR_DATA0_HIGH_US           (576U)
+#define CIR_DATA0_LOW_US            (557U)
+#define CIR_DATA1_HIGH_US           (576U)
+#define CIR_DATA1_LOW_US            (1690U)
+#define CIR_SPECIAL_HIGH_US         (9065U)
+#define CIR_SPECIAL_LOW_US          (2282U)
+#define CIR_STOP_HIGH_US            (542U)
+#define CIR_STOP_LOW_US             (17000U)
+
+#define CIR_TO_TICKS(high_us, low_us) \
+    (((high_us) + (low_us)) / CIR_TIMING_UNIT_US)
+#define CIR_UPPER_BOUND(high_us, low_us) \
+    (CIR_TO_TICKS((high_us), (low_us)) + CIR_BOUNDARY_TOLERANCE)
+#define CIR_LOWER_BOUND(high_us, low_us) \
+    (CIR_TO_TICKS((high_us), (low_us)) - CIR_BOUNDARY_TOLERANCE)
+
+/* Queue shared by the CIR interrupt handler and the foreground parser. */
 uint32_t Queue[MAX_QUEUE];
 
 /**
@@ -35,7 +63,7 @@ void CIR_IRQHandler(void)
          */
         CIR_GetPatternBoundary(CIR0, CIR_SPECIAL_PAT, &u32Hb, &u32Lb);
         if((CIR_GetLatchedTimerValue(CIR0)< u32Hb)   &&   (CIR_GetLatchedTimerValue(CIR0) > u32Lb))
-            Push(Queue, 0xFFFFFFFF);                                /* proprietary define repeat code to 0xFFFFFFFF */
+            Push(Queue, CIR_REPEAT_CODE);                           /* Represent a repeat frame with a dedicated software code. */
         CIR_ClearIntFlag(CIR0, CIR_STATUS_RERRF_Msk);
     }
     else if(status & CIR_STATUS_EPMF_Msk)
@@ -112,7 +140,7 @@ void UART0_Init(void)
  *    Use AI-26C generic remote controller by setting TV system to Panasonic:
  *    Pressed "Setup" up to 3 seconds, then pressed "0", "0", "1" to assign the remote controller to operate on Panasonic mode
  *
- *    CIR Clock Source From LIRC. T = 30.5us
+ *    CIR Clock Source From __LIRC. T = 26.04us
  *
  *    unit: us
  *    Header    9100+4450
@@ -125,14 +153,27 @@ void CIR_Init(void)
 {
     CIR_SetClockPrescaler(CIR0, CIR_PRESCALER_1);
 
-    CIR_SetPatternBoundary(CIR0, CIR_HEADER_PAT, ((9100+4450)/26)+15, ((9100+4450)/26)-15);
-    CIR_SetPatternBoundary(CIR0, CIR_DATA1_PAT, ((576+1690)/26)+15, ((576+1690)/26)-15);
-    CIR_SetPatternBoundary(CIR0, CIR_DATA0_PAT, ((576+557)/26)+15, ((576+557)/26)-15);
-    CIR_SetPatternBoundary(CIR0, CIR_SPECIAL_PAT, ((9065+2282)/26)+15, ((9065+2282)/26)-15);
-    CIR_SetPatternBoundary(CIR0, CIR_END_PAT, 0, (542+17000)/26);
+    /* Convert protocol pulse widths from microseconds to CIR timer ticks.
+     * A tolerance is applied to normal patterns to accommodate clock and
+     * receiver timing variation. */
+    CIR_SetPatternBoundary(CIR0, CIR_HEADER_PAT,
+                           CIR_UPPER_BOUND(CIR_HEADER_HIGH_US, CIR_HEADER_LOW_US),
+                           CIR_LOWER_BOUND(CIR_HEADER_HIGH_US, CIR_HEADER_LOW_US));
+    CIR_SetPatternBoundary(CIR0, CIR_DATA1_PAT,
+                           CIR_UPPER_BOUND(CIR_DATA1_HIGH_US, CIR_DATA1_LOW_US),
+                           CIR_LOWER_BOUND(CIR_DATA1_HIGH_US, CIR_DATA1_LOW_US));
+    CIR_SetPatternBoundary(CIR0, CIR_DATA0_PAT,
+                           CIR_UPPER_BOUND(CIR_DATA0_HIGH_US, CIR_DATA0_LOW_US),
+                           CIR_LOWER_BOUND(CIR_DATA0_HIGH_US, CIR_DATA0_LOW_US));
+    CIR_SetPatternBoundary(CIR0, CIR_SPECIAL_PAT,
+                           CIR_UPPER_BOUND(CIR_SPECIAL_HIGH_US, CIR_SPECIAL_LOW_US),
+                           CIR_LOWER_BOUND(CIR_SPECIAL_HIGH_US, CIR_SPECIAL_LOW_US));
+    CIR_SetPatternBoundary(CIR0, CIR_END_PAT, 0U,
+                           CIR_TO_TICKS(CIR_STOP_HIGH_US, CIR_STOP_LOW_US));
 
-    CIR_EnableDataCmpWakeup(CIR0, 0x40, 7);                          /* Enable data compare if received data is 0x38 (8 bits) */
-    CIR_EnableRecvBitCountMatch(CIR0, 32);                           /* Enable bit count compare if bit count compare match with 32 bit */
+    /* Configure the optional data comparator and require a complete 32-bit frame. */
+    CIR_EnableDataCmpWakeup(CIR0, CIR_DATA_CMP_VALUE, CIR_DATA_CMP_BIT_COUNT);
+    CIR_EnableRecvBitCountMatch(CIR0, CIR_EXPECTED_BIT_COUNT);
 
     CIR_EnableInt(CIR0, CIR_INTCTL_PERRIEN_Msk|CIR_INTCTL_EPMIEN_Msk);
 
@@ -178,6 +219,13 @@ const IR_INFO Array[] =
 };
 
 
+/**
+ * @brief Decode received CIR frames and print the corresponding key name.
+ *
+ * The interrupt handler stores received frames in Queue[]. This routine runs
+ * in the foreground, removes entries from the queue, and searches Array[] for
+ * a matching remote-control command. A repeat frame is handled separately.
+ */
 void CIR_Parsing(void)
 {
     uint32_t u32IrCode;
@@ -187,9 +235,9 @@ void CIR_Parsing(void)
         if(isEmpty() != 1)
         {
             u32IrCode = Pop(Queue);
-            if(u32IrCode != 0xFFFFFFFF)
+            if(u32IrCode != CIR_REPEAT_CODE)
             {
-                for(i=0; i<sizeof(Array)/ sizeof(Array[0]); i=i+1)
+                for(i=0; i<(sizeof(Array) / sizeof(Array[0])); i=i+1)
                 {
                     if(u32IrCode == Array[i].IrCode0)
                         printf("%s Pressed\n", Array[i].KeyString);

@@ -12,8 +12,10 @@
 #include "queue.h"
 
 
+/* Ring-buffer indices shared between interrupt and foreground contexts. */
 volatile uint32_t front = 0, rear = 0;
 
+/** @brief Check whether the CIR event queue is full. */
 int32_t isFull(void)
 {
     int32_t i32Ret;
@@ -30,6 +32,7 @@ int32_t isFull(void)
     return i32Ret;
 }
 
+/** @brief Check whether the CIR event queue contains no pending events. */
 int32_t isEmpty(void)
 {
     int32_t i32Ret = 0;
@@ -43,6 +46,7 @@ int32_t isEmpty(void)
     return i32Ret;
 }
 
+/** @brief Append one CIR event to the ring buffer. */
 void Push(uint32_t* queue, uint32_t item)
 {
     if (isFull())
@@ -54,12 +58,13 @@ void Push(uint32_t* queue, uint32_t item)
     __set_PRIMASK(1u);
 
     queue[rear] = item;
-    if(rear++ >= MAX_QUEUE)
+    if(++rear >= MAX_QUEUE)
         rear = 0;
 
     __set_PRIMASK(0u);
 }
 
+/** @brief Remove and return the oldest CIR event from the ring buffer. */
 uint32_t Pop(uint32_t* queue)
 {
     uint32_t u32Data;
@@ -72,7 +77,7 @@ uint32_t Pop(uint32_t* queue)
     __set_PRIMASK(1u);
 
     u32Data = queue[front];
-    if(front++ >= MAX_QUEUE)
+    if(++front >= MAX_QUEUE)
         front = 0;
 
     __set_PRIMASK(0u);

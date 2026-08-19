@@ -13,9 +13,10 @@
 extern "C" {
 #endif
 
-
+/* Maximum number of entries reserved for CIR events in the software queue. */
 #define MAX_QUEUE 20
 
+/* Queue status and data access APIs used by the CIR interrupt handler and parser. */
 int32_t isFull(void);
 int32_t isEmpty(void);
 void Push(uint32_t* queue, uint32_t item);
@@ -26,4 +27,3 @@ uint32_t Pop(uint32_t* queue);
 #endif
 
 #endif  /* QUEUE_H */
-

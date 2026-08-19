@@ -25,6 +25,87 @@
   @{
 */
 
+/**
+  * @brief      Disable Error Bypass
+  *
+  * @param[in]  cir         The pointer of the specified CIR module. 
+  *
+  * @return     None
+  *
+  * @details    This receiving bits will be dropped as error occurrence.
+  *
+  * \hideinitializer
+  */
+void CIR_DisableErrorBypass(CIR_T *cir)  
+{	
+    cir->CTL &= ~CIR_CTL_ERRBYP_Msk;    
+}
+
+
+/**
+  * @brief      Enable Error Bypass
+  *
+  * @param[in]  cir         The pointer of the specified CIR module. 
+  *
+  * @return     None
+  *
+  * @details    This receiving bits will keep into DATAx buffer as error occurrence.
+  *
+  * \hideinitializer
+  */
+void CIR_EnableErrorBypass(CIR_T *cir)  
+{	
+    cir->CTL |= CIR_CTL_ERRBYP_Msk;    
+}
+
+
+/**
+  * @brief      Get the enabled interrupt mask
+  *
+  * @param[in]  cir         The pointer of the specified CIR module. 
+  *
+  * @return     The enabled interrupt mask
+  *
+  * \hideinitializer
+  */
+uint32_t CIR_GetEnabledIntMask(const CIR_T *cir)  
+{	
+    return (cir->INTCTL);    
+}
+
+
+/**
+  * @brief      Get current latched timer value
+  *
+  * @param[in]  cir         The pointer of the specified CIR module. 
+  *
+  * @return     The latched counter value between two consecutive rising edges or two consecutive falling edges
+  *
+  * \hideinitializer
+  */
+uint32_t CIR_GetLatchedTimerValue(const CIR_T *cir)  
+{
+    return (cir->LTVR & CIR_LTVR_LTV_Msk);
+}
+
+
+/**
+  * @brief      Get data in CIR buffer
+  *
+  * @param[in]  cir         The pointer of the specified CIR module. 
+  *
+  * @return     None
+  *
+  * \hideinitializer
+  */
+void CIR_GetData(const CIR_T *cir, uint32_t *u32Data0, uint32_t *u32Data1)  
+{	
+    *u32Data0 = cir->DATA0;
+    *u32Data1 = cir->DATA1;
+}
+
+
+
 
 /**
   *   @brief Disable CIR function.
@@ -53,11 +134,11 @@ void CIR_Open(CIR_T *cir)
 
 
 /* CIR CLK Source */
-#define CIR_SRC_HXT                     (0)
-#define CIR_SRC_LXT                     (1)
-#define CIR_SRC_TM0                     (2)
-#define CIR_SRC_LIRC                    (3)
-#define CIR_SRC_HIRC                    (4)
+#define CIR_SRC_HXT                     (0UL)
+#define CIR_SRC_LXT                     (1UL)
+#define CIR_SRC_TM0                     (2UL)
+#define CIR_SRC_LIRC                    (3UL)
+#define CIR_SRC_HIRC                    (4UL)
 /**
   * @brief Set CIR prescaler
   *
@@ -79,44 +160,82 @@ void CIR_Open(CIR_T *cir)
   */
 int32_t CIR_SetClockPrescaler(CIR_T *cir, uint32_t u32Prescaler)
 {
-    uint32_t u32SampleClk, u32Src;
-    uint32_t u32Clk, u32TmrPsc, u32TmrCmp;
+    uint32_t u32SampleClk;
+    uint32_t u32Src;
+    uint32_t u32PrescalerValue;
+    uint32_t u32Divider;
 
     const uint32_t au32Clk[] = {__HXT, __LXT, 0UL, 0UL, 0UL, __LIRC, 0UL, __HIRC};
 
     cir->CTL = (cir->CTL & ~CIR_CTL_PSCALER_Msk) | u32Prescaler;
 
-    u32Src = (CLK->CLKSEL2 & ~CLK_CLKSEL2_CIR0SEL_Msk) >> CLK_CLKSEL2_CIR0SEL_Pos;
-    u32Prescaler = u32Prescaler >> CIR_CTL_PSCALER_Pos;
+    u32Src = (CLK->CLKSEL2 & CLK_CLKSEL2_CIR0SEL_Msk) >> CLK_CLKSEL2_CIR0SEL_Pos;
+    u32PrescalerValue = u32Prescaler >> CIR_CTL_PSCALER_Pos;
+    u32Divider = 1UL << u32PrescalerValue;
+
     switch(u32Src)
     {
-    case CIR_SRC_HIRC:
-        u32SampleClk = __HIRC/(uint32_t)pow((float)2.0, (float)u32Prescaler);
-        break;
-    case CIR_SRC_LIRC:
-        u32SampleClk = __LIRC/(uint32_t)pow((float)2.0, (float)u32Prescaler);
-        break;
-    case CIR_SRC_TM0:
-        u32Src = (CLK->CLKSEL1 & CLK_CLKSEL1_TMR0SEL_Msk) >> CLK_CLKSEL1_TMR0SEL_Pos;
-        if(u32Src == 2UL)
-            u32Clk = CLK_GetPCLK0Freq();
-        else
-            u32Clk = au32Clk[u32Src];
-        u32TmrPsc = TIMER0->CTL & TIMER_CTL_PSC_Msk;
-        u32TmrCmp = TIMER0->CMP & TIMER_CMP_CMPDAT_Msk;
-        u32SampleClk = u32Clk / (u32TmrCmp * (u32TmrPsc + 1UL));
-        u32SampleClk = u32SampleClk/(uint32_t)pow((float)2.0, (float)u32Prescaler);
-        break;
-    case CIR_SRC_LXT:
-        u32SampleClk = __LXT/(uint32_t)pow((float)2.0, (float)u32Prescaler);
-        break;
-    case CIR_SRC_HXT:
-        u32SampleClk = __HXT/(uint32_t)pow((float)2.0, (float)u32Prescaler);
-        break;
-    default:
-        return -1;
+        case CIR_SRC_HIRC:
+        {
+            u32SampleClk = __HIRC / u32Divider;
+            break;
+        }
+
+        case CIR_SRC_LIRC:
+        {
+            u32SampleClk = __LIRC / u32Divider;
+            break;
+        }
+
+        case CIR_SRC_TM0:
+        {
+            uint32_t u32Clk;
+            uint32_t u32TmrPsc;
+            uint32_t u32TmrCmp;
+
+            u32Src = (CLK->CLKSEL1 & CLK_CLKSEL1_TMR0SEL_Msk) >> CLK_CLKSEL1_TMR0SEL_Pos;
+
+            if(u32Src == 2UL)
+            {
+                u32Clk = CLK_GetPCLK0Freq();
+            }
+            else
+            {
+                u32Clk = au32Clk[u32Src];
+            }
+
+            u32TmrPsc = TIMER0->CTL & TIMER_CTL_PSC_Msk;
+            u32TmrCmp = TIMER0->CMP & TIMER_CMP_CMPDAT_Msk;
+
+            if(u32TmrCmp == 0UL)
+            {
+                return -1;
+            }
+
+            u32SampleClk = u32Clk / (u32TmrCmp * (u32TmrPsc + 1UL));
+            u32SampleClk /= u32Divider;
+            break;
+        }
+
+        case CIR_SRC_LXT:
+        {
+            u32SampleClk = __LXT / u32Divider;
+            break;
+        }
+
+        case CIR_SRC_HXT:
+        {
+            u32SampleClk = __HXT / u32Divider;
+            break;
+        }
+
+        default:
+        {
+            return -1;
+        }
     }
-    return u32SampleClk;
+
+    return (int32_t)u32SampleClk;
 }
 
 /**
@@ -227,7 +346,7 @@ void CIR_EnableInt(CIR_T *cir, uint32_t u32Mask)
   *
   * @details    Clear CIR interrupt flag when interrupt flag is set. These flags are written "1" to clear status
   */
-uint32_t CIR_GetIntFlag(CIR_T *cir)
+uint32_t CIR_GetIntFlag(const CIR_T *cir)
 {
     return cir->STATUS;
 }
@@ -282,17 +401,30 @@ void CIR_ClearIntFlag(CIR_T *cir, uint32_t u32Mask)
 void CIR_SetPatternBoundary(CIR_T *cir, uint32_t u32Pattern, uint32_t u32HBound, uint32_t u32LBound)
 {
     if(u32Pattern == CIR_HEADER_PAT)
+    {
         cir->HDBOUND = (u32HBound << CIR_HDBOUND_HBOUND_Pos) | u32LBound;
+    }
     else if(u32Pattern == CIR_DATA0_PAT)
+    {
         cir->D0BOUND = (u32HBound << CIR_D0BOUND_HBOUND_Pos) | u32LBound;
+    }
     else if(u32Pattern == CIR_DATA1_PAT)
+    {
         cir->D1BOUND = (u32HBound << CIR_D1BOUND_HBOUND_Pos) | u32LBound;
+    }
     else if(u32Pattern == CIR_SPECIAL_PAT)
+    {
         cir->SPBOUND = (u32HBound << CIR_SPBOUND_HBOUND_Pos) | u32LBound;
+    }
     else if(u32Pattern == CIR_END_PAT)
+    {
         cir->ENDBOUND = u32LBound;
+    }
+    else
+    {
+        /* Invalid pattern: no register is updated. */
+    }
 }
-
 
 /**
   * @brief      This function is use to get the CIR upper and lower bounds
@@ -310,24 +442,38 @@ void CIR_SetPatternBoundary(CIR_T *cir, uint32_t u32Pattern, uint32_t u32HBound,
   *
   * @return     None
   */
-void CIR_GetPatternBoundary(CIR_T *cir, uint32_t u32Pattern, uint32_t* pu32HBound, uint32_t* pu32LBound)
+void CIR_GetPatternBoundary(const CIR_T *cir, uint32_t u32Pattern, uint32_t *pu32HBound, uint32_t *pu32LBound)
 {
-    uint32_t u32Bound = 0;
+    uint32_t u32Bound = 0UL;
+
     if(u32Pattern == CIR_HEADER_PAT)
+    {
         u32Bound = cir->HDBOUND;
+    }
     else if(u32Pattern == CIR_DATA0_PAT)
+    {
         u32Bound = cir->D0BOUND;
+    }
     else if(u32Pattern == CIR_DATA1_PAT)
+    {
         u32Bound = cir->D1BOUND;
+    }
     else if(u32Pattern == CIR_SPECIAL_PAT)
+    {
         u32Bound = cir->SPBOUND;
+    }
     else if(u32Pattern == CIR_END_PAT)
+    {
         u32Bound = cir->ENDBOUND;
+    }
+    else
+    {
+        /* Invalid pattern: return zero bounds. */
+    }
 
-    *pu32HBound = u32Bound >> 16;
-    *pu32LBound = u32Bound & 0xFFFF;
+    *pu32HBound = u32Bound >> 16U;
+    *pu32LBound = u32Bound & 0xFFFFUL;
 }
-
 
 /**
   * @brief      It is used to enable the receiving bits count matched function.
@@ -343,7 +489,7 @@ void CIR_GetPatternBoundary(CIR_T *cir, uint32_t u32Pattern, uint32_t* pu32HBoun
 void CIR_EnableRecvBitCountMatch(CIR_T *cir, uint32_t u32RecvBitCount)
 {
     cir->RDBC = (cir->RDBC & ~CIR_RDBC_RBITCMP_Msk)\
-                | (CIR_RDBC_BCCMEN_Msk|(u32RecvBitCount << CIR_RDBC_RBITCMP_Pos));
+                | (CIR_RDBC_BCCMEN_Msk | (u32RecvBitCount << CIR_RDBC_RBITCMP_Pos));
 }
 
 
@@ -372,7 +518,7 @@ void CIR_DisableRecvBitCountMatch(CIR_T *cir)
   */
 void CIR_ClearReceivedBitLength(CIR_T *cir)
 {
-    cir->RDBC = (cir->RDBC & ~CIR_RDBC_RBITCNT_Msk) | 0x1;
+    cir->RDBC = (cir->RDBC & ~CIR_RDBC_RBITCNT_Msk) | 0x1UL;
 }
 
 
@@ -393,7 +539,7 @@ void CIR_ClearReceivedBitLength(CIR_T *cir)
 void CIR_EnableDataCmpWakeup(CIR_T *cir, uint8_t u8ExpectedData, uint8_t u8CmpBitCount)
 {
     cir->CMPCTL = (cir->CMPCTL & ~(CIR_CMPCTL_CMPDAT_Msk | CIR_CMPCTL_CMPVALID_Msk))\
-                  | ((CIR_CMPCTL_DCMPEN_Msk | u8ExpectedData) | (u8CmpBitCount<<CIR_CMPCTL_CMPVALID_Pos));
+                  | ((CIR_CMPCTL_DCMPEN_Msk | (uint32_t)u8ExpectedData) | ((uint32_t)u8CmpBitCount << CIR_CMPCTL_CMPVALID_Pos));
 }
 
 /**
@@ -419,11 +565,11 @@ void CIR_DisableDataCmpWakeup(CIR_T *cir)
   *
   * @details    Bit count will be cleared automatically after disable CNTEN then enable CIREN
   */
-void CIR_ClearDataFieldBitCount(CIR_T* cir)
+void CIR_ClearDataFieldBitCount(CIR_T *cir)
 {
     cir->CTL &= ~CIR_CTL_CNTEN_Msk;   /* !!!! To clear CIREN bit then set CNTEN, also clear receive bit count */
-    cir->DATA0 = 0x1;
-    cir->DATA1 = 0x1;
+    cir->DATA0 = 0x1UL;
+    cir->DATA1 = 0x1UL;
     cir->CTL |= CIR_CTL_CNTEN_Msk;
 }
 /*@}*/ /* end of group CIR_EXPORTED_FUNCTIONS */
