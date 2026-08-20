@@ -9,7 +9,7 @@
 #include <stdio.h>
 
 #include "NuMicro.h"
-#include "Queue.h"
+#include "queue.h"
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* CIR sample configuration                                                                                */

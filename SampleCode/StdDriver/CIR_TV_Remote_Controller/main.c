@@ -9,7 +9,7 @@
 #include <stdio.h>
 
 #include "NuMicro.h"
-#include "Queue.h"
+#include "queue.h"
 
 /* CIR timing configuration for the Panasonic-compatible remote controller. */
 #define CIR_TIMING_UNIT_US          (26U)
