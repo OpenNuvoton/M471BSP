@@ -59,9 +59,9 @@ int32_t DFMC_Erase(uint32_t u32PageAddr)
 
     tout = DFMC_TIMEOUT_ERASE;    
 	
-    while ((--tout > 0) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
+    while ((--tout > 0UL) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
     
-    if (tout == 0)
+    if (tout == 0UL)
     {
         g_DFMC_i32ErrCode = -1;
         return -1;
@@ -113,8 +113,8 @@ int32_t DFMC_Mass_Erase(void)
 
     tout = DFMC_TIMEOUT_MERASE;    
 	
-    while ((--tout > 0) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
-    if (tout == 0)
+    while ((--tout > 0UL) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
+    if (tout == 0UL)
     {
         g_DFMC_i32ErrCode = -1;
         return -1;
@@ -171,11 +171,11 @@ uint32_t DFMC_Read(uint32_t u32Addr)
 	
     tout = DFMC_TIMEOUT_READ;    
 	
-    while ((--tout > 0) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
-    if (tout == 0)
+    while ((--tout > 0UL) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
+    if (tout == 0UL)
     {
         g_DFMC_i32ErrCode = -1;
-        return 0xFFFFFFFF;
+        return 0xFFFFFFFFUL;
     }
     return DFMC->ISPDAT;
 }
@@ -203,9 +203,9 @@ int32_t DFMC_Write(uint32_t u32Addr, uint32_t u32Data)
 	
     tout = DFMC_TIMEOUT_WRITE;    
 	
-    while ((--tout > 0) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
+    while ((--tout > 0UL) && (DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk)) { }
 		
-    if (tout == 0)
+    if (tout == 0UL)
     {
         g_DFMC_i32ErrCode = -1;
         return -1;
@@ -253,7 +253,7 @@ int32_t  DFMC_GetChkSum(uint32_t u32addr, uint32_t u32count)
     if ((u32addr % 256UL) || (u32count % 256UL))
     {
         g_DFMC_i32ErrCode = -2;
-        return 0xFFFFFFFF;
+        return 0xFFFFFFFFUL;
     }
     DFMC->ISPCMD  = DFMC_ISPCMD_RUN_CKS;
     DFMC->ISPADDR = u32addr;
@@ -262,19 +262,19 @@ int32_t  DFMC_GetChkSum(uint32_t u32addr, uint32_t u32count)
 
     tout = DFMC_TIMEOUT_CHKSUM;
 		
-    while ((--tout > 0) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
+    while ((--tout > 0UL) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
 		
-    if (tout == 0)
+    if (tout == 0UL)
     {
         g_DFMC_i32ErrCode = -1;
-        return 0xFFFFFFFF;
+        return 0xFFFFFFFFUL;
     }
 
     if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
     {
         DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
         g_DFMC_i32ErrCode = -2;
-        return 0xFFFFFFFF;
+        return 0xFFFFFFFFUL;
     }
 
     DFMC->ISPCMD = DFMC_ISPCMD_READ_CKS;
@@ -283,18 +283,18 @@ int32_t  DFMC_GetChkSum(uint32_t u32addr, uint32_t u32count)
 
     tout = FMC_TIMEOUT_CHKSUM;
 		
-    while ((--tout > 0) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
+    while ((--tout > 0UL) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
 		
-    if (tout == 0)
+    if (tout == 0UL)
     {
         g_DFMC_i32ErrCode = -1;
-        return 0xFFFFFFFF;
+        return 0xFFFFFFFFUL;
     }
     if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
     {
         DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
         g_DFMC_i32ErrCode = -2;
-        return 0xFFFFFFFF;
+        return 0xFFFFFFFFUL;
     }
     return DFMC->ISPDAT;
 }
@@ -326,11 +326,12 @@ int32_t  DFMC_CheckAllOne(uint32_t u32addr, uint32_t u32count)
 
     tout = FMC_TIMEOUT_CHKALLONE;
 	
-    while ((--tout > 0) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
+    while ((--tout > 0UL) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
 
-    if (tout == 0)
+    if (tout == 0UL)
+    {
         return -1;
-
+    }
     if (DFMC->ISPCTL & DFMC_ISPCTL_ISPFF_Msk)
     {
         DFMC->ISPCTL |= DFMC_ISPCTL_ISPFF_Msk;
@@ -344,10 +345,12 @@ int32_t  DFMC_CheckAllOne(uint32_t u32addr, uint32_t u32count)
         DFMC->ISPADDR    = u32addr;
         DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;
 			
-        while ((--tout > 0) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
+        while ((--tout > 0UL) && (DFMC->ISPSTS & DFMC_ISPSTS_ISPBUSY_Msk)) { }
 				
-        if (tout == 0)
+        if (tout == 0UL)
+        {
             return -1;
+        }
     }
     while (DFMC->ISPDAT == 0UL);
 

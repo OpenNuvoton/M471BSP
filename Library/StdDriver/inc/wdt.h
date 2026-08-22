@@ -165,13 +165,16 @@ __STATIC_INLINE void WDT_DisableInt(void);
   */
 __STATIC_INLINE int32_t WDT_Close(void)
 {
-    uint32_t u32TimeOutCount = SystemCoreClock / 400;
+    uint32_t u32TimeOutCount = SystemCoreClock / 400UL;
     WDT->CTL = 0UL;
     while(WDT->CTL & WDT_CTL_SYNC_Msk)  /* Wait disable WDTEN bit completed, it needs 2 * WDT_CLK. */
 		{
-        if(u32TimeOutCount == 0) return -1;
+        if(u32TimeOutCount == 0UL)
+        {
+            return -1;
+        }
         u32TimeOutCount--;
-		}
+    }
     return 0;
 }
 
@@ -187,13 +190,16 @@ __STATIC_INLINE int32_t WDT_Close(void)
   */
 __STATIC_INLINE int32_t WDT_EnableInt(void)
 {
-    uint32_t u32TimeOutCount = SystemCoreClock / 400;
+    uint32_t u32TimeOutCount = SystemCoreClock / 400UL;
     WDT->CTL |= WDT_CTL_INTEN_Msk;	
     while(WDT->CTL & WDT_CTL_SYNC_Msk)  /* Wait disable WDTEN bit completed, it needs 2 * WDT_CLK. */
-		{
-        if(u32TimeOutCount == 0) return -1;
+    {
+        if(u32TimeOutCount == 0UL)
+        {
+            return -1;
+        }
         u32TimeOutCount--;
-		}
+    }
     return 0;
 }
 

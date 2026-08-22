@@ -53,12 +53,12 @@ extern "C"
 #define DREAD_ALLONE_NOT         0xA1100000UL    /*!< Check-all-one result is not all one.  \hideinitializer */
 #define DREAD_ALLONE_CMD_FAIL    0xFFFFFFFFUL    /*!< Check-all-one command failed.         \hideinitializer */
 
-#define DFMC_TIMEOUT_READ        ((SystemCoreClock/10)*2) /*!< Read command time-out 100 ms         \hideinitializer */
-#define DFMC_TIMEOUT_WRITE       ((SystemCoreClock/10)*2) /*!< Write command time-out 100 ms        \hideinitializer */
-#define DFMC_TIMEOUT_ERASE       ((SystemCoreClock/10)*4) /*!< Erase command time-out 200 ms        \hideinitializer */
-#define DFMC_TIMEOUT_MERASE      (SystemCoreClock)        /*!< Erase command time-out 1 s        \hideinitializer */
-#define DFMC_TIMEOUT_CHKSUM      (SystemCoreClock*2)      /*!< Get checksum command time-out 2 s    \hideinitializer */
-#define DFMC_TIMEOUT_CHKALLONE   (SystemCoreClock*2)      /*!< Check-all-one command time-out 2 s   \hideinitializer */
+#define DFMC_TIMEOUT_READ        (SystemCoreClock/5UL) /*!< Read command time-out 100 ms         \hideinitializer */
+#define DFMC_TIMEOUT_WRITE       (SystemCoreClock/5UL) /*!< Write command time-out 100 ms        \hideinitializer */
+#define DFMC_TIMEOUT_ERASE       (SystemCoreClock/2UL) /*!< Erase command time-out 200 ms        \hideinitializer */
+#define DFMC_TIMEOUT_MERASE      (SystemCoreClock)     /*!< Erase command time-out 1 s        \hideinitializer */
+#define DFMC_TIMEOUT_CHKSUM      (SystemCoreClock*2UL) /*!< Get checksum command time-out 2 s    \hideinitializer */
+#define DFMC_TIMEOUT_CHKALLONE   (SystemCoreClock*2UL) /*!< Check-all-one command time-out 2 s   \hideinitializer */
 /*@}*/ /* end of group DFMC_EXPORTED_CONSTANTS */
 
 
@@ -112,12 +112,14 @@ __STATIC_INLINE uint32_t DFMC_ReadCID(void)
     g_DFMC_i32ErrCode = 0;
 
     DFMC->ISPCMD = DFMC_ISPCMD_READ_CID;           /* Set ISP Command Code */
-    DFMC->ISPADDR = 0x0u;                          /* Must keep 0x0 when read CID */
+    DFMC->ISPADDR = 0x0U;                          /* Must keep 0x0 when read CID */
     DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;          /* Trigger to start ISP procedure */
-#if ISBEN
+#ifdef ISBEN
+#if (ISBEN != 0)
     __ISB();
-#endif                                             /* To make sure ISP/CPU be Synchronized */
-    while (tout-- > 0)
+#endif
+#endif                                                  /* To make sure ISP/CPU be Synchronized */
+    while (tout-- > 0UL)
     {
         if (!(DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk))  /* Waiting for ISP Done */
         {
@@ -125,7 +127,7 @@ __STATIC_INLINE uint32_t DFMC_ReadCID(void)
         }
     }
     g_DFMC_i32ErrCode = -1;
-    return 0xFFFFFFFF;
+    return 0xFFFFFFFFUL;
 
 }
 
@@ -145,18 +147,20 @@ __STATIC_INLINE uint32_t DFMC_ReadPID(void)
     g_DFMC_i32ErrCode = 0;
 
     DFMC->ISPCMD = DFMC_ISPCMD_READ_DID;          /* Set ISP Command Code */
-    DFMC->ISPADDR = 0x04u;                        /* Must keep 0x4 when read PID */
+    DFMC->ISPADDR = 0x04U;                        /* Must keep 0x4 when read PID */
     DFMC->ISPTRG = DFMC_ISPTRG_ISPGO_Msk;         /* Trigger to start ISP procedure */
-#if ISBEN
+#ifdef ISBEN
+#if (ISBEN != 0)
     __ISB();
-#endif                                          /* To make sure ISP/CPU be Synchronized */
-    while (tout-- > 0)
+#endif
+#endif                                               /* To make sure ISP/CPU be Synchronized */
+    while (tout-- > 0UL)
     {
         if (!(DFMC->ISPTRG & DFMC_ISPTRG_ISPGO_Msk))  /* Waiting for ISP Done */
             return DFMC->ISPDAT;
     }
     g_DFMC_i32ErrCode = -1;
-    return 0xFFFFFFFF;
+    return 0xFFFFFFFFUL;
 }
 
 /*  Functions                                                                                              */
