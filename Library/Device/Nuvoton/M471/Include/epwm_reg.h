@@ -3482,16 +3482,16 @@ typedef struct
 #define EPWM_BRKCTL0_1_SYSLBEN_Msk        (0x1ul << EPWM_BRKCTL0_1_SYSLBEN_Pos)              /*!< EPWM_T::BRKCTL0_1: SYSLBEN Mask         */
 
 #define EPWM_BRKCTL0_1_BRKAEVEN_Pos       (16)                                              /*!< EPWM_T::BRKCTL0_1: BRKAEVEN Position    */
-#define EPWM_BRKCTL0_1_BRKAEVEN_Msk       (0x3ul << EPWM_BRKCTL0_1_BRKAEVEN_Pos)             /*!< EPWM_T::BRKCTL0_1: BRKAEVEN Mask        */
+#define EPWM_BRKCTL0_1_BRKAEVEN_Msk       ((uint32_t)0x3ul << EPWM_BRKCTL0_1_BRKAEVEN_Pos)  /*!< EPWM_T::BRKCTL0_1: BRKAEVEN Mask        */
 
 #define EPWM_BRKCTL0_1_BRKAODD_Pos        (18)                                              /*!< EPWM_T::BRKCTL0_1: BRKAODD Position     */
-#define EPWM_BRKCTL0_1_BRKAODD_Msk        (0x3ul << EPWM_BRKCTL0_1_BRKAODD_Pos)              /*!< EPWM_T::BRKCTL0_1: BRKAODD Mask         */
+#define EPWM_BRKCTL0_1_BRKAODD_Msk        ((uint32_t)0x3ul << EPWM_BRKCTL0_1_BRKAODD_Pos)   /*!< EPWM_T::BRKCTL0_1: BRKAODD Mask         */
 
-#define EPWM_BRKCTL0_1_EADC0EBEN_Pos     (20)                                              /*!< EPWM_T::BRKCTL0_1: EADC0EBEN Position  */
-#define EPWM_BRKCTL0_1_EADC0EBEN_Msk     (0x1ul << EPWM_BRKCTL0_1_EADC0EBEN_Pos)           /*!< EPWM_T::BRKCTL0_1: EADC0EBEN Mask      */
+#define EPWM_BRKCTL0_1_EADC0EBEN_Pos      (20)                                              /*!< EPWM_T::BRKCTL0_1: EADC0EBEN Position  */
+#define EPWM_BRKCTL0_1_EADC0EBEN_Msk      (0x1ul << EPWM_BRKCTL0_1_EADC0EBEN_Pos)           /*!< EPWM_T::BRKCTL0_1: EADC0EBEN Mask      */
 
-#define EPWM_BRKCTL0_1_EADC0LBEN_Pos     (28)                                              /*!< EPWM_T::BRKCTL0_1: EADC0LBEN Position  */
-#define EPWM_BRKCTL0_1_EADC0LBEN_Msk     (0x1ul << EPWM_BRKCTL0_1_EADC0LBEN_Pos)           /*!< EPWM_T::BRKCTL0_1: EADC0LBEN Mask      */
+#define EPWM_BRKCTL0_1_EADC0LBEN_Pos      (28)                                              /*!< EPWM_T::BRKCTL0_1: EADC0LBEN Position  */
+#define EPWM_BRKCTL0_1_EADC0LBEN_Msk      (0x1ul << EPWM_BRKCTL0_1_EADC0LBEN_Pos)           /*!< EPWM_T::BRKCTL0_1: EADC0LBEN Mask      */
 
 #define EPWM_BRKCTL2_3_CPO0EBEN_Pos       (0)                                               /*!< EPWM_T::BRKCTL2_3: CPO0EBEN Position    */
 #define EPWM_BRKCTL2_3_CPO0EBEN_Msk       (0x1ul << EPWM_BRKCTL2_3_CPO0EBEN_Pos)             /*!< EPWM_T::BRKCTL2_3: CPO0EBEN Mask        */

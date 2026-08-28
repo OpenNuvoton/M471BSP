@@ -143,8 +143,8 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Duty Interrupt Type Constant Definitions                                                               */
 /*---------------------------------------------------------------------------------------------------------*/
-#define EPWM_DUTY_INT_DOWN_COUNT_MATCH_CMP        (1U << EPWM_INTEN0_CMPDIEN0_Pos)   /*!< EPWM duty interrupt triggered if down count match comparator \hideinitializer */
-#define EPWM_DUTY_INT_UP_COUNT_MATCH_CMP          (1U << EPWM_INTEN0_CMPUIEN0_Pos)   /*!< EPWM duty interrupt triggered if up down match comparator \hideinitializer */
+#define EPWM_DUTY_INT_DOWN_COUNT_MATCH_CMP        ((uint32_t)1U << ((uint32_t)EPWM_INTEN0_CMPDIEN0_Pos & 0x1FU))   /*!< EPWM duty interrupt triggered if down count match comparator \hideinitializer */
+#define EPWM_DUTY_INT_UP_COUNT_MATCH_CMP          ((uint32_t)1U << ((uint32_t)EPWM_INTEN0_CMPUIEN0_Pos & 0x1FU))   /*!< EPWM duty interrupt triggered if up down match comparator \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Interrupt Flag Accumulator Constant Definitions                                                        */
@@ -547,11 +547,11 @@ void EPWM_ForceStop(EPWM_T *epwm, uint32_t u32ChannelMask);
 void EPWM_EnableADCTrigger(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32Condition);
 void EPWM_DisableADCTrigger(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_ClearADCTriggerFlag(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32Condition);
-uint32_t EPWM_GetADCTriggerFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
+uint32_t EPWM_GetADCTriggerFlag(const EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableDACTrigger(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32Condition);
 void EPWM_DisableDACTrigger(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_ClearDACTriggerFlag(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32Condition);
-uint32_t EPWM_GetDACTriggerFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
+uint32_t EPWM_GetDACTriggerFlag(const EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableFaultBrake(EPWM_T *epwm, uint32_t u32ChannelMask, uint32_t u32LevelMask, uint32_t u32BrakeSource);
 void EPWM_EnableCapture(EPWM_T *epwm, uint32_t u32ChannelMask);
 void EPWM_DisableCapture(EPWM_T *epwm, uint32_t u32ChannelMask);
@@ -564,35 +564,35 @@ void EPWM_DisableDeadZone(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableCaptureInt(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32Edge);
 void EPWM_DisableCaptureInt(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32Edge);
 void EPWM_ClearCaptureIntFlag(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32Edge);
-uint32_t EPWM_GetCaptureIntFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
+uint32_t EPWM_GetCaptureIntFlag(const EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableDutyInt(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32IntDutyType);
 void EPWM_DisableDutyInt(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_ClearDutyIntFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
-uint32_t EPWM_GetDutyIntFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
+uint32_t EPWM_GetDutyIntFlag(const EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableFaultBrakeInt(EPWM_T *epwm, uint32_t u32BrakeSource);
 void EPWM_DisableFaultBrakeInt(EPWM_T *epwm, uint32_t u32BrakeSource);
 void EPWM_ClearFaultBrakeIntFlag(EPWM_T *epwm, uint32_t u32BrakeSource);
-uint32_t EPWM_GetFaultBrakeIntFlag(EPWM_T *epwm, uint32_t u32BrakeSource);
+uint32_t EPWM_GetFaultBrakeIntFlag(const EPWM_T *epwm, uint32_t u32BrakeSource);
 void EPWM_EnablePeriodInt(EPWM_T *epwm, uint32_t u32ChannelNum,  uint32_t u32IntPeriodType);
 void EPWM_DisablePeriodInt(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_ClearPeriodIntFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
-uint32_t EPWM_GetPeriodIntFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
+uint32_t EPWM_GetPeriodIntFlag(const EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableZeroInt(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_DisableZeroInt(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_ClearZeroIntFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
-uint32_t EPWM_GetZeroIntFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
+uint32_t EPWM_GetZeroIntFlag(const EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableAcc(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32IntFlagCnt, uint32_t u32IntAccSrc);
 void EPWM_DisableAcc(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableAccInt(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_DisableAccInt(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_ClearAccInt(EPWM_T *epwm, uint32_t u32ChannelNum);
-uint32_t EPWM_GetAccInt(EPWM_T *epwm, uint32_t u32ChannelNum);
+uint32_t EPWM_GetAccInt(const EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableAccPDMA(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_DisableAccPDMA(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableAccStopMode(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_DisableAccStopMode(EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_ClearFTDutyIntFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
-uint32_t EPWM_GetFTDutyIntFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
+uint32_t EPWM_GetFTDutyIntFlag(const EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_EnableLoadMode(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32LoadMode);
 void EPWM_DisableLoadMode(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32LoadMode);
 void EPWM_ConfigSyncPhase(EPWM_T *epwm, uint32_t u32ChannelNum, uint32_t u32SyncSrc, uint32_t u32Direction, uint32_t u32StartPhase);
@@ -609,7 +609,7 @@ void EPWM_EnableBrakePinInverse(EPWM_T *epwm, uint32_t u32BrakePinNum);
 void EPWM_DisableBrakePinInverse(EPWM_T *epwm, uint32_t u32BrakePinNum);
 void EPWM_SetBrakePinSource(EPWM_T *epwm, uint32_t u32BrakePinNum, uint32_t u32SelAnotherModule);
 void EPWM_SetLeadingEdgeBlanking(EPWM_T *epwm, uint32_t u32TrigSrcSel, uint32_t u32TrigType, uint32_t u32BlankingCnt, uint32_t u32BlankingEnable);
-uint32_t EPWM_GetWrapAroundFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
+uint32_t EPWM_GetWrapAroundFlag(const EPWM_T *epwm, uint32_t u32ChannelNum);
 void EPWM_ClearWrapAroundFlag(EPWM_T *epwm, uint32_t u32ChannelNum);
 
 /*@}*/ /* end of group EPWM_EXPORTED_FUNCTIONS */

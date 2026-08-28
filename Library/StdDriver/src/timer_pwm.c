@@ -35,8 +35,11 @@
   */
 uint32_t TPWM_ConfigOutputFreqAndDuty(TIMER_T *timer, uint32_t u32Frequency, uint32_t u32DutyCycle)
 {
-    uint32_t u32PWMClockFreq, u32TargetFreq;
-    uint32_t u32Prescaler = 0x100UL, u32Period, u32CMP;
+    uint32_t u32PWMClockFreq;
+    uint32_t u32TargetFreq;
+    uint32_t u32Prescaler = 0x100UL;
+    uint32_t u32Period;
+    uint32_t u32CMP;
 
     if ((timer == TIMER0) || (timer == TIMER1))
     {
@@ -47,16 +50,22 @@ uint32_t TPWM_ConfigOutputFreqAndDuty(TIMER_T *timer, uint32_t u32Frequency, uin
         u32PWMClockFreq = CLK_GetPCLK1Freq();
     }
 
-    /* Calculate u8PERIOD and u8PSC */
-    for (u32Prescaler = 1; u32Prescaler <= 0x100UL; u32Prescaler++)
+    /* Calculate u32Period and u32Prescaler */
+    for (u32Prescaler = 1UL; u32Prescaler <= 0x100UL; u32Prescaler++)
     {
         u32Period = (u32PWMClockFreq / u32Prescaler) / u32Frequency;
 
         /* If target u32Period is larger than 0x10000, need to use a larger prescaler */
         if (u32Period > 0x10000UL)
+        {
             continue;
+        }
+		else
+		{
+			break;
+		}
 
-        break;
+       // break;
     }
 
     if (u32Prescaler == 0x101UL)

@@ -526,7 +526,7 @@ void TPWM_DisableTrigger(TIMER_T *timer, uint32_t u32TargetMask);
 /* Declare these inline functions here to avoid MISRA C 2004 rule 8.1 error */
 __STATIC_INLINE void TPWM_EnableWakeup(TIMER_T *timer);
 __STATIC_INLINE void TPWM_DisableWakeup(TIMER_T *timer);
-__STATIC_INLINE uint32_t TPWM_GetWakeupFlag(TIMER_T *timer);
+__STATIC_INLINE uint32_t TPWM_GetWakeupFlag(const TIMER_T *timer);
 __STATIC_INLINE void TPWM_ClearWakeupFlag(TIMER_T *timer);
 
 /**
@@ -572,7 +572,7 @@ __STATIC_INLINE void TPWM_DisableWakeup(TIMER_T *timer)
   * @details    This function indicates TPWM interrupt event has waked up system or not.
   * \hideinitializer
   */
-__STATIC_INLINE uint32_t TPWM_GetWakeupFlag(TIMER_T *timer)
+__STATIC_INLINE uint32_t TPWM_GetWakeupFlag(const TIMER_T *timer)
 {
     return ((timer->PWMSTATUS & TIMER_PWMSTATUS_PWMINTWKF_Msk) ? 1 : 0);
 }

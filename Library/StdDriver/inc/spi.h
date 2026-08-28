@@ -65,35 +65,35 @@ extern "C"
 
 
 /* I2S Data Width */
-#define SPII2S_DATABIT_8           (0U << SPI_I2SCTL_WDWIDTH_Pos)      /*!< I2S data width is 8-bit \hideinitializer */
-#define SPII2S_DATABIT_16          (1U << SPI_I2SCTL_WDWIDTH_Pos)      /*!< I2S data width is 16-bit \hideinitializer */
-#define SPII2S_DATABIT_24          (2U << SPI_I2SCTL_WDWIDTH_Pos)      /*!< I2S data width is 24-bit \hideinitializer */
-#define SPII2S_DATABIT_32          (3U << SPI_I2SCTL_WDWIDTH_Pos)      /*!< I2S data width is 32-bit \hideinitializer */
+#define SPII2S_DATABIT_8           ((uint32_t)0U << SPI_I2SCTL_WDWIDTH_Pos)      /*!< I2S data width is 8-bit \hideinitializer */
+#define SPII2S_DATABIT_16          ((uint32_t)1U << SPI_I2SCTL_WDWIDTH_Pos)      /*!< I2S data width is 16-bit \hideinitializer */
+#define SPII2S_DATABIT_24          ((uint32_t)2U << SPI_I2SCTL_WDWIDTH_Pos)      /*!< I2S data width is 24-bit \hideinitializer */
+#define SPII2S_DATABIT_32          ((uint32_t)3U << SPI_I2SCTL_WDWIDTH_Pos)      /*!< I2S data width is 32-bit \hideinitializer */
 
 /* I2S Audio Format */
 #define SPII2S_MONO                SPI_I2SCTL_MONO_Msk                /*!< Monaural channel \hideinitializer */
 #define SPII2S_STEREO              (0U)                               /*!< Stereo channel \hideinitializer */
 
 /* I2S Data Format */
-#define SPII2S_FORMAT_I2S          (0U<<SPI_I2SCTL_FORMAT_Pos)         /*!< I2S data format \hideinitializer */
-#define SPII2S_FORMAT_MSB          (1U<<SPI_I2SCTL_FORMAT_Pos)         /*!< MSB justified data format \hideinitializer */
-#define SPII2S_FORMAT_PCMA         (2U<<SPI_I2SCTL_FORMAT_Pos)         /*!< PCM mode A data format \hideinitializer */
-#define SPII2S_FORMAT_PCMB         (3U<<SPI_I2SCTL_FORMAT_Pos)         /*!< PCM mode B data format \hideinitializer */
+#define SPII2S_FORMAT_I2S          ((uint32_t)0U<<SPI_I2SCTL_FORMAT_Pos)         /*!< I2S data format \hideinitializer */
+#define SPII2S_FORMAT_MSB          ((uint32_t)1U<<SPI_I2SCTL_FORMAT_Pos)         /*!< MSB justified data format \hideinitializer */
+#define SPII2S_FORMAT_PCMA         ((uint32_t)2U<<SPI_I2SCTL_FORMAT_Pos)         /*!< PCM mode A data format \hideinitializer */
+#define SPII2S_FORMAT_PCMB         ((uint32_t)3U<<SPI_I2SCTL_FORMAT_Pos)         /*!< PCM mode B data format \hideinitializer */
 
 /* I2S Operation mode */
 #define SPII2S_MODE_SLAVE          SPI_I2SCTL_SLAVE_Msk               /*!< As slave mode \hideinitializer */
 #define SPII2S_MODE_MASTER         (0U)                               /*!< As master mode \hideinitializer */
 
 /* I2S TX FIFO Threshold */
-#define SPII2S_FIFO_TX_LEVEL_WORD_0    (0U)                            /*!< TX threshold is 0 word \hideinitializer */
-#define SPII2S_FIFO_TX_LEVEL_WORD_1    (1U << SPI_FIFOCTL_TXTH_Pos)    /*!< TX threshold is 1 word \hideinitializer */
-#define SPII2S_FIFO_TX_LEVEL_WORD_2    (2U << SPI_FIFOCTL_TXTH_Pos)    /*!< TX threshold is 2 words \hideinitializer */
-#define SPII2S_FIFO_TX_LEVEL_WORD_3    (3U << SPI_FIFOCTL_TXTH_Pos)    /*!< TX threshold is 3 words \hideinitializer */
+#define SPII2S_FIFO_TX_LEVEL_WORD_0    (0U)   			                         /*!< TX threshold is 0 word \hideinitializer */
+#define SPII2S_FIFO_TX_LEVEL_WORD_1    ((uint32_t)1U << SPI_FIFOCTL_TXTH_Pos)    /*!< TX threshold is 1 word \hideinitializer */
+#define SPII2S_FIFO_TX_LEVEL_WORD_2    ((uint32_t)2U << SPI_FIFOCTL_TXTH_Pos)    /*!< TX threshold is 2 words \hideinitializer */
+#define SPII2S_FIFO_TX_LEVEL_WORD_3    ((uint32_t)3U << SPI_FIFOCTL_TXTH_Pos)    /*!< TX threshold is 3 words \hideinitializer */
 /* I2S RX FIFO Threshold */
-#define SPII2S_FIFO_RX_LEVEL_WORD_1    (0U)                            /*!< RX threshold is 1 word \hideinitializer */
-#define SPII2S_FIFO_RX_LEVEL_WORD_2    (1U << SPI_FIFOCTL_RXTH_Pos)    /*!< RX threshold is 2 words \hideinitializer */
-#define SPII2S_FIFO_RX_LEVEL_WORD_3    (2U << SPI_FIFOCTL_RXTH_Pos)    /*!< RX threshold is 3 words \hideinitializer */
-#define SPII2S_FIFO_RX_LEVEL_WORD_4    (3U << SPI_FIFOCTL_RXTH_Pos)    /*!< RX threshold is 4 words \hideinitializer */
+#define SPII2S_FIFO_RX_LEVEL_WORD_1    (0U)             			             /*!< RX threshold is 1 word \hideinitializer */
+#define SPII2S_FIFO_RX_LEVEL_WORD_2    ((uint32_t)1U << SPI_FIFOCTL_RXTH_Pos)    /*!< RX threshold is 2 words \hideinitializer */
+#define SPII2S_FIFO_RX_LEVEL_WORD_3    ((uint32_t)2U << SPI_FIFOCTL_RXTH_Pos)    /*!< RX threshold is 3 words \hideinitializer */
+#define SPII2S_FIFO_RX_LEVEL_WORD_4    ((uint32_t)3U << SPI_FIFOCTL_RXTH_Pos)    /*!< RX threshold is 4 words \hideinitializer */
 
 /* I2S Record Channel */
 #define SPII2S_MONO_RIGHT          (0U)                               /*!< Record mono right channel \hideinitializer */
@@ -577,22 +577,23 @@ __STATIC_INLINE void SPII2S_SET_MONO_RX_CHANNEL(SPI_T *i2s, uint32_t u32Ch)
 
 /* Function prototype declaration */
 uint32_t SPI_Open(SPI_T *spi, uint32_t u32MasterSlave, uint32_t u32SPIMode, uint32_t u32DataWidth, uint32_t u32BusClock);
-void SPI_Close(SPI_T *spi);
+void SPI_Close(const SPI_T *spi);
 void SPI_ClearRxFIFO(SPI_T *spi);
 void SPI_ClearTxFIFO(SPI_T *spi);
 void SPI_DisableAutoSS(SPI_T *spi);
 void SPI_EnableAutoSS(SPI_T *spi, uint32_t u32SSPinMask, uint32_t u32ActiveLevel);
 uint32_t SPI_SetBusClock(SPI_T *spi, uint32_t u32BusClock);
 void SPI_SetFIFO(SPI_T *spi, uint32_t u32TxThreshold, uint32_t u32RxThreshold);
-uint32_t SPI_GetBusClock(SPI_T *spi);
+uint32_t SPI_GetBusClock(const SPI_T *spi);
 void SPI_EnableInt(SPI_T *spi, uint32_t u32Mask);
 void SPI_DisableInt(SPI_T *spi, uint32_t u32Mask);
-uint32_t SPI_GetIntFlag(SPI_T *spi, uint32_t u32Mask);
+uint32_t SPI_GetIntFlag(const SPI_T *spi, uint32_t u32Mask);
 void SPI_ClearIntFlag(SPI_T *spi, uint32_t u32Mask);
-uint32_t SPI_GetStatus(SPI_T *spi, uint32_t u32Mask);
+uint32_t SPI_GetStatus(const SPI_T *spi, uint32_t u32Mask);
 
 uint32_t SPII2S_Open(SPI_T *i2s, uint32_t u32MasterSlave, uint32_t u32SampleRate, uint32_t u32WordWidth, uint32_t u32Channels, uint32_t u32DataFormat);
 void SPII2S_Close(SPI_T *i2s);
+uint32_t SPII2S_GetSourceClockFreq(const SPI_T *i2s);
 void SPII2S_EnableInt(SPI_T *i2s, uint32_t u32Mask);
 void SPII2S_DisableInt(SPI_T *i2s, uint32_t u32Mask);
 uint32_t SPII2S_EnableMCLK(SPI_T *i2s, uint32_t u32BusClock);
