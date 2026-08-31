@@ -694,6 +694,9 @@ int fputc(int ch, FILE *stream)
 
 #if defined (__GNUC__) && !defined(__ARMCC_VERSION)
 #if !defined(OS_USE_SEMIHOSTING)
+
+#include <sys/stat.h>
+
 int _write(int fd, char *ptr, int len)
 {
     int i = len;
@@ -717,8 +720,34 @@ int _read(int fd, char *ptr, int len)
     while((DEBUG_PORT->FIFOSTS & UART_FIFOSTS_RXEMPTY_Msk) != 0);
     *ptr = DEBUG_PORT->DAT;
     return 1;
+}
 
+/* Provide minimal syscall stubs for newlib-nano to avoid linker warnings. */
+int _close(int fd)
+{
+    (void)fd;
+    return 0;
+}
 
+int _fstat(int fd, struct stat *st)
+{
+    (void)fd;
+    st->st_mode = S_IFCHR;
+    return 0;
+}
+
+int _isatty(int fd)
+{
+    (void)fd;
+    return 1;
+}
+
+int _lseek(int fd, int ptr, int dir)
+{
+    (void)fd;
+    (void)ptr;
+    (void)dir;
+    return 0;
 }
 #endif
 
