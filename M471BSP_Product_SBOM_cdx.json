@@ -1,0 +1,392 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:cea7ad0e-42d4-47c1-9743-a2356a1a9053",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-01T20:50:20+08:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "author": "anchore",
+          "name": "syft",
+          "version": "1.45.1"
+        }
+      ]
+    },
+    "component": {
+      "bom-ref": "52439678d9babcd2",
+      "type": "library",
+      "name": "MCU Driver",
+      "version": "V3.03.000-20-g84b9da1d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/mcu-driver@V3.03.000-20-g84b9da1d",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:scope",
+          "value": "Components included in, linked with, deployed to, or reasonably expected to be integrated into final product firmware/software."
+        },
+        {
+          "name": "bsp:scope-policy-file",
+          "value": "product-scope.yaml"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        },
+        {
+          "name": "bsp:third-party-components",
+          "value": "Third-party component status is represented by component-level bsp:component-origin properties and manual SCA evidence."
+        },
+        {
+          "name": "bsp:product-scope-include-path",
+          "value": "Library/CMSIS"
+        },
+        {
+          "name": "bsp:product-scope-include-path",
+          "value": "Library/Device"
+        },
+        {
+          "name": "bsp:product-scope-include-path",
+          "value": "Library/StdDriver"
+        },
+        {
+          "name": "bsp:product-scope-exclude-path",
+          "value": "Document/"
+        },
+        {
+          "name": "bsp:product-scope-exclude-path",
+          "value": "SampleCode/"
+        },
+        {
+          "name": "bsp:product-scope-exclude-path",
+          "value": "ThirdParty/"
+        },
+        {
+          "name": "bsp:product-scope-exclude-path",
+          "value": "Library/CMSIS/Documentation/"
+        },
+        {
+          "name": "bsp:product-scope-exclude-path",
+          "value": "Library/CMSIS/CoreValidation/"
+        }
+      ]
+    },
+    "supplier": {
+      "name": "Nuvoton Technology Corp.",
+      "url": [
+        "https://www.nuvoton.com"
+      ]
+    },
+    "authors": [
+      {
+        "name": "Nuvoton Technology Corp."
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "m471bsp:product-component:library-device",
+      "name": "M471 Device",
+      "version": "V3.03.000-20-g84b9da1d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/library-device@V3.03.000-20-g84b9da1d",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a100f772a7bad3f6a3331856ba2d52377fc4e98d1c9f8aeb2e3e393cf937deda"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Directory-level first-party BSP product component included from product scope path Library/Device",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "directory"
+        },
+        {
+          "name": "bsp:scope-policy-file",
+          "value": "product-scope.yaml"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "m471bsp:product-component:library-stddriver",
+      "name": "M471 StdDriver",
+      "version": "V3.03.000-20-g84b9da1d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/library-stddriver@V3.03.000-20-g84b9da1d",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "48ddba6f4e5a21fb80c74b29bb4967ec083936507d70c90e21579cee20f8e414"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Directory-level first-party BSP product component included from product scope path Library/StdDriver",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/StdDriver"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "directory"
+        },
+        {
+          "name": "bsp:scope-policy-file",
+          "value": "product-scope.yaml"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/cmsis-dsp@1.10.0",
+      "group": "Arm",
+      "name": "CMSIS-DSP",
+      "version": "1.10.0",
+      "scope": "optional",
+      "author": "Arm Limited",
+      "supplier": {
+        "name": "Arm Limited"
+      },
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:generic/cmsis-dsp@1.10.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7f7a6ee57bd2f809c4d925ca21a8ad0774232832b9478ad43a1e51471a04bd03"
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Library/CMSIS/DSP"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_source_subset"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:included-paths",
+          "value": "Library/CMSIS/DSP/Include; Library/CMSIS/DSP/PrivateInclude; Library/CMSIS/DSP/Source"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "Library/CMSIS/DSP/Include/arm_math.h"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Library/CMSIS/DSP/Include/arm_math.h"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/ProductView/sca_cmsis-dsp.md"
+        },
+        {
+          "name": "bsp:repository-import-commit",
+          "value": "cc5fcbbceafb1e7f28e6aff65ac6943cec8d569f"
+        },
+        {
+          "name": "bsp:upstream-traceability",
+          "value": "exact-upstream-tag-and-commit-not-confirmed"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "304"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/cmsis@6.1.0",
+      "group": "Arm",
+      "name": "CMSIS",
+      "version": "6.1.0",
+      "scope": "required",
+      "author": "Arm Limited",
+      "supplier": {
+        "name": "Arm Limited"
+      },
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:generic/cmsis@6.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "65e0bc843cd9a72f84c8ee3447882c949f27ba505d4e39558c5e287cd1d92d5d"
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Library/CMSIS"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_source_subset"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:included-paths",
+          "value": "Library/CMSIS/Core; Library/CMSIS/Driver; Library/CMSIS/RTOS2"
+        },
+        {
+          "name": "bsp:excluded-independent-paths",
+          "value": "Library/CMSIS/DSP"
+        },
+        {
+          "name": "bsp:cmsis-core-version",
+          "value": "6.1.0"
+        },
+        {
+          "name": "bsp:cmsis-rtos2-api-version",
+          "value": "2.3.0"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "Library/CMSIS/Core/Include/cmsis_version.h; Library/CMSIS/RTOS2/Include/cmsis_os2.h"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Library/CMSIS/Core/Include/cmsis_version.h; Library/CMSIS/RTOS2/Include/cmsis_os2.h"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/ProductView/sca_cmsis.md"
+        },
+        {
+          "name": "bsp:repository-import-commit",
+          "value": "cc5fcbbceafb1e7f28e6aff65ac6943cec8d569f"
+        },
+        {
+          "name": "bsp:upstream-traceability",
+          "value": "exact-upstream-tag-and-commit-not-confirmed"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "152"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "52439678d9babcd2",
+      "dependsOn": [
+        "m471bsp:product-component:library-device",
+        "m471bsp:product-component:library-stddriver"
+      ]
+    }
+  ]
+}
