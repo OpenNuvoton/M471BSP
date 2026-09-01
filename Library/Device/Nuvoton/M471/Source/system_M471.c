@@ -21,14 +21,16 @@ extern void *__Vectors;                   /* see startup file */
 uint32_t SystemCoreClock  = __SYSTEM_CLOCK;    /*!< System Clock Frequency (Core Clock)*/
 uint32_t CyclesPerUs      = (__HSI / 1000000UL); /* Cycles per micro second */
 uint32_t PllClock         = __HSI;             /*!< PLL Output Clock Frequency         */
-uint32_t gau32ClkSrcTbl[] = {__HXT, __LXT, 0UL, __LIRC, 0UL, 0UL, 0UL, __HIRC};
+extern uint32_t gau32ClkSrcTbl[8];
+uint32_t gau32ClkSrcTbl[8] = {__HXT, __LXT, 0UL, __LIRC, 0UL, 0UL, 0UL, __HIRC};
 
 /*----------------------------------------------------------------------------
   Clock functions
  *----------------------------------------------------------------------------*/
 void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
 {
-    uint32_t u32Freq, u32ClkSrc;
+    uint32_t u32Freq;
+    uint32_t u32ClkSrc;
     uint32_t u32HclkDiv;
 
     /* Update PLL Clock */
@@ -88,12 +90,13 @@ void SystemInit (void)
 
     /* FPU settings ------------------------------------------------------------*/
 #if (__FPU_PRESENT == 1U) && (__FPU_USED == 1U)
-    SCB->CPACR |= ((3UL << 10*2) |                 /* set CP10 Full Access */
-                   (3UL << 11*2)  );               /* set CP11 Full Access */
+    SCB->CPACR |= ((3UL << 20U) |                  /* set CP10 Full Access */
+                   (3UL << 22U));                   /* set CP11 Full Access */
 #endif
 
     /* Set access cycle for CPU @ 120MHz */
-    FMC->CYCCTL = (FMC->CYCCTL & ~FMC_CYCCTL_CYCLE_Msk) | (6 << FMC_CYCCTL_CYCLE_Pos);
+    FMC->CYCCTL = (FMC->CYCCTL & ~FMC_CYCCTL_CYCLE_Msk) |
+                  (6UL << FMC_CYCCTL_CYCLE_Pos);
 
     HXTInit();
 

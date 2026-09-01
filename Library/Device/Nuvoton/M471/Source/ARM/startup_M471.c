@@ -24,6 +24,7 @@ extern __NO_RETURN void __PROGRAM_START(void);
  *----------------------------------------------------------------------------*/
 __NO_RETURN void Reset_Handler(void);
 __NO_RETURN void Default_Handler(void);
+__WEAK void Reset_Handler_PreInit(void);
 
 /*----------------------------------------------------------------------------
   Exception / Interrupt Handler
@@ -306,7 +307,10 @@ __WEAK void HardFault_Handler(void)
  *----------------------------------------------------------------------------*/
 void Default_Handler(void)
 {
-    while (1);
+    for (;;)
+    {
+        /* Default handler loop */
+    }
 }
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
