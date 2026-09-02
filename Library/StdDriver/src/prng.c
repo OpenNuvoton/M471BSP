@@ -65,7 +65,8 @@ void PRNG_Start(PRNG_T *prng)
   */
 void PRNG_Read(PRNG_T *prng, uint32_t u32RandKey[])
 {
-    uint32_t  i, wcnt;
+    uint32_t i;
+    uint32_t wcnt;
 
     wcnt = (((prng->CTL & PRNG_CTL_KEYSZ_Msk) >> PRNG_CTL_KEYSZ_Pos) + 1U) * 2U;
 
