@@ -2251,11 +2251,11 @@
       "evidence": {
         "source": "first-party-license-review",
         "evidenceFile": "license-evidence/samplecode-xom-xomlib-xomaddr-exe.md",
-        "evidenceCompleteness": "binary-hash-version-and-local-license-reviewed",
+        "evidenceCompleteness": "binary-hash-version-and-formal-SVN-license-identified",
         "reviewedBy": "Product Security",
         "reviewDate": "2026-06-02",
-        "notes": "First-party Nuvoton XOM sample code post-build utility. The corresponding SampleCode/XOM/XOMLib/XOMAddr_LICENSE.md file declares the Nuvoton Software License Agreement and copyright notice. Apply only on SHA-256 match.",
-        "bsp:license-evidence-id": "samplecode-xom-xomlib-xomaddr-exe.md-0e350c41db213eaea3b6f7aecfd6b40d9b65a55fc250221833784a211ff8b4ba"
+        "notes": "First-party Nuvoton XOM sample code post-build utility. Formal SVN r43 evidence identifies the Nuvoton Software License Agreement at bsp/m471/V3.03.000-21-ga1b76a29/Nuvoton Software License Agreement.md (SHA-256 8c61cd7eb3a4bd8693bb3678c57c9568d328ad661dc5f4682fcf306644dcf9fe). The agreement is not packaged in Git pending Legal approval. Apply only on SHA-256 match.",
+        "bsp:license-evidence-id": "samplecode-xom-xomlib-xomaddr-exe.md-1cf3c4a3cba8a59a64c35c8a4f505d4c4412e735bb8bb179c79ed4aa1529fc88"
       },
       "cyclonedx": {
         "licenses": [
