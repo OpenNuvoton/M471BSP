@@ -2,185 +2,145 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:16510c41-8e5a-4dca-bc9c-9cbb7a126d82",
+  "serialNumber": "urn:uuid:c28046b6-3cfd-5456-80b8-efd38643e715",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-01T21:00:52+08:00",
+    "timestamp": "2026-09-02T04:19:13Z",
+    "supplier": {
+      "name": "Nuvoton Technology Corp."
+    },
+    "authors": [
+      {
+        "name": "Nuvoton Technology Corp."
+      }
+    ],
     "tools": {
       "components": [
         {
           "type": "application",
-          "author": "anchore",
-          "name": "syft",
-          "version": "1.45.1"
+          "name": "M471 current-candidate generator",
+          "version": "1.0.0",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "9048747c6a8ede093cf7317010c390c9b5b40b5b80cf52e3b031618f4e2e49d7"
+            }
+          ]
         }
       ]
     },
     "component": {
-      "bom-ref": "823c07cbb2149911",
       "type": "application",
-      "name": "MCU Test Sample",
-      "version": "V3.03.000-21-ga1b76a29",
+      "bom-ref": "m471bsp:current-candidate:test-sample",
+      "name": "M471BSP current-candidate test-sample view",
+      "version": "V3.03.000-current-candidate-gbadf61f8",
       "supplier": {
-        "name": "Nuvoton Technology Corp.",
-        "url": [
-          "https://www.nuvoton.com"
-        ]
+        "name": "Nuvoton Technology Corp."
       },
-      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.03.000-21-ga1b76a29",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
       "properties": [
         {
           "name": "bsp:sbom-category",
           "value": "test-sample"
         },
         {
-          "name": "bsp:scope",
-          "value": "Components used only for examples, demonstrations, validation, host-side utilities, or testing; not included in product runtime unless explicitly integrated by the user."
-        },
-        {
-          "name": "bsp:scope-policy-file",
-          "value": "test-sample-scope.yaml"
-        },
-        {
           "name": "bsp:runtime-scope",
           "value": "false"
         },
         {
-          "name": "bsp:included-in-product-firmware",
-          "value": "false"
+          "name": "bsp:candidate-baseline-commit",
+          "value": "badf61f833eb8c37c1a87445db2722c0abec604c"
         },
         {
-          "name": "bsp:test-sample-scope-include-path",
-          "value": "SampleCode/"
+          "name": "bsp:generation-commit",
+          "value": "uncommitted-null"
         },
         {
-          "name": "bsp:test-sample-scope-include-path",
-          "value": "ThirdParty/"
+          "name": "bsp:release-source-commit",
+          "value": "a1b76a29ddd3b05862c9318e3b8bf0dfef9f0632"
         },
         {
-          "name": "bsp:test-sample-scope-exclude-path",
-          "value": "Document/"
+          "name": "bsp:scan-source-commit",
+          "value": "84b9da1dae9fc61df3e1b59c352c2e9887a13bcb"
         },
         {
-          "name": "bsp:test-sample-scope-exclude-path",
-          "value": "Library/"
+          "name": "bsp:distribution-commit",
+          "value": "badf61f833eb8c37c1a87445db2722c0abec604c"
         }
       ]
-    },
-    "supplier": {
-      "name": "Nuvoton Technology Corp.",
-      "url": [
-        "https://www.nuvoton.com"
-      ]
-    },
-    "authors": [
-      {
-        "name": "Nuvoton Technology Corp."
-      }
-    ]
+    }
   },
   "components": [
     {
-      "bom-ref": "4469a6b94ddb29ec",
-      "type": "library",
-      "name": "Lua - The Programming Language",
-      "version": "5.1.4",
-      "cpe": "cpe:2.3:a:Lua_-_The_Programming_Language:Lua_-_The_Programming_Language:5.1.4:*:*:*:*:*:*:*",
-      "properties": [
+      "type": "data",
+      "bom-ref": "m471bsp:test:samplecode-distribution",
+      "name": "M471 SampleCode distribution inventory",
+      "version": "V3.03.000-21-ga1b76a29",
+      "scope": "required",
+      "purl": "pkg:generic/m471bsp-local/samplecode-distribution@V3.03.000-21-ga1b76a29",
+      "licenses": [
         {
-          "name": "syft:package:foundBy",
-          "value": "pe-binary-package-cataloger"
-        },
-        {
-          "name": "syft:package:type",
-          "value": "binary"
-        },
-        {
-          "name": "syft:package:metadataType",
-          "value": "pe-binary"
-        },
-        {
-          "name": "syft:cpe23",
-          "value": "cpe:2.3:a:Lua_-_The_Programming_Language:Lua___The_Programming_Language:5.1.4:*:*:*:*:*:*:*"
-        },
-        {
-          "name": "syft:cpe23",
-          "value": "cpe:2.3:a:Lua___The_Programming_Language:Lua_-_The_Programming_Language:5.1.4:*:*:*:*:*:*:*"
-        },
-        {
-          "name": "syft:cpe23",
-          "value": "cpe:2.3:a:Lua___The_Programming_Language:Lua___The_Programming_Language:5.1.4:*:*:*:*:*:*:*"
-        },
-        {
-          "name": "syft:cpe23",
-          "value": "cpe:2.3:a:Lua_:Lua_-_The_Programming_Language:5.1.4:*:*:*:*:*:*:*"
-        },
-        {
-          "name": "syft:cpe23",
-          "value": "cpe:2.3:a:Lua_:Lua___The_Programming_Language:5.1.4:*:*:*:*:*:*:*"
-        },
-        {
-          "name": "syft:location:0:path",
-          "value": "/SampleCode/XOM/XOMLib/lua5.1.dll"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "third-party"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-source",
-          "value": "manual-binary-license-mapping"
-        },
-        {
-          "name": "bsp:license-match-method",
-          "value": "sha256"
-        },
-        {
-          "name": "bsp:license-evidence-id",
-          "value": "samplecode-xom-xomlib-lua5.1-dll.md-15b240a83ea4efc8db8ee7276663690fca44d89e00872ea63197f906b9938913"
-        },
-        {
-          "name": "bsp:included-in-product-firmware",
-          "value": "false"
-        },
-        {
-          "name": "bsp:runtime-dependency",
-          "value": "false"
-        },
-        {
-          "name": "bsp:usage",
-          "value": "host-side Windows Lua runtime library bundled with the XOM sample code"
-        },
-        {
-          "name": "bsp:file-path",
-          "value": "SampleCode/XOM/XOMLib/lua5.1.dll"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Nuvoton Software License Agreement.md"
-        },
-        {
-          "name": "bsp:version-basis",
-          "value": "BSP release identity when no PE version is available"
+          "expression": "LicenseRef-M471-SampleCode-Mixed-NOASSERTION"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "26384c6ee7d50863e3fb65fdc1bad452d9311f34d782390401de9bb130eecc4a"
+          "content": "994861caf6f5a4934e5e478dee396ae1063bab3925cf3f49895a658a8c836568"
         }
       ],
+      "properties": [
+        {
+          "name": "bsp:component-origin",
+          "value": "mixed"
+        },
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode"
+        },
+        {
+          "name": "bsp:path-base",
+          "value": "repository-root"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "1912"
+        },
+        {
+          "name": "bsp:component-hash-inventory",
+          "value": "Document/SBOM/aggregate-inventory.json#test-sample-distribution"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "mixed-content-no-blanket-license"
+        },
+        {
+          "name": "bsp:excluded-separate-components",
+          "value": "12 binary artifacts; SampleCode/FreeRTOS/Blinky/ParTest.c"
+        },
+        {
+          "name": "bsp:license-definition",
+          "value": "Document/SBOM/license-definitions.json#LicenseRef-M471-SampleCode-Mixed-NOASSERTION"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "m471bsp:third-party:freertos-vendored-snapshot",
+      "name": "FreeRTOS-Kernel vendored snapshot",
+      "version": "snapshot-cc6dadc5fae4",
+      "scope": "required",
+      "purl": "pkg:generic/m471bsp-local/freertos-vendored-snapshot@snapshot-cc6dadc5fae4",
+      "supplier": {
+        "name": "Amazon.com, Inc. or its affiliates"
+      },
       "licenses": [
         {
           "license": {
@@ -188,157 +148,132 @@
           }
         }
       ],
-      "supplier": {
-        "name": "Nuvoton Technology Corp.",
-        "url": [
-          "https://www.nuvoton.com"
-        ]
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cc6dadc5fae4b34b21fd987a66c6224fd0699246fe3ce3c9329969fa3ac05577"
+        }
+      ],
+      "pedigree": {
+        "notes": "Immutable repository snapshot: 123 files state V10.0.0; task.h also retains V9.0.0 version macros. No exact upstream tag or commit is asserted."
       },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FXOM%2FXOMLib%2Flua5.1.dll"
-    },
-    {
-      "bom-ref": "17aa5837af702890",
-      "type": "application",
-      "name": "/SampleCode/XOM/XOMLib/XOMAddr",
-      "version": "1.0",
       "properties": [
-        {
-          "name": "syft:package:foundBy",
-          "value": "pe-binary-package-cataloger"
-        },
-        {
-          "name": "syft:package:type",
-          "value": "binary"
-        },
-        {
-          "name": "syft:package:metadataType",
-          "value": "pe-binary"
-        },
-        {
-          "name": "syft:location:0:path",
-          "value": "/SampleCode/XOM/XOMLib/XOMAddr.exe"
-        },
         {
           "name": "bsp:component-origin",
-          "value": "first-party"
+          "value": "third-party"
         },
-        {
-          "name": "bsp:license-status",
-          "value": "proprietary"
-        },
-        {
-          "name": "bsp:license-source",
-          "value": "manual-binary-license-mapping"
-        },
-        {
-          "name": "bsp:license-match-method",
-          "value": "sha256"
-        },
-        {
-          "name": "bsp:license-evidence-id",
-          "value": "samplecode-xom-xomlib-xomaddr-exe.md-0e350c41db213eaea3b6f7aecfd6b40d9b65a55fc250221833784a211ff8b4ba"
-        },
-        {
-          "name": "bsp:included-in-product-firmware",
-          "value": "false"
-        },
-        {
-          "name": "bsp:runtime-dependency",
-          "value": "false"
-        },
-        {
-          "name": "bsp:usage",
-          "value": "host-side Windows XOM sample code post-build utility"
-        },
-        {
-          "name": "bsp:file-path",
-          "value": "SampleCode/XOM/XOMLib/XOMAddr.exe"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Nuvoton Software License Agreement.md"
-        },
-        {
-          "name": "bsp:version-basis",
-          "value": "BSP release identity when no PE version is available"
-        }
-      ],
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "10d3cf6d50b65b6adc13efd4c782ec7b09fd5894381e437c63517ccf7d7dfb6a"
-        }
-      ],
-      "licenses": [
-        {
-          "expression": "LicenseRef-Nuvoton-Proprietary"
-        }
-      ],
-      "supplier": {
-        "name": "Nuvoton Technology Corp.",
-        "url": [
-          "https://www.nuvoton.com"
-        ]
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FXOM%2FXOMLib%2FXOMAddr.exe"
-    },
-    {
-      "type": "application",
-      "bom-ref": "m471bsp:test-sample-component:samplecode",
-      "name": "M471 SampleCode",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp.",
-        "url": [
-          "https://www.nuvoton.com"
-        ]
-      },
-      "purl": "pkg:generic/nuvoton/samplecode@V3.03.000-21-ga1b76a29",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "6bcdafee36abc1acfee4a5ae94cbc94d1a70db942f8bfa0b56bee6f16b71d99a"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Directory-level first-party BSP test-sample component included from test-sample scope path SampleCode/",
-      "properties": [
         {
           "name": "bsp:sbom-category",
           "value": "test-sample"
         },
         {
           "name": "bsp:path",
-          "value": "SampleCode/"
+          "value": "ThirdParty/FreeRTOS"
         },
         {
-          "name": "bsp:component-origin",
-          "value": "first-party"
+          "name": "bsp:path-base",
+          "value": "repository-root"
         },
         {
-          "name": "bsp:component-granularity",
-          "value": "directory"
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
         },
         {
-          "name": "bsp:scope-policy-file",
-          "value": "test-sample-scope.yaml"
+          "name": "bsp:component-hash-file-count",
+          "value": "136"
         },
         {
-          "name": "bsp:runtime-scope",
-          "value": "false"
+          "name": "bsp:component-hash-inventory",
+          "value": "Document/SBOM/aggregate-inventory.json#test-freertos-snapshot"
         },
         {
-          "name": "bsp:included-in-product-firmware",
-          "value": "false"
+          "name": "bsp:version-status",
+          "value": "ambiguous"
+        },
+        {
+          "name": "bsp:version-observation",
+          "value": "123 files state V10.0.0; ThirdParty/FreeRTOS/Source/include/task.h macros state V9.0.0"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "ThirdParty/FreeRTOS/License/license.txt"
+        },
+        {
+          "name": "bsp:purl-status",
+          "value": "not-asserted-until-version-resolved"
+        },
+        {
+          "name": "bsp:cpe-status",
+          "value": "not-asserted-authoritative-cpe-unavailable"
+        },
+        {
+          "name": "bsp:blocker-id",
+          "value": "BLK-UPSTREAM-FREERTOS-IDENTITY"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "ThirdParty/FreeRTOS/Source/include/FreeRTOS.h"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "ThirdParty/FreeRTOS/Source/include/task.h"
         }
       ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "m471bsp:third-party:freertos-7.4-partest",
+      "name": "FreeRTOS 7.4.0 ParTest source",
+      "version": "7.4.0",
+      "scope": "required",
+      "purl": "pkg:generic/m471bsp-local/freertos-7.4-partest@7.4.0",
+      "licenses": [
+        {
+          "expression": "LicenseRef-M471-FreeRTOS-7.4-Exception-NOASSERTION"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1a6960c2ed6a8f8913b3ba6aa6d1da5bf4b4a7d028d58566dc3b6880f502ec15"
+        }
+      ],
+      "pedigree": {
+        "notes": "The embedded header declares GPL version 2 modified by the FreeRTOS exception. The complete exception text is not packaged, so no normalized license conclusion is asserted."
+      },
+      "properties": [
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "unresolved"
+        },
+        {
+          "name": "bsp:license-observation",
+          "value": "GPL version 2 modified by the FreeRTOS exception"
+        },
+        {
+          "name": "bsp:blocker-id",
+          "value": "BLK-LEGAL-FREERTOS-7-EXCEPTION"
+        },
+        {
+          "name": "bsp:source-evidence",
+          "value": "SampleCode/FreeRTOS/Blinky/ParTest.c"
+        },
+        {
+          "name": "bsp:license-definition",
+          "value": "Document/SBOM/license-definitions.json#LicenseRef-M471-FreeRTOS-7.4-Exception-NOASSERTION"
+        }
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/FreeRTOS/Blinky/ParTest.c"
+          }
+        ]
+      }
     },
     {
       "type": "firmware",
@@ -365,10 +300,6 @@
       ],
       "properties": [
         {
-          "name": "artifact_path",
-          "value": "SampleCode/StdDriver/FMC_DualBankFwUpdate/FMC_DualBankFW/FMC_DualBankNewFW.bin"
-        },
-        {
           "name": "artifact_size_bytes",
           "value": "6796"
         },
@@ -381,18 +312,33 @@
           "value": "identified"
         },
         {
-          "name": "bsp:binary-license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
           "name": "bsp:relationship-evidence",
           "value": "SampleCode/StdDriver/FMC_DualBankFwUpdate/FMC_DualBankFW/main.c; SampleCode/StdDriver/FMC_DualBankFwUpdate/FMC_DualBankFW/IAR/FMC_DualBankFW.ewp; SampleCode/StdDriver/FMC_DualBankFwUpdate/FMC_DualBankFW/KEIL/FMC_DualBankFW.uvprojx; SampleCode/StdDriver/FMC_DualBankFwUpdate/FMC_DualBankFW/VSCode/FMC_DualBankFW.cproject.yml"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_DualBankFwUpdate/FMC_DualBankFW/FMC_DualBankNewFW.bin"
+        },
+        {
+          "name": "bsp:occurrence-path",
+          "value": "SampleCode/StdDriver/FMC_DualBankFwUpdate/FMC_DualBankFW/FMC_DualBankNewFW.bin"
+        },
+        {
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/license-evidence/binary-artifact-license-evidence.md"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/StdDriver/FMC_DualBankFwUpdate/FMC_DualBankFW/FMC_DualBankNewFW.bin"
+          }
+        ]
+      }
     },
     {
       "type": "firmware",
@@ -419,10 +365,6 @@
       ],
       "properties": [
         {
-          "name": "artifact_path",
-          "value": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin"
-        },
-        {
           "name": "artifact_size_bytes",
           "value": "3364"
         },
@@ -435,18 +377,33 @@
           "value": "identified"
         },
         {
-          "name": "bsp:binary-license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
           "name": "bsp:relationship-evidence",
           "value": "SampleCode/StdDriver/FMC_IAP/LDROM_main.c; SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/startup_M471_user.S; SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/system_M471_user.c; SampleCode/StdDriver/FMC_IAP/GCC/ap_image.S"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin"
+        },
+        {
+          "name": "bsp:occurrence-path",
+          "value": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin"
+        },
+        {
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/license-evidence/binary-artifact-license-evidence.md"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin"
+          }
+        ]
+      }
     },
     {
       "type": "firmware",
@@ -473,10 +430,6 @@
       ],
       "properties": [
         {
-          "name": "artifact_path",
-          "value": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin"
-        },
-        {
           "name": "artifact_size_bytes",
           "value": "3945"
         },
@@ -489,18 +442,33 @@
           "value": "identified"
         },
         {
-          "name": "bsp:binary-license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
           "name": "bsp:relationship-evidence",
           "value": "SampleCode/StdDriver/FMC_IAP/LDROM_main.c; SampleCode/StdDriver/FMC_IAP/IAR/fmc_ld_iap.ewp; SampleCode/StdDriver/FMC_IAP/IAR/fmc_ap_main.ewp"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:occurrence-path",
+          "value": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/license-evidence/binary-artifact-license-evidence.md"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin"
+          }
+        ]
+      }
     },
     {
       "type": "firmware",
@@ -527,10 +495,6 @@
       ],
       "properties": [
         {
-          "name": "artifact_path",
-          "value": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ap_main.bin"
-        },
-        {
           "name": "artifact_size_bytes",
           "value": "13592"
         },
@@ -543,18 +507,33 @@
           "value": "identified"
         },
         {
-          "name": "bsp:binary-license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
           "name": "bsp:relationship-evidence",
           "value": "SampleCode/StdDriver/FMC_IAP/APROM_main.c; SampleCode/StdDriver/FMC_IAP/KEIL/fmc_ap_main.uvprojx; SampleCode/StdDriver/FMC_IAP/KEIL/ap_image.s"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ap_main.bin"
+        },
+        {
+          "name": "bsp:occurrence-path",
+          "value": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ap_main.bin"
+        },
+        {
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/license-evidence/binary-artifact-license-evidence.md"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ap_main.bin"
+          }
+        ]
+      }
     },
     {
       "type": "firmware",
@@ -581,10 +560,6 @@
       ],
       "properties": [
         {
-          "name": "artifact_path",
-          "value": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin"
-        },
-        {
           "name": "artifact_size_bytes",
           "value": "5124"
         },
@@ -597,18 +572,33 @@
           "value": "identified"
         },
         {
-          "name": "bsp:binary-license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
           "name": "bsp:relationship-evidence",
           "value": "SampleCode/StdDriver/FMC_IAP/LDROM_main.c; SampleCode/StdDriver/FMC_IAP/KEIL/fmc_ld_iap.uvprojx; SampleCode/StdDriver/FMC_IAP/KEIL/ap_image.s"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:occurrence-path",
+          "value": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/license-evidence/binary-artifact-license-evidence.md"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin"
+          }
+        ]
+      }
     },
     {
       "type": "firmware",
@@ -635,10 +625,6 @@
       ],
       "properties": [
         {
-          "name": "artifact_path",
-          "value": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/ARMCLANG/Release/fmc_ld_iap.bin"
-        },
-        {
           "name": "artifact_size_bytes",
           "value": "5180"
         },
@@ -651,18 +637,33 @@
           "value": "identified"
         },
         {
-          "name": "bsp:binary-license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
           "name": "bsp:relationship-evidence",
           "value": "SampleCode/StdDriver/FMC_IAP/LDROM_main.c; SampleCode/StdDriver/FMC_IAP/VSCode/fmc_ld_iap.cproject.yml; SampleCode/StdDriver/FMC_IAP/GCC/ap_image.S"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/ARMCLANG/Release/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:occurrence-path",
+          "value": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/ARMCLANG/Release/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/license-evidence/binary-artifact-license-evidence.md"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/ARMCLANG/Release/fmc_ld_iap.bin"
+          }
+        ]
+      }
     },
     {
       "type": "firmware",
@@ -689,10 +690,6 @@
       ],
       "properties": [
         {
-          "name": "artifact_path",
-          "value": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/GNUC/Release/fmc_ld_iap.bin"
-        },
-        {
           "name": "artifact_size_bytes",
           "value": "6900"
         },
@@ -705,18 +702,33 @@
           "value": "identified"
         },
         {
-          "name": "bsp:binary-license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
           "name": "bsp:relationship-evidence",
           "value": "SampleCode/StdDriver/FMC_IAP/LDROM_main.c; SampleCode/StdDriver/FMC_IAP/VSCode/fmc_ld_iap.cproject.yml; SampleCode/StdDriver/FMC_IAP/GCC/ap_image.S"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/GNUC/Release/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:occurrence-path",
+          "value": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/GNUC/Release/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/license-evidence/binary-artifact-license-evidence.md"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/GNUC/Release/fmc_ld_iap.bin"
+          }
+        ]
+      }
     },
     {
       "type": "firmware",
@@ -743,10 +755,6 @@
       ],
       "properties": [
         {
-          "name": "artifact_path",
-          "value": "SampleCode/StdDriver/FMC_MultiWordProgram/VSCode/out/fmc_ld_iap/GNUC/release/fmc_ld_iap.bin"
-        },
-        {
           "name": "artifact_size_bytes",
           "value": "6836"
         },
@@ -759,22 +767,37 @@
           "value": "identified"
         },
         {
-          "name": "bsp:binary-license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
           "name": "bsp:relationship-evidence",
           "value": "SampleCode/StdDriver/FMC_MultiWordProgram/main.c; SampleCode/StdDriver/FMC_MultiWordProgram/VSCode/FMC_MultiWordProgram.cproject.yml; SampleCode/StdDriver/FMC_MultiWordProgram/VSCode/FMC_MultiWordProgram.csolution.yml"
         },
         {
           "name": "bsp:path-anomaly",
           "value": "distributed output directory retains fmc_ld_iap name; no rename or provenance beyond repository context is asserted"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_MultiWordProgram/VSCode/out/fmc_ld_iap/GNUC/release/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:occurrence-path",
+          "value": "SampleCode/StdDriver/FMC_MultiWordProgram/VSCode/out/fmc_ld_iap/GNUC/release/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/license-evidence/binary-artifact-license-evidence.md"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/StdDriver/FMC_MultiWordProgram/VSCode/out/fmc_ld_iap/GNUC/release/fmc_ld_iap.bin"
+          }
+        ]
+      }
     },
     {
       "type": "library",
@@ -801,10 +824,6 @@
       ],
       "properties": [
         {
-          "name": "artifact_path",
-          "value": "SampleCode/XOM/XOMLib/lib/XOMLib.a"
-        },
-        {
           "name": "artifact_size_bytes",
           "value": "7308"
         },
@@ -817,18 +836,33 @@
           "value": "identified"
         },
         {
-          "name": "bsp:binary-license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
           "name": "bsp:relationship-evidence",
           "value": "SampleCode/XOM/XOMLib/xomlibIAR.c; SampleCode/XOM/XOMLib/lib/xomlib.h; SampleCode/XOM/XOMLib/IAR/XOMLib.ewp"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/XOM/XOMLib/lib/XOMLib.a"
+        },
+        {
+          "name": "bsp:occurrence-path",
+          "value": "SampleCode/XOM/XOMLib/lib/XOMLib.a"
+        },
+        {
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/license-evidence/binary-artifact-license-evidence.md"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/XOM/XOMLib/lib/XOMLib.a"
+          }
+        ]
+      }
     },
     {
       "type": "library",
@@ -855,10 +889,6 @@
       ],
       "properties": [
         {
-          "name": "artifact_path",
-          "value": "SampleCode/XOM/XOMLib/lib/XOMLib.lib"
-        },
-        {
           "name": "artifact_size_bytes",
           "value": "1156"
         },
@@ -871,653 +901,41 @@
           "value": "identified"
         },
         {
-          "name": "bsp:binary-license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
           "name": "bsp:relationship-evidence",
           "value": "SampleCode/XOM/XOMLib/xomlib.c; SampleCode/XOM/XOMLib/lib/xomlib.h; SampleCode/XOM/XOMLib/KEIL/XOMLib.uvprojx"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "bom-ref": "pkg:generic/freertos-kernel@10.0.0?path=ThirdParty%2FFreeRTOS&source=vendored",
-      "name": "FreeRTOS-Kernel",
-      "version": "10.0.0",
-      "scope": "required",
-      "author": "FreeRTOS project",
-      "supplier": {
-        "name": "Amazon.com, Inc. or its affiliates"
-      },
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ],
-      "purl": "pkg:generic/freertos-kernel@10.0.0",
-      "description": "Vendored FreeRTOS source used by M471 sample projects. Distributed file headers identify 10.0.0, while task.h retains conflicting 9.0.0 version macros.",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "cc6dadc5fae4b34b21fd987a66c6224fd0699246fe3ce3c9329969fa3ac05577"
-        }
-      ],
-      "properties": [
-        {
-          "name": "src_path",
-          "value": "ThirdParty/FreeRTOS"
-        },
-        {
-          "name": "integration",
-          "value": "vendored_source"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "third-party"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_freertos.md"
-        },
-        {
-          "name": "bsp:evidence-path",
-          "value": "ThirdParty/FreeRTOS"
-        },
-        {
-          "name": "bsp:version-evidence",
-          "value": "ThirdParty/FreeRTOS/Source/include/FreeRTOS.h; ThirdParty/FreeRTOS/Source/include/task.h"
-        },
-        {
-          "name": "bsp:version-evidence-status",
-          "value": "conflicting-local-markers-disclosed"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "ThirdParty/FreeRTOS/License/license.txt"
-        },
-        {
-          "name": "bsp:upstream-traceability",
-          "value": "exact-upstream-tag-and-commit-not-confirmed"
-        },
-        {
-          "name": "bsp:component-hash-algorithm",
-          "value": "sha256-path-nul-content-nul-v1"
-        },
-        {
-          "name": "bsp:component-hash-file-count",
-          "value": "136"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "bom-ref": "binary-file:1f856037b3d141a57f4f2324d8ace2d55069a725d94fef582c1b2033357220b9:2fb4eaf0c107f76b",
-      "name": "SampleCode/StdDriver/FMC_DualBankFwUpdate/FMC_DualBankFW/FMC_DualBankNewFW.bin",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp."
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FStdDriver%2FFMC_DualBankFwUpdate%2FFMC_DualBankFW%2FFMC_DualBankNewFW.bin",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "1f856037b3d141a57f4f2324d8ace2d55069a725d94fef582c1b2033357220b9"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
-        },
-        {
-          "name": "bsp:path",
-          "value": "SampleCode/StdDriver/FMC_DualBankFwUpdate/FMC_DualBankFW/FMC_DualBankNewFW.bin"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party-build-artifact"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "bom-ref": "binary-file:89726bfdacfc1f5ec9c32983fc1ee1d198c286b96c0e702c927dc664d61ac0ba:7ea1a3a7b552965e",
-      "name": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp."
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FGCC%2FLDROM_iap%2FLDROM_iap.bin",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "89726bfdacfc1f5ec9c32983fc1ee1d198c286b96c0e702c927dc664d61ac0ba"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
-        },
-        {
-          "name": "bsp:path",
-          "value": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party-build-artifact"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "bom-ref": "binary-file:9033bc6ef420a4792ae54c8641be3960edfb6890aac658f06d553106b0d22d67:0e0a1c77a5b88463",
-      "name": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp."
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FIAR%2FRelease%2FExe%2Ffmc_ld_iap.bin",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "9033bc6ef420a4792ae54c8641be3960edfb6890aac658f06d553106b0d22d67"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
-        },
-        {
-          "name": "bsp:path",
-          "value": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party-build-artifact"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "bom-ref": "binary-file:b7fc54741f37f7e012ad4e18647bb75e6a5022f3fa6ecbbc97c017ba682c1325:90864c6e48d77e71",
-      "name": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ap_main.bin",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp."
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FKEIL%2FObj%2Ffmc_ap_main.bin",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "b7fc54741f37f7e012ad4e18647bb75e6a5022f3fa6ecbbc97c017ba682c1325"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
-        },
-        {
-          "name": "bsp:path",
-          "value": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ap_main.bin"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party-build-artifact"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "bom-ref": "binary-file:1dad93aee32633ba39fcd2dd0226c817f9ed20fc58d2205e5288bfb3ca77695e:225fdbd165d55663",
-      "name": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp."
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FKEIL%2FObj%2Ffmc_ld_iap.bin",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "1dad93aee32633ba39fcd2dd0226c817f9ed20fc58d2205e5288bfb3ca77695e"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
-        },
-        {
-          "name": "bsp:path",
-          "value": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party-build-artifact"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "bom-ref": "binary-file:2adfbee765addf90e4b31edb50233a2c002836024799737d8f59695b1ca663c0:9a1261f3aecd962a",
-      "name": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/ARMCLANG/Release/fmc_ld_iap.bin",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp."
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FVSCode%2Fout%2Ffmc_ld_iap%2FARMCLANG%2FRelease%2Ffmc_ld_iap.bin",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "2adfbee765addf90e4b31edb50233a2c002836024799737d8f59695b1ca663c0"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
-        },
-        {
-          "name": "bsp:path",
-          "value": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/ARMCLANG/Release/fmc_ld_iap.bin"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party-build-artifact"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "bom-ref": "binary-file:57b1387015c6853a7a0c067e05908e4d3c0010597af1adf6e2edee7750c1fd0e:4a2c4771836e1667",
-      "name": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/GNUC/Release/fmc_ld_iap.bin",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp."
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FVSCode%2Fout%2Ffmc_ld_iap%2FGNUC%2FRelease%2Ffmc_ld_iap.bin",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "57b1387015c6853a7a0c067e05908e4d3c0010597af1adf6e2edee7750c1fd0e"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
-        },
-        {
-          "name": "bsp:path",
-          "value": "SampleCode/StdDriver/FMC_IAP/VSCode/out/fmc_ld_iap/GNUC/Release/fmc_ld_iap.bin"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party-build-artifact"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "bom-ref": "binary-file:15c6a0409b2353fc4079329eccad52d536e2811a584c9441ffed8075febc28a9:fd596b992d263c5c",
-      "name": "SampleCode/StdDriver/FMC_MultiWordProgram/VSCode/out/fmc_ld_iap/GNUC/release/fmc_ld_iap.bin",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp."
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FStdDriver%2FFMC_MultiWordProgram%2FVSCode%2Fout%2Ffmc_ld_iap%2FGNUC%2Frelease%2Ffmc_ld_iap.bin",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "15c6a0409b2353fc4079329eccad52d536e2811a584c9441ffed8075febc28a9"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
-        },
-        {
-          "name": "bsp:path",
-          "value": "SampleCode/StdDriver/FMC_MultiWordProgram/VSCode/out/fmc_ld_iap/GNUC/release/fmc_ld_iap.bin"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party-build-artifact"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "bom-ref": "binary-file:f3bdeb96d86be2b6679d6befa94c63fa1ec082bb5d7878da5f9854b6a4a24ddf:bfab73225cc11ce5",
-      "name": "SampleCode/XOM/XOMLib/lib/XOMLib.a",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp."
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FXOM%2FXOMLib%2Flib%2FXOMLib.a",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "f3bdeb96d86be2b6679d6befa94c63fa1ec082bb5d7878da5f9854b6a4a24ddf"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
-        },
-        {
-          "name": "bsp:path",
-          "value": "SampleCode/XOM/XOMLib/lib/XOMLib.a"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party-build-artifact"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "bom-ref": "binary-file:1e6cf4f57c7307e8a1c47a14073b2408279147ecc1871a03b50d1f9ebfdc2401:cb17ade0e4795e31",
-      "name": "SampleCode/XOM/XOMLib/lib/XOMLib.lib",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp."
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FXOM%2FXOMLib%2Flib%2FXOMLib.lib",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "1e6cf4f57c7307e8a1c47a14073b2408279147ecc1871a03b50d1f9ebfdc2401"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
         },
         {
           "name": "bsp:path",
           "value": "SampleCode/XOM/XOMLib/lib/XOMLib.lib"
         },
         {
-          "name": "bsp:component-origin",
-          "value": "first-party-build-artifact"
+          "name": "bsp:occurrence-path",
+          "value": "SampleCode/XOM/XOMLib/lib/XOMLib.lib"
         },
         {
-          "name": "bsp:component-granularity",
-          "value": "file"
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
         },
         {
-          "name": "bsp:license-status",
-          "value": "identified"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
-        },
-        {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/license-evidence/binary-artifact-license-evidence.md"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/XOM/XOMLib/lib/XOMLib.lib"
+          }
+        ]
+      }
     },
     {
-      "type": "file",
-      "bom-ref": "binary-file:26384c6ee7d50863e3fb65fdc1bad452d9311f34d782390401de9bb130eecc4a:169ba94a1bdf521a",
-      "name": "SampleCode/XOM/XOMLib/lua5.1.dll",
-      "version": "V3.03.000-21-ga1b76a29",
-      "supplier": {
-        "name": "Nuvoton Technology Corp.",
-        "url": [
-          "https://www.nuvoton.com"
-        ]
-      },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FXOM%2FXOMLib%2Flua5.1.dll",
+      "type": "library",
+      "bom-ref": "m471bsp:binary:lua-runtime:26384c6e",
+      "name": "Lua runtime library",
+      "version": "5.1",
+      "scope": "required",
+      "purl": "pkg:generic/m471bsp-local/lua-runtime-binary@5.1",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -1526,116 +944,235 @@
       ],
       "licenses": [
         {
-          "expression": "LicenseRef-Nuvoton-Proprietary"
+          "license": {
+            "id": "MIT"
+          }
         }
       ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
       "properties": [
         {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "PE version resource and SHA-256 reviewed in candidate binary-license projection"
+        },
+        {
+          "name": "bsp:supplier-status",
+          "value": "not-asserted-upstream-authority-not-packaged"
+        },
+        {
+          "name": "bsp:purl-status",
+          "value": "not-asserted-upstream-identity-not-confirmed"
+        },
+        {
+          "name": "bsp:cpe-status",
+          "value": "not-asserted-authoritative-cpe-unavailable"
         },
         {
           "name": "bsp:path",
           "value": "SampleCode/XOM/XOMLib/lua5.1.dll"
         },
         {
-          "name": "bsp:component-origin",
-          "value": "first-party"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
-          "name": "bsp:license-status",
-          "value": "proprietary"
-        },
-        {
           "name": "bsp:license-evidence",
-          "value": "Nuvoton Software License Agreement.md"
+          "value": "Document/SBOM/license-evidence/samplecode-xom-xomlib-lua5.1-dll.md"
         },
         {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/XOM/XOMLib/lua5.1.dll"
+          }
+        ]
+      }
     },
     {
-      "type": "file",
-      "bom-ref": "binary-file:10d3cf6d50b65b6adc13efd4c782ec7b09fd5894381e437c63517ccf7d7dfb6a:c0b17ba4a96dc3d9",
-      "name": "SampleCode/XOM/XOMLib/XOMAddr.exe",
-      "version": "V3.03.000-21-ga1b76a29",
+      "type": "application",
+      "bom-ref": "m471bsp:binary:xomaddr:10d3cf6d",
+      "name": "XOMAddr",
+      "version": "1.0",
+      "scope": "required",
       "supplier": {
-        "name": "Nuvoton Technology Corp.",
-        "url": [
-          "https://www.nuvoton.com"
-        ]
+        "name": "Nuvoton Technology Corporation"
       },
-      "purl": "pkg:generic/nuvoton/m471bsp-binary@V3.03.000-21-ga1b76a29?file_path=SampleCode%2FXOM%2FXOMLib%2FXOMAddr.exe",
+      "purl": "pkg:generic/m471bsp-local/xomaddr-binary@1.0",
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Software-License-Agreement"
+        }
+      ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "10d3cf6d50b65b6adc13efd4c782ec7b09fd5894381e437c63517ccf7d7dfb6a"
         }
       ],
-      "licenses": [
-        {
-          "expression": "LicenseRef-Nuvoton-Proprietary"
-        }
-      ],
-      "scope": "required",
-      "description": "Binary artifact distributed in the M471BSP test-sample scope.",
       "properties": [
         {
-          "name": "bsp:sbom-category",
-          "value": "test-sample"
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "PE version resource and SHA-256"
         },
         {
           "name": "bsp:path",
           "value": "SampleCode/XOM/XOMLib/XOMAddr.exe"
         },
         {
-          "name": "bsp:component-origin",
-          "value": "first-party"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "file"
-        },
-        {
           "name": "bsp:license-status",
-          "value": "proprietary"
+          "value": "identified-from-formal-r43-evidence"
         },
         {
           "name": "bsp:license-evidence",
-          "value": "Nuvoton Software License Agreement.md"
+          "value": "Document/SBOM/license-evidence/samplecode-xom-xomlib-xomaddr-exe.md"
         },
         {
-          "name": "bsp:identity-basis",
-          "value": "exact distributed file path, SHA-256, and BSP release"
+          "name": "bsp:license-evidence-sha256",
+          "value": "1cf3c4a3cba8a59a64c35c8a4f505d4c4412e735bb8bb179c79ed4aa1529fc88"
+        },
+        {
+          "name": "bsp:license-definition",
+          "value": "LicenseRef-Nuvoton-Software-License-Agreement"
+        },
+        {
+          "name": "bsp:formal-license-source",
+          "value": "SVN r43 bsp/m471/V3.03.000-21-ga1b76a29/Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:formal-license-source-sha256",
+          "value": "8c61cd7eb3a4bd8693bb3678c57c9568d328ad661dc5f4682fcf306644dcf9fe"
+        },
+        {
+          "name": "bsp:license-distribution-status",
+          "value": "not-packaged-pending-legal-approval"
+        },
+        {
+          "name": "bsp:license-distribution-blocker",
+          "value": "BLK-LEGAL-NUVOTON-AGREEMENT-GIT-DISTRIBUTION"
+        },
+        {
+          "name": "bsp:physical-representation",
+          "value": "component-evidence-occurrence"
         }
-      ]
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "SampleCode/XOM/XOMLib/XOMAddr.exe"
+          }
+        ]
+      }
     }
   ],
   "dependencies": [
     {
-      "ref": "823c07cbb2149911",
+      "ref": "m471bsp:current-candidate:test-sample",
       "dependsOn": [
-        "binary-file:10d3cf6d50b65b6adc13efd4c782ec7b09fd5894381e437c63517ccf7d7dfb6a:c0b17ba4a96dc3d9",
-        "binary-file:15c6a0409b2353fc4079329eccad52d536e2811a584c9441ffed8075febc28a9:fd596b992d263c5c",
-        "binary-file:1dad93aee32633ba39fcd2dd0226c817f9ed20fc58d2205e5288bfb3ca77695e:225fdbd165d55663",
-        "binary-file:1e6cf4f57c7307e8a1c47a14073b2408279147ecc1871a03b50d1f9ebfdc2401:cb17ade0e4795e31",
-        "binary-file:1f856037b3d141a57f4f2324d8ace2d55069a725d94fef582c1b2033357220b9:2fb4eaf0c107f76b",
-        "binary-file:26384c6ee7d50863e3fb65fdc1bad452d9311f34d782390401de9bb130eecc4a:169ba94a1bdf521a",
-        "binary-file:2adfbee765addf90e4b31edb50233a2c002836024799737d8f59695b1ca663c0:9a1261f3aecd962a",
-        "binary-file:57b1387015c6853a7a0c067e05908e4d3c0010597af1adf6e2edee7750c1fd0e:4a2c4771836e1667",
-        "binary-file:89726bfdacfc1f5ec9c32983fc1ee1d198c286b96c0e702c927dc664d61ac0ba:7ea1a3a7b552965e",
-        "binary-file:9033bc6ef420a4792ae54c8641be3960edfb6890aac658f06d553106b0d22d67:0e0a1c77a5b88463",
-        "binary-file:b7fc54741f37f7e012ad4e18647bb75e6a5022f3fa6ecbbc97c017ba682c1325:90864c6e48d77e71",
-        "binary-file:f3bdeb96d86be2b6679d6befa94c63fa1ec082bb5d7878da5f9854b6a4a24ddf:bfab73225cc11ce5",
-        "m471bsp:test-sample-component:samplecode"
+        "m471bsp:test:samplecode-distribution",
+        "m471bsp:third-party:freertos-vendored-snapshot",
+        "m471bsp:third-party:freertos-7.4-partest",
+        "pkg:generic/nuvoton/m471-fmc-dualbank-firmware@3.00?artifact=FMC_DualBankNewFW.bin",
+        "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=gcc-eclipse",
+        "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=iar",
+        "pkg:generic/nuvoton/m471-fmc-iap-aprom@1.00?toolchain=keil",
+        "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=keil",
+        "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=armclang-vscode",
+        "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=gnuc-vscode",
+        "pkg:generic/nuvoton/m471-fmc-multiword-program@0.10?toolchain=gnuc-vscode",
+        "pkg:generic/nuvoton/m471-xomlib@3.00?toolchain=iar",
+        "pkg:generic/nuvoton/m471-xomlib@3.00?toolchain=keil",
+        "m471bsp:binary:lua-runtime:26384c6e",
+        "m471bsp:binary:xomaddr:10d3cf6d"
+      ]
+    },
+    {
+      "ref": "m471bsp:test:samplecode-distribution",
+      "dependsOn": []
+    },
+    {
+      "ref": "m471bsp:third-party:freertos-vendored-snapshot",
+      "dependsOn": []
+    },
+    {
+      "ref": "m471bsp:third-party:freertos-7.4-partest",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/nuvoton/m471-fmc-dualbank-firmware@3.00?artifact=FMC_DualBankNewFW.bin",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=gcc-eclipse",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=iar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/nuvoton/m471-fmc-iap-aprom@1.00?toolchain=keil",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=keil",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=armclang-vscode",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=gnuc-vscode",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/nuvoton/m471-fmc-multiword-program@0.10?toolchain=gnuc-vscode",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/nuvoton/m471-xomlib@3.00?toolchain=iar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/nuvoton/m471-xomlib@3.00?toolchain=keil",
+      "dependsOn": []
+    },
+    {
+      "ref": "m471bsp:binary:lua-runtime:26384c6e",
+      "dependsOn": []
+    },
+    {
+      "ref": "m471bsp:binary:xomaddr:10d3cf6d",
+      "dependsOn": []
+    }
+  ],
+  "compositions": [
+    {
+      "aggregate": "incomplete",
+      "assemblies": [
+        "m471bsp:current-candidate:test-sample",
+        "m471bsp:test:samplecode-distribution",
+        "m471bsp:third-party:freertos-vendored-snapshot",
+        "m471bsp:third-party:freertos-7.4-partest",
+        "pkg:generic/nuvoton/m471-fmc-dualbank-firmware@3.00?artifact=FMC_DualBankNewFW.bin",
+        "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=gcc-eclipse",
+        "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=iar",
+        "pkg:generic/nuvoton/m471-fmc-iap-aprom@1.00?toolchain=keil",
+        "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=keil",
+        "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=armclang-vscode",
+        "pkg:generic/nuvoton/m471-fmc-iap-ldrom@1.00?toolchain=gnuc-vscode",
+        "pkg:generic/nuvoton/m471-fmc-multiword-program@0.10?toolchain=gnuc-vscode",
+        "pkg:generic/nuvoton/m471-xomlib@3.00?toolchain=iar",
+        "pkg:generic/nuvoton/m471-xomlib@3.00?toolchain=keil",
+        "m471bsp:binary:lua-runtime:26384c6e",
+        "m471bsp:binary:xomaddr:10d3cf6d"
       ]
     }
   ]
