@@ -11,6 +11,10 @@
 
 
 #include <stdio.h>
+
+#if defined(__GNUC__) && !defined(__ARMCC_VERSION) && !defined(OS_USE_SEMIHOSTING)
+#include <sys/stat.h>
+#endif
 #include "NuMicro.h"
 
 #ifndef   __WEAK
@@ -869,6 +873,37 @@ int _read(int fd, char *ptr, int len)
     return 1;
 
 
+}
+
+/* GCC/newlib-nano low-level hooks for the UART character device. */
+int _close(int file)
+{
+    (void)file;
+    return -1;
+}
+
+int _lseek(int file, int ptr, int dir)
+{
+    (void)file;
+    (void)ptr;
+    (void)dir;
+    return 0;
+}
+
+int _fstat(int file, struct stat *st)
+{
+    (void)file;
+    if (st != NULL)
+    {
+        st->st_mode = S_IFCHR;
+    }
+    return 0;
+}
+
+int _isatty(int file)
+{
+    (void)file;
+    return 1;
 }
 #endif
 
